@@ -178,8 +178,6 @@
   .nav-btn.primary:hover { background: var(--purple-800); border-color: var(--purple-800); }
   .nav-btn.primary.teal { background: var(--teal-600); border-color: var(--teal-600); }
   .nav-btn.primary.teal:hover { background: var(--teal-800); border-color: var(--teal-800); }
-  .nav-btn.save-btn { color: var(--blue-600); border-color: rgba(24,95,165,0.3); }
-  .nav-btn.save-btn.saved { background: var(--blue-50); }
 
   /* ── RESULT ── */
   .result-view { display: none; }
@@ -373,7 +371,6 @@
       </div>
       <div class="right">
         <button class="nav-btn bk-btn" id="bookmarkBtn" onclick="toggleBookmark()">🔖 Bookmark</button>
-        <button class="nav-btn save-btn" id="saveBtn" onclick="saveDraft()">Save Draft</button>
         <button class="nav-btn primary" id="submitBtn" onclick="confirmSubmit()">Submit</button>
       </div>
     </div>
@@ -1262,7 +1259,7 @@ let currentType = null;
 let currentSet  = null;
 let questions   = [];
 let answers     = {};
-let savedDrafts = {};
+let savedDrafts = {}; // kept for legacy compatibility
 let currentQ    = 0;
 
 /* ════════ PERSISTENT STORAGE ════════ */
@@ -1464,8 +1461,7 @@ function startSet(setIndex) {
   currentSet = setIndex;
   const data = currentType === 'synonyms' ? SYNONYMS : ANTONYMS;
   questions = shuffle(data[setIndex]);
-  const draftKey = `${currentType}-${setIndex}`;
-  answers = savedDrafts[draftKey] ? { ...savedDrafts[draftKey] } : {};
+  answers = {};
   currentQ = 0;
   const isTeal = currentType === 'antonyms';
   document.getElementById('progressFill').className = 'progress-fill' + (isTeal ? ' teal' : '');
@@ -1535,13 +1531,6 @@ function renderPalette() {
 function navigate(dir) {
   currentQ = Math.max(0, Math.min(questions.length - 1, currentQ + dir));
   renderQuestion();
-}
-
-function saveDraft() {
-  savedDrafts[`${currentType}-${currentSet}`] = { ...answers };
-  const btn = document.getElementById('saveBtn');
-  btn.textContent = '✓ Saved'; btn.classList.add('saved');
-  setTimeout(() => { btn.textContent = 'Save Draft'; btn.classList.remove('saved'); }, 2000);
 }
 
 function confirmSubmit() {
