@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Vocabulary Mock Test</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #f8f7f4; --surface: #ffffff; --surface2: #f1efe8;
+    --border: rgba(0,0,0,0.12); --border-md: rgba(0,0,0,0.22);
+    --text: #1a1a1a; --text-muted: #5f5e5a; --text-hint: #888780;
+    --purple-50: #EEEDFE; --purple-200: #AFA9EC; --purple-600: #534AB7; --purple-800: #3C3489;
+    --teal-50: #E1F5EE; --teal-200: #5DCAA5; --teal-600: #0F6E56; --teal-800: #085041;
+    --green-50: #EAF3DE; --green-600: #3B6D11; --green-800: #27500A;
+    --red-50: #FCEBEB; --red-200: #F09595; --red-600: #A32D2D; --red-800: #791F1F;
+    --amber-50: #FAEEDA; --amber-600: #854F0B; --amber-800: #633806;
+    --blue-50: #E6F1FB; --blue-600: #185FA5; --blue-800: #0C447C;
+    --radius-md: 8px; --radius-lg: 12px; --radius-xl: 16px;
+  }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 16px; line-height: 1.6; }
+  .app { max-width: 820px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+  .header { text-align: center; margin-bottom: 2.5rem; }
+  .header h1 { font-size: 26px; font-weight: 500; margin-bottom: 6px; }
+  .header p { font-size: 14px; color: var(--text-muted); }
+  .home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  @media(max-width:480px){ .home-grid { grid-template-columns: 1fr; } }
+  .type-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-xl); padding: 2rem 1.5rem; cursor: pointer; transition: border-color 0.15s, transform 0.1s; text-align: center; user-select: none; }
+  .type-card:hover { border-color: var(--border-md); transform: translateY(-2px); }
+  .type-card:active { transform: scale(0.98); }
+  .type-card .icon { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; font-weight: 600; margin: 0 auto 1rem; }
+  .type-card.syn .icon { background: var(--purple-50); color: var(--purple-800); }
+  .type-card.ant .icon { background: var(--teal-50); color: var(--teal-800); }
+  .type-card h2 { font-size: 18px; font-weight: 500; margin-bottom: 6px; }
+  .type-card p { font-size: 13px; color: var(--text-muted); }
+  .type-card .badge { display: inline-block; margin-top: 12px; font-size: 12px; padding: 3px 10px; border-radius: var(--radius-md); border: 0.5px solid var(--border); color: var(--text-muted); }
+  .set-selector { display: none; }
+  .set-selector h2 { font-size: 18px; font-weight: 500; margin-bottom: 4px; }
+  .set-selector .sub { font-size: 13px; color: var(--text-muted); margin-bottom: 1.5rem; }
+  .set-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.5rem; }
+  .set-btn { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 10px 20px; cursor: pointer; font-size: 14px; font-weight: 500; transition: background 0.1s, border-color 0.1s; }
+  .set-btn:hover { background: var(--surface2); border-color: var(--border-md); }
+  .back-btn { background: none; border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 8px 16px; cursor: pointer; font-size: 13px; color: var(--text-muted); display: inline-flex; align-items: center; gap: 6px; }
+  .back-btn:hover { border-color: var(--border-md); color: var(--text); }
+  .quiz-view { display: none; }
+  .quiz-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; gap: 12px; flex-wrap: wrap; }
+  .quiz-meta { font-size: 13px; color: var(--text-muted); }
+  .quiz-meta strong { color: var(--text); }
+  .progress-bar { width: 100%; height: 5px; background: var(--surface2); border-radius: 99px; margin-bottom: 1.5rem; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--purple-600); border-radius: 99px; transition: width 0.2s; }
+  .progress-fill.teal { background: var(--teal-600); }
+  .question-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 1.75rem 1.5rem; margin-bottom: 1.25rem; }
+  .q-number { font-size: 12px; color: var(--text-hint); margin-bottom: 8px; letter-spacing: 0.04em; text-transform: uppercase; }
+  .q-text { font-size: 17px; font-weight: 500; line-height: 1.5; margin-bottom: 1.5rem; }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: var(--radius-md); border: 0.5px solid var(--border); cursor: pointer; font-size: 15px; transition: background 0.1s, border-color 0.1s; background: var(--surface); }
+  .option:hover { background: var(--surface2); border-color: var(--border-md); }
+  .option.selected { background: var(--purple-50); border-color: var(--purple-200); color: var(--purple-800); }
+  .option.selected.teal-mode { background: var(--teal-50); border-color: var(--teal-200); color: var(--teal-800); }
+  .option-letter { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; background: var(--surface2); color: var(--text-muted); transition: background 0.1s, color 0.1s; }
+  .option.selected .option-letter { background: var(--purple-600); color: #fff; }
+  .option.selected.teal-mode .option-letter { background: var(--teal-600); color: #fff; }
+  /* Instant feedback styles */
+  .option.correct-ans { background: #eaf3de; border-color: #3B6D11; color: #27500A; font-weight: 500; }
+  .option.correct-ans .option-letter { background: #3B6D11; color: #fff; }
+  .option.wrong-ans { background: #fcebeb; border-color: #A32D2D; color: #791F1F; font-weight: 500; }
+  .option.wrong-ans .option-letter { background: #A32D2D; color: #fff; }
+  .option.locked { pointer-events: none; opacity: 0.55; }
+  .option.locked.correct-ans, .option.locked.wrong-ans { opacity: 1; }
+  .quiz-nav { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-top: 0.5rem; }
+  .quiz-nav .left, .quiz-nav .right { display: flex; gap: 10px; }
+  .nav-btn { padding: 9px 20px; border-radius: var(--radius-md); border: 0.5px solid var(--border); font-size: 14px; font-weight: 500; cursor: pointer; background: var(--surface); transition: background 0.1s, border-color 0.1s; }
+  .nav-btn:hover { background: var(--surface2); border-color: var(--border-md); }
+  .nav-btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .nav-btn.primary { background: var(--purple-600); color: #fff; border-color: var(--purple-600); }
+  .nav-btn.primary:hover { background: var(--purple-800); border-color: var(--purple-800); }
+  .nav-btn.primary.teal { background: var(--teal-600); border-color: var(--teal-600); }
+  .nav-btn.primary.teal:hover { background: var(--teal-800); border-color: var(--teal-800); }
+  .nav-btn.save-btn { color: var(--blue-800); border-color: var(--blue-600); }
+  .nav-btn.save-btn.saved { background: var(--blue-50); }
+  .result-view { display: none; }
+  .result-header { margin-bottom: 2rem; }
+  .result-header h2 { font-size: 20px; font-weight: 500; margin-bottom: 4px; }
+  .result-header p { font-size: 13px; color: var(--text-muted); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 2rem; }
+  @media(max-width:520px){ .stats-grid { grid-template-columns: repeat(2,1fr); } }
+  .stat-card { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 14px 12px; text-align: center; }
+  .stat-label { font-size: 12px; color: var(--text-hint); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.04em; }
+  .stat-value { font-size: 26px; font-weight: 500; }
+  .stat-card.correct .stat-value { color: var(--green-600); }
+  .stat-card.wrong .stat-value { color: var(--red-600); }
+  .stat-card.skipped .stat-value { color: var(--amber-600); }
+  .score-bar-wrap { margin-bottom: 2rem; }
+  .score-bar-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; }
+  .score-bar { height: 10px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
+  .score-fill { height: 100%; border-radius: 99px; background: var(--green-600); }
+  .result-section-title { font-size: 13px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; padding-bottom: 6px; border-bottom: 0.5px solid var(--border); }
+  .result-item { background: var(--surface); border: 0.5px solid var(--border); border-radius: var(--radius-md); padding: 14px 16px; margin-bottom: 8px; }
+  .result-item.wrong { border-left: 3px solid var(--red-600); }
+  .result-item.skipped { border-left: 3px solid #EF9F27; }
+  .result-item.correct { border-left: 3px solid var(--green-600); }
+  .result-item .ri-q { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+  .result-item .ri-row { display: flex; gap: 8px; flex-wrap: wrap; font-size: 13px; margin-top: 4px; }
+  .pill { padding: 2px 10px; border-radius: 99px; font-size: 12px; font-weight: 500; }
+  .pill.your { background: var(--red-50); color: var(--red-800); border: 0.5px solid var(--red-200); }
+  .pill.ans { background: var(--green-50); color: var(--green-800); border: 0.5px solid #C0DD97; }
+  .pill.skip { background: var(--amber-50); color: var(--amber-800); border: 0.5px solid #FAC775; }
+  .pill.ok { background: var(--green-50); color: var(--green-800); border: 0.5px solid #C0DD97; }
+  .result-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2rem; }
+  .dl-btn { padding: 10px 22px; border-radius: var(--radius-md); font-size: 14px; font-weight: 500; cursor: pointer; background: var(--purple-600); color: #fff; border: none; transition: background 0.1s; }
+  .dl-btn:hover { background: var(--purple-800); }
+  .dl-btn.outline { background: var(--surface); color: var(--text); border: 0.5px solid var(--border); }
+  .dl-btn.outline:hover { background: var(--surface2); }
+  .q-palette { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.5rem; }
+  .q-dot { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 500; cursor: pointer; border: 1.5px solid var(--border); color: var(--text-muted); transition: transform 0.1s; }
+  .q-dot:hover { transform: scale(1.1); }
+  .q-dot.answered { background: var(--purple-50); border-color: var(--purple-600); color: var(--purple-800); }
+  .q-dot.answered.teal-mode { background: var(--teal-50); border-color: var(--teal-600); color: var(--teal-800); }
+  .q-dot.current { border-width: 2px; border-color: var(--text); color: var(--text); font-weight: 700; }
+  .q-dot.dot-correct { background: #eaf3de; border-color: #3B6D11; color: #27500A; }
+  .q-dot.dot-wrong { background: #fcebeb; border-color: #A32D2D; color: #791F1F; }
+  .saved-indicator { font-size: 12px; color: var(--blue-800); }
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="header">
+    <h1>Vocabulary Mock Test</h1>
+    <p>Practice synonyms and antonyms — October 2025 batch</p>
+  </div>
+
+  <div id="homeView">
+    <div class="home-grid">
+      <div class="type-card syn" onclick="selectType('synonyms')">
+        <div class="icon">SYN</div>
+        <h2>Synonyms</h2>
+        <p>Words with the same or similar meaning</p>
+        <span class="badge" id="synBadge">Loading...</span>
+      </div>
+      <div class="type-card ant" onclick="selectType('antonyms')">
+        <div class="icon">ANT</div>
+        <h2>Antonyms</h2>
+        <p>Words with opposite meanings</p>
+        <span class="badge" id="antBadge">Loading...</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="set-selector" id="setView">
+    <button class="back-btn" onclick="goHome()">← Back</button>
+    <div style="height:1.25rem"></div>
+    <h2 id="setViewTitle">Choose a Set</h2>
+    <p class="sub" id="setViewSub"></p>
+    <div class="set-grid" id="setGrid"></div>
+  </div>
+
+  <div class="quiz-view" id="quizView">
+    <div class="quiz-top">
+      <button class="back-btn" onclick="exitQuiz()">← Sets</button>
+      <span class="quiz-meta"><strong id="quizTypeLabel"></strong> — <span id="quizSetLabel"></span></span>
+      <span class="saved-indicator" id="savedIndicator" style="display:none">Draft saved</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="q-palette" id="qPalette"></div>
+    <div class="question-card">
+      <div class="q-number" id="qNumber"></div>
+      <div class="q-text" id="qText"></div>
+      <div class="options" id="optionsContainer"></div>
+    </div>
+    <div class="quiz-nav">
+      <div class="left">
+        <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">← Previous</button>
+        <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Next →</button>
+      </div>
+      <div class="right">
+        <button class="nav-btn save-btn" id="saveBtn" onclick="saveDraft()">Save Draft</button>
+        <button class="nav-btn primary" id="submitBtn" onclick="confirmSubmit()">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result-view" id="resultView">
+    <div class="result-header">
+      <h2 id="resultTitle">Result</h2>
+      <p id="resultSubtitle"></p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card total"><div class="stat-label">Total</div><div class="stat-value" id="statTotal"></div></div>
+      <div class="stat-card correct"><div class="stat-label">Correct</div><div class="stat-value" id="statCorrect"></div></div>
+      <div class="stat-card wrong"><div class="stat-label">Wrong</div><div class="stat-value" id="statWrong"></div></div>
+      <div class="stat-card skipped"><div class="stat-label">Skipped</div><div class="stat-value" id="statSkipped"></div></div>
+    </div>
+    <div class="score-bar-wrap">
+      <div class="score-bar-label"><span>Score</span><span id="scorePct"></span></div>
+      <div class="score-bar"><div class="score-fill" id="scoreFill"></div></div>
+    </div>
+    <div id="resultItems"></div>
+    <div class="result-actions">
+      <button class="dl-btn" onclick="downloadResult()">Download Result (.html)</button>
+      <button class="dl-btn outline" onclick="downloadResultTxt()">Download Result (.txt)</button>
+      <button class="dl-btn outline" onclick="retakeSet()">Retake Set</button>
+      <button class="dl-btn outline" onclick="goHome()">Home</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ================================================================
+   HOW TO ADD QUESTIONS
+   -------------------
+   Paste your questions inside the backtick strings below.
+   Each set holds 25 questions. Use EXACTLY this format:
+
+   Q1. Your question text here
+   A. Option one
+   B. Option two
+   C. Option three
+   D. Option four
+   Ans: B
+
+   Rules:
+   - Q must start with "Q" followed by a number and a dot
+   - Options must be exactly A. B. C. D. (capital letter + dot)
+   - Ans: must be exactly "Ans:" followed by A, B, C, or D
+   - Leave one blank line between questions
+   - Serial numbers in Q don't need to match set order — the
+     parser just reads them top to bottom
+
+   To add more sets: copy a RAW_SET block below and fill it in.
+================================================================ */
+
+/* -------- SYNONYMS -------- */
+
+const SYN_SET_1 = `
+Q1. What is a synonym of PESSIMISTIC?
+A. Optimistic
+B. Cheerful
+C. Cynical
+D. Hopeful
+Ans: C
+
+Q2. What is a synonym of PESSIMISTIC?
+A. Hopeful
+B. Negative
+C. Ambitious
+D. Energetic
+Ans: B
+
+Q3. What is a synonym of PESSIMISTIC?
+A. Cheerful
+B. Secure
+C. Bright
+D. Gloomy
+Ans: D
+
+Q4. What is a synonym of SLACKENING?
+A. Accelerating
+B. Slowing
+C. Strengthening
+D. Intensifying
+Ans: B
+
+Q5. What is a synonym of SLACKENING?
+A. Stable
+B. Secure
+C. Weakening
+D. Expanding
+Ans: C
+
+Q6. What is a synonym of SLACKENING?
+A. Tightening
+B. Easing
+C. Hardening
+D. Growing
+Ans: B
+
+Q7. What is a synonym of PRECARIOUS?
+A. Stable
+B. Secure
+C. Safe
+D. Unstable
+Ans: D
+
+Q8. What is a synonym of PRECARIOUS?
+A. Protected
+B. Insecure
+C. Steady
+D. Reliable
+Ans: B
+
+Q9. What is a synonym of PRECARIOUS?
+A. Safe
+B. Certain
+C. Risky
+D. Stable
+Ans: C
+
+Q10. What is a synonym of COMPLACENT?
+A. Ambitious
+B. Self-satisfied
+C. Concerned
+D. Dissatisfied
+Ans: B
+
+Q11. What is a synonym of COMPLACENT?
+A. Alert
+B. Worried
+C. Smug
+D. Humble
+Ans: C
+
+Q12. What is a synonym of COMPLACENT?
+A. Concerned
+B. Active
+C. Indifferent
+D. Ambitious
+Ans: C
+
+Q13. What is a synonym of VULNERABLE?
+A. Protected
+B. Susceptible
+C. Invulnerable
+D. Secure
+Ans: B
+
+Q14. What is a synonym of VULNERABLE?
+A. Strong
+B. Guarded
+C. Defenseless
+D. Shielded
+Ans: C
+
+Q15. What is a synonym of VULNERABLE?
+A. Stable
+B. Secure
+C. Weak
+D. Safe
+Ans: C
+
+Q16. What is a synonym of RAMPANT?
+A. Controlled
+B. Subdued
+C. Uncontrolled
+D. Restrained
+Ans: C
+
+Q17. What is a synonym of RAMPANT?
+A. Limited
+B. Calm
+C. Unrestrained
+D. Contained
+Ans: C
+
+Q18. What is a synonym of RAMPANT?
+A. Restricted
+B. Controlled
+C. Widespread
+D. Narrow
+Ans: C
+
+Q19. What is a synonym of TRANSPARENCY?
+A. Secrecy
+B. Openness
+C. Ambiguity
+D. Opaqueness
+Ans: B
+
+Q20. What is a synonym of TRANSPARENCY?
+A. Vagueness
+B. Clarity
+C. Secrecy
+D. Ambiguity
+Ans: B
+
+Q21. What is a synonym of TRANSPARENCY?
+A. Deception
+B. Ambiguity
+C. Honesty
+D. Secrecy
+Ans: C
+
+Q22. What is a synonym of IMPUNITY?
+A. Accountability
+B. Penalty
+C. Immunity
+D. Liability
+Ans: C
+
+Q23. What is a synonym of IMPUNITY?
+A. Punishment
+B. Exemption
+C. Penalty
+D. Liability
+Ans: B
+
+Q24. What is a synonym of IMPUNITY?
+A. Accountability
+B. Penalty
+C. Freedom
+D. Restriction
+Ans: C
+
+Q25. What is a synonym of UPTICK?
+A. Decline
+B. Drop
+C. Rise
+D. Downturn
+Ans: C
+`;
+
+const SYN_SET_2 = `
+Q26. What is a synonym of UPTICK?
+A. Decline
+B. Increase
+C. Downturn
+D. Drop
+Ans: B
+
+Q27. What is a synonym of UPTICK?
+A. Decline
+B. Drop
+C. Upsurge
+D. Downturn
+Ans: C
+
+Q28. What is a synonym of JEOPARDIZE?
+A. Protect
+B. Endanger
+C. Safeguard
+D. Secure
+Ans: B
+
+Q29. What is a synonym of JEOPARDIZE?
+A. Protect
+B. Threaten
+C. Defend
+D. Secure
+Ans: B
+
+Q30. What is a synonym of JEOPARDIZE?
+A. Safeguard
+B. Secure
+C. Imperil
+D. Protect
+Ans: C
+
+Q31. What is a synonym of UNRESTRAINED?
+A. Controlled
+B. Uncontrolled
+C. Restrained
+D. Limited
+Ans: B
+
+Q32. What is a synonym of UNRESTRAINED?
+A. Limited
+B. Restricted
+C. Unchecked
+D. Controlled
+Ans: C
+
+Q33. What is a synonym of UNRESTRAINED?
+A. Controlled
+B. Limited
+C. Restrained
+D. Unrestricted
+Ans: D
+
+Q34. What is a synonym of DEVASTATION?
+A. Recovery
+B. Repair
+C. Destruction
+D. Restoration
+Ans: C
+
+Q35. What is a synonym of DEVASTATION?
+A. Recovery
+B. Restoration
+C. Ruin
+D. Repair
+Ans: C
+
+Q36. What is a synonym of DEVASTATION?
+A. Repair
+B. Restoration
+C. Havoc
+D. Recovery
+Ans: C
+
+Q37. What is a synonym of ENCROACHMENT?
+A. Withdrawal
+B. Retreat
+C. Intrusion
+D. Respect
+Ans: C
+
+Q38. What is a synonym of ENCROACHMENT?
+A. Retreat
+B. Invasion
+C. Withdrawal
+D. Respect
+Ans: B
+
+Q39. What is a synonym of ENCROACHMENT?
+A. Retreat
+B. Withdrawal
+C. Trespass
+D. Respect
+Ans: C
+
+Q40. What is a synonym of TANGIBLE?
+A. Abstract
+B. Vague
+C. Concrete
+D. Intangible
+Ans: C
+
+Q41. What is a synonym of TANGIBLE?
+A. Vague
+B. Abstract
+C. Real
+D. Intangible
+Ans: C
+
+Q42. What is a synonym of TANGIBLE?
+A. Abstract
+B. Intangible
+C. Perceptible
+D. Vague
+Ans: C
+
+Q43. What is a synonym of MITIGATION?
+A. Aggravation
+B. Intensification
+C. Alleviation
+D. Exacerbation
+Ans: C
+
+Q44. What is a synonym of MITIGATION?
+A. Aggravation
+B. Reduction
+C. Intensification
+D. Exacerbation
+Ans: B
+
+Q45. What is a synonym of MITIGATION?
+A. Exacerbation
+B. Aggravation
+C. Relief
+D. Intensification
+Ans: C
+
+Q46. What is a synonym of AGILITY?
+A. Sluggishness
+B. Nimbleness
+C. Clumsiness
+D. Inertia
+Ans: B
+
+Q47. What is a synonym of AGILITY?
+A. Inertia
+B. Clumsiness
+C. Dexterity
+D. Sluggishness
+Ans: C
+
+Q48. What is a synonym of AGILITY?
+A. Sluggishness
+B. Inertia
+C. Quickness
+D. Clumsiness
+Ans: C
+
+Q49. What is a synonym of RELENTLESS?
+A. Lenient
+B. Forgiving
+C. Unyielding
+D. Intermittent
+Ans: C
+
+Q50. What is a synonym of RELENTLESS?
+A. Intermittent
+B. Lenient
+C. Unremitting
+D. Forgiving
+Ans: C
+`;
+
+const SYN_SET_3 = `
+Q51. What is a synonym of RELENTLESS?
+A. Lenient
+B. Intermittent
+C. Persistent
+D. Forgiving
+Ans: C
+
+Q52. What is a synonym of ESCALATE?
+A. Decrease
+B. Diminish
+C. Intensify
+D. Reduce
+Ans: C
+
+Q53. What is a synonym of ESCALATE?
+A. Reduce
+B. Heighten
+C. Decrease
+D. Diminish
+Ans: B
+
+Q54. What is a synonym of ESCALATE?
+A. Diminish
+B. Decrease
+C. Amplify
+D. Reduce
+Ans: C
+`;
+/* Paste more synonym sets here:
+const SYN_SET_4 = `
+Q1. ...
+`;
+*/
+
+/* -------- ANTONYMS -------- */
+
+const ANT_SET_1 = `
+Q1. What is an antonym of PESSIMISTIC?
+A. Cynical
+B. Negative
+C. Optimistic
+D. Gloomy
+Ans: C
+
+Q2. What is an antonym of PESSIMISTIC?
+A. Gloomy
+B. Hopeful
+C. Weak
+D. Indifferent
+Ans: B
+
+Q3. What is an antonym of PESSIMISTIC?
+A. Negative
+B. Cynical
+C. Slowing
+D. Cheerful
+Ans: D
+
+Q4. What is an antonym of SLACKENING?
+A. Slowing
+B. Easing
+C. Intensifying
+D. Weakening
+Ans: C
+
+Q5. What is an antonym of SLACKENING?
+A. Loosening
+B. Strengthening
+C. Slowing
+D. Easing
+Ans: B
+
+Q6. What is an antonym of SLACKENING?
+A. Weakening
+B. Declining
+C. Resting
+D. Accelerating
+Ans: D
+
+Q7. What is an antonym of PRECARIOUS?
+A. Risky
+B. Unstable
+C. Stable
+D. Insecure
+Ans: C
+
+Q8. What is an antonym of PRECARIOUS?
+A. Weak
+B. Wavering
+C. Secure
+D. Dangerous
+Ans: C
+
+Q9. What is an antonym of PRECARIOUS?
+A. Risky
+B. Insecure
+C. Safe
+D. Unstable
+Ans: C
+
+Q10. What is an antonym of COMPLACENT?
+A. Smug
+B. Indifferent
+C. Concerned
+D. Self-satisfied
+Ans: C
+
+Q11. What is an antonym of COMPLACENT?
+A. Smug
+B. Dissatisfied
+C. Indifferent
+D. Gloomy
+Ans: B
+
+Q12. What is an antonym of COMPLACENT?
+A. Self-satisfied
+B. Smug
+C. Indifferent
+D. Ambitious
+Ans: D
+
+Q13. What is an antonym of VULNERABLE?
+A. Weak
+B. Susceptible
+C. Protected
+D. Defenseless
+Ans: C
+
+Q14. What is an antonym of VULNERABLE?
+A. Insecure
+B. Secure
+C. Susceptible
+D. Defenseless
+Ans: B
+
+Q15. What is an antonym of VULNERABLE?
+A. Weak
+B. Susceptible
+C. Invulnerable
+D. Risky
+Ans: C
+
+Q16. What is an antonym of RAMPANT?
+A. Widespread
+B. Unrestrained
+C. Controlled
+D. Rampant
+Ans: C
+
+Q17. What is an antonym of RAMPANT?
+A. Uncontrolled
+B. Restrained
+C. Widespread
+D. Rampant
+Ans: B
+
+Q18. What is an antonym of RAMPANT?
+A. Uncontrolled
+B. Widespread
+C. Subdued
+D. Unrestrained
+Ans: C
+
+Q19. What is an antonym of TRANSPARENCY?
+A. Clarity
+B. Openness
+C. Opaqueness
+D. Honesty
+Ans: C
+
+Q20. What is an antonym of TRANSPARENCY?
+A. Openness
+B. Clarity
+C. Secrecy
+D. Honesty
+Ans: C
+
+Q21. What is an antonym of TRANSPARENCY?
+A. Honesty
+B. Clarity
+C. Ambiguity
+D. Openness
+Ans: C
+
+Q22. What is an antonym of IMPUNITY?
+A. Immunity
+B. Exemption
+C. Accountability
+D. Freedom
+Ans: C
+
+Q23. What is an antonym of IMPUNITY?
+A. Freedom
+B. Immunity
+C. Liability
+D. Exemption
+Ans: C
+
+Q24. What is an antonym of IMPUNITY?
+A. Immunity
+B. Exemption
+C. Penalty
+D. Freedom
+Ans: C
+
+Q25. What is an antonym of UPTICK?
+A. Rise
+B. Upsurge
+C. Drop
+D. Increase
+Ans: C
+`;
+
+const ANT_SET_2 = `
+Q26. What is an antonym of UPTICK?
+A. Rise
+B. Decline
+C. Increase
+D. Upsurge
+Ans: B
+
+Q27. What is an antonym of UPTICK?
+A. Rise
+B. Increase
+C. Upsurge
+D. Downturn
+Ans: D
+
+Q28. What is an antonym of JEOPARDIZE?
+A. Endanger
+B. Threaten
+C. Protect
+D. Imperil
+Ans: C
+
+Q29. What is an antonym of JEOPARDIZE?
+A. Imperil
+B. Secure
+C. Endanger
+D. Threaten
+Ans: B
+
+Q30. What is an antonym of JEOPARDIZE?
+A. Endanger
+B. Threaten
+C. Safeguard
+D. Imperil
+Ans: C
+
+Q31. What is an antonym of UNRESTRAINED?
+A. Unchecked
+B. Uncontrolled
+C. Restrained
+D. Unrestricted
+Ans: C
+
+Q32. What is an antonym of UNRESTRAINED?
+A. Unrestricted
+B. Controlled
+C. Unchecked
+D. Uncontrolled
+Ans: B
+
+Q33. What is an antonym of UNRESTRAINED?
+A. Unrestricted
+B. Unchecked
+C. Limited
+D. Uncontrolled
+Ans: C
+
+Q34. What is an antonym of DEVASTATION?
+A. Destruction
+B. Ruin
+C. Restoration
+D. Havoc
+Ans: C
+
+Q35. What is an antonym of DEVASTATION?
+A. Havoc
+B. Repair
+C. Destruction
+D. Ruin
+Ans: B
+
+Q36. What is an antonym of DEVASTATION?
+A. Destruction
+B. Havoc
+C. Recovery
+D. Ruin
+Ans: C
+
+Q37. What is an antonym of ENCROACHMENT?
+A. Invasion
+B. Intrusion
+C. Withdrawal
+D. Trespass
+Ans: C
+
+Q38. What is an antonym of ENCROACHMENT?
+A. Trespass
+B. Retreat
+C. Invasion
+D. Intrusion
+Ans: B
+
+Q39. What is an antonym of ENCROACHMENT?
+A. Intrusion
+B. Invasion
+C. Respect
+D. Trespass
+Ans: C
+
+Q40. What is an antonym of TANGIBLE?
+A. Real
+B. Concrete
+C. Intangible
+D. Perceptible
+Ans: C
+
+Q41. What is an antonym of TANGIBLE?
+A. Concrete
+B. Perceptible
+C. Abstract
+D. Real
+Ans: C
+
+Q42. What is an antonym of TANGIBLE?
+A. Concrete
+B. Real
+C. Vague
+D. Perceptible
+Ans: C
+
+Q43. What is an antonym of MITIGATION?
+A. Alleviation
+B. Reduction
+C. Aggravation
+D. Relief
+Ans: C
+
+Q44. What is an antonym of MITIGATION?
+A. Relief
+B. Exacerbation
+C. Alleviation
+D. Reduction
+Ans: B
+
+Q45. What is an antonym of MITIGATION?
+A. Alleviation
+B. Relief
+C. Intensification
+D. Reduction
+Ans: C
+
+Q46. What is an antonym of AGILITY?
+A. Nimbleness
+B. Quickness
+C. Sluggishness
+D. Dexterity
+Ans: C
+
+Q47. What is an antonym of AGILITY?
+A. Dexterity
+B. Clumsiness
+C. Nimbleness
+D. Quickness
+Ans: B
+
+Q48. What is an antonym of AGILITY?
+A. Nimbleness
+B. Dexterity
+C. Quickness
+D. Inertia
+Ans: D
+
+Q49. What is an antonym of RELENTLESS?
+A. Persistent
+B. Unyielding
+C. Lenient
+D. Unremitting
+Ans: C
+
+Q50. What is an antonym of RELENTLESS?
+A. Unyielding
+B. Persistent
+C. Intermittent
+D. Unremitting
+Ans: C
+`;
+
+const ANT_SET_3 = `
+Q51. What is an antonym of RELENTLESS?
+A. Unyielding
+B. Persistent
+C. Forgiving
+D. Unremitting
+Ans: C
+
+Q52. What is an antonym of ESCALATE?
+A. Intensify
+B. Amplify
+C. Decrease
+D. Heighten
+Ans: C
+
+Q53. What is an antonym of ESCALATE?
+A. Amplify
+B. Reduce
+C. Heighten
+D. Intensify
+Ans: B
+
+Q54. What is an antonym of ESCALATE?
+A. Intensify
+B. Heighten
+C. Diminish
+D. Amplify
+Ans: C
+`;
+/* Paste more antonym sets here:
+const ANT_SET_4 = `
+Q1. ...
+`;
+*/
+
+/* ================================================================
+   PARSER — do not edit below this line
+================================================================ */
+function parseSet(rawText) {
+  const questions = [];
+  const blocks = rawText.trim().split(/\n{2,}/);
+  const letterMap = { A: 0, B: 1, C: 2, D: 3 };
+  for (const block of blocks) {
+    const lines = block.trim().split('\n').map(l => l.trim()).filter(Boolean);
+    if (lines.length < 6) continue;
+    const qLine  = lines.find(l => /^Q\d+\./i.test(l));
+    const aLine  = lines.find(l => /^A\./i.test(l));
+    const bLine  = lines.find(l => /^B\./i.test(l));
+    const cLine  = lines.find(l => /^C\./i.test(l));
+    const dLine  = lines.find(l => /^D\./i.test(l));
+    const ansLine = lines.find(l => /^Ans:/i.test(l));
+    if (!qLine || !aLine || !bLine || !cLine || !dLine || !ansLine) continue;
+    const q = qLine.replace(/^Q\d+\.\s*/i, '').trim();
+    const opts = [
+      aLine.replace(/^A\.\s*/i, '').trim(),
+      bLine.replace(/^B\.\s*/i, '').trim(),
+      cLine.replace(/^C\.\s*/i, '').trim(),
+      dLine.replace(/^D\.\s*/i, '').trim()
+    ];
+    const ansLetter = ansLine.replace(/^Ans:\s*/i, '').trim().toUpperCase();
+    const answer = letterMap[ansLetter];
+    if (answer === undefined) continue;
+    questions.push({ q, options: opts, answer });
+  }
+  return questions;
+}
+
+const SYNONYMS = [
+  parseSet(SYN_SET_1),
+  parseSet(SYN_SET_2),
+  parseSet(SYN_SET_3)
+  /* Add: parseSet(SYN_SET_4), */
+];
+
+const ANTONYMS = [
+  parseSet(ANT_SET_1),
+  parseSet(ANT_SET_2),
+  parseSet(ANT_SET_3)
+  /* Add: parseSet(ANT_SET_4), */
+];
+
+/* ════════ APP STATE ════════ */
+let currentType = null;
+let currentSet  = null;
+let questions   = [];
+let answers     = {};
+let savedDrafts = {};
+let currentQ    = 0;
+
+/* ════════ NAVIGATION ════════ */
+function show(id) {
+  ['homeView','setView','quizView','resultView'].forEach(v =>
+    document.getElementById(v).style.display = v === id ? 'block' : 'none'
+  );
+}
+function goHome() { show('homeView'); }
+
+function selectType(type) {
+  currentType = type;
+  const data = type === 'synonyms' ? SYNONYMS : ANTONYMS;
+  document.getElementById('setViewTitle').textContent = type === 'synonyms' ? 'Synonyms — Choose a Set' : 'Antonyms — Choose a Set';
+  document.getElementById('setViewSub').textContent = `${data.length} set(s) available`;
+  const grid = document.getElementById('setGrid');
+  grid.innerHTML = '';
+  data.forEach((set, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'set-btn';
+    btn.textContent = `Set ${i + 1}  (${set.length} Qs)`;
+    btn.onclick = () => startSet(i);
+    grid.appendChild(btn);
+  });
+  show('setView');
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startSet(setIndex) {
+  currentSet = setIndex;
+  const data = currentType === 'synonyms' ? SYNONYMS : ANTONYMS;
+  questions = shuffle(data[setIndex]);
+  const draftKey = `${currentType}-${setIndex}`;
+  answers = savedDrafts[draftKey] ? { ...savedDrafts[draftKey] } : {};
+  currentQ = 0;
+  document.getElementById('quizTypeLabel').textContent = currentType === 'synonyms' ? 'Synonyms' : 'Antonyms';
+  document.getElementById('quizSetLabel').textContent = `Set ${setIndex + 1}`;
+  document.getElementById('savedIndicator').style.display = 'none';
+  const isTeal = currentType === 'antonyms';
+  document.getElementById('progressFill').className = 'progress-fill' + (isTeal ? ' teal' : '');
+  document.getElementById('submitBtn').className = 'nav-btn primary' + (isTeal ? ' teal' : '');
+  renderQuestion();
+  show('quizView');
+}
+
+function exitQuiz() { selectType(currentType); }
+
+/* ════════ QUIZ ════════ */
+function renderQuestion() {
+  const q = questions[currentQ];
+  const total = questions.length;
+  const chosen = answers[currentQ];
+  const hasAnswer = chosen !== undefined;
+
+  document.getElementById('qNumber').textContent = `Question ${currentQ + 1} of ${total}`;
+  document.getElementById('qText').textContent = q.q;
+  const container = document.getElementById('optionsContainer');
+  container.innerHTML = '';
+  ['A','B','C','D'].forEach((letter, i) => {
+    const div = document.createElement('div');
+    let cls = 'option';
+    if (hasAnswer) {
+      // Always highlight the correct answer in green
+      if (i === q.answer) {
+        cls += ' correct-ans';
+      } else if (i === chosen && chosen !== q.answer) {
+        // The wrong choice gets red
+        cls += ' wrong-ans';
+      } else {
+        cls += ' locked';
+      }
+    }
+    div.className = cls;
+    div.innerHTML = `<span class="option-letter">${letter}</span><span>${q.options[i]}</span>`;
+    if (!hasAnswer) {
+      div.onclick = () => { answers[currentQ] = i; renderQuestion(); };
+    }
+    container.appendChild(div);
+  });
+  const answered = Object.keys(answers).length;
+  document.getElementById('progressFill').style.width = `${(answered / total) * 100}%`;
+  renderPalette();
+  document.getElementById('prevBtn').disabled = currentQ === 0;
+  document.getElementById('nextBtn').disabled = currentQ === total - 1;
+}
+
+function renderPalette() {
+  const palette = document.getElementById('qPalette');
+  palette.innerHTML = '';
+  questions.forEach((q, i) => {
+    const dot = document.createElement('div');
+    let cls = 'q-dot' + (i === currentQ ? ' current' : '');
+    if (answers[i] !== undefined) {
+      cls += answers[i] === q.answer ? ' dot-correct' : ' dot-wrong';
+    }
+    dot.className = cls;
+    dot.textContent = i + 1;
+    dot.onclick = () => { currentQ = i; renderQuestion(); };
+    palette.appendChild(dot);
+  });
+}
+
+function navigate(dir) {
+  currentQ = Math.max(0, Math.min(questions.length - 1, currentQ + dir));
+  renderQuestion();
+}
+
+function saveDraft() {
+  savedDrafts[`${currentType}-${currentSet}`] = { ...answers };
+  document.getElementById('savedIndicator').style.display = 'inline';
+  const btn = document.getElementById('saveBtn');
+  btn.textContent = '✓ Saved'; btn.classList.add('saved');
+  setTimeout(() => { btn.textContent = 'Save Draft'; btn.classList.remove('saved'); }, 2000);
+}
+
+function confirmSubmit() {
+  const skipped = questions.length - Object.keys(answers).length;
+  if (skipped > 0 && !confirm(`You have ${skipped} unanswered question(s). Submit anyway?`)) return;
+  showResult();
+}
+
+/* ════════ RESULTS ════════ */
+function getResults() {
+  let correct = 0, wrong = 0, skipped = 0;
+  const results = questions.map((q, i) => {
+    if (answers[i] === undefined) { skipped++; return { q, i, status: 'skipped', chosen: null }; }
+    if (answers[i] === q.answer)  { correct++; return { q, i, status: 'correct', chosen: answers[i] }; }
+    wrong++;                                    return { q, i, status: 'wrong',   chosen: answers[i] };
+  });
+  return { results, correct, wrong, skipped };
+}
+
+function showResult() {
+  const total = questions.length;
+  const { results, correct, wrong, skipped } = getResults();
+  const pct = Math.round((correct / total) * 100);
+  const type = currentType === 'synonyms' ? 'Synonyms' : 'Antonyms';
+  const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+
+  document.getElementById('resultTitle').textContent = `${type} — Set ${currentSet + 1} Result`;
+  document.getElementById('resultSubtitle').textContent = `Submitted on ${date}`;
+  document.getElementById('statTotal').textContent   = total;
+  document.getElementById('statCorrect').textContent = correct;
+  document.getElementById('statWrong').textContent   = wrong;
+  document.getElementById('statSkipped').textContent = skipped;
+  document.getElementById('scorePct').textContent    = `${correct}/${total} (${pct}%)`;
+  document.getElementById('scoreFill').style.width   = `${pct}%`;
+
+  const ordered = [
+    ...results.filter(r => r.status === 'wrong'),
+    ...results.filter(r => r.status === 'skipped'),
+    ...results.filter(r => r.status === 'correct')
+  ];
+
+  const container = document.getElementById('resultItems');
+  container.innerHTML = '';
+  const sections = [
+    { label: `Wrong Attempts (${wrong})`,     items: ordered.filter(r => r.status === 'wrong'),   cls: 'wrong' },
+    { label: `Skipped Questions (${skipped})`, items: ordered.filter(r => r.status === 'skipped'), cls: 'skipped' },
+    { label: `Correct Attempts (${correct})`,  items: ordered.filter(r => r.status === 'correct'), cls: 'correct' }
+  ];
+  sections.forEach(sec => {
+    if (!sec.items.length) return;
+    const title = document.createElement('div');
+    title.className = 'result-section-title';
+    title.textContent = sec.label;
+    container.appendChild(title);
+    sec.items.forEach(r => {
+      const div = document.createElement('div');
+      div.className = `result-item ${r.status}`;
+      const L = ['A','B','C','D'];
+      let pillsHtml = '';
+      if (r.status === 'wrong') {
+        pillsHtml = `<span class="pill your">Your answer: ${L[r.chosen]}) ${r.q.options[r.chosen]}</span>
+                     <span class="pill ans">Correct: ${L[r.q.answer]}) ${r.q.options[r.q.answer]}</span>`;
+      } else if (r.status === 'skipped') {
+        pillsHtml = `<span class="pill skip">Not attempted</span>
+                     <span class="pill ans">Correct: ${L[r.q.answer]}) ${r.q.options[r.q.answer]}</span>`;
+      } else {
+        pillsHtml = `<span class="pill ok">Correct: ${L[r.q.answer]}) ${r.q.options[r.q.answer]}</span>`;
+      }
+      div.innerHTML = `<div class="ri-q">Q${r.i + 1}. ${r.q.q}</div><div class="ri-row">${pillsHtml}</div>`;
+      container.appendChild(div);
+    });
+  });
+  show('resultView');
+}
+
+function retakeSet() { startSet(currentSet); }
+
+/* ════════ DOWNLOADS ════════ */
+function buildTxt() {
+  const total = questions.length;
+  const { results, correct, wrong, skipped } = getResults();
+  const pct = Math.round((correct / total) * 100);
+  const type = currentType === 'synonyms' ? 'Synonyms' : 'Antonyms';
+  const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+  const L = ['A','B','C','D'];
+  let txt = `VOCABULARY MOCK TEST — RESULT REPORT\n${'='.repeat(50)}\n`;
+  txt += `Type    : ${type}\nSet     : Set ${currentSet + 1}\nDate    : ${date}\n${'='.repeat(50)}\n\n`;
+  txt += `SUMMARY\n${'-'.repeat(30)}\nTotal     : ${total}\nCorrect   : ${correct}\nWrong     : ${wrong}\nSkipped   : ${skipped}\nScore     : ${correct}/${total} (${pct}%)\n\n`;
+  [
+    { label: 'WRONG ATTEMPTS',     items: results.filter(r => r.status === 'wrong') },
+    { label: 'SKIPPED QUESTIONS',  items: results.filter(r => r.status === 'skipped') },
+    { label: 'CORRECT ATTEMPTS',   items: results.filter(r => r.status === 'correct') }
+  ].forEach(g => {
+    if (!g.items.length) return;
+    txt += `${g.label} (${g.items.length})\n${'-'.repeat(40)}\n`;
+    g.items.forEach(r => {
+      txt += `Q${r.i + 1}. ${r.q.q}\n`;
+      if (r.status === 'wrong')    txt += `    Your answer : ${L[r.chosen]}) ${r.q.options[r.chosen]}\n    Correct     : ${L[r.q.answer]}) ${r.q.options[r.q.answer]}\n`;
+      else if (r.status === 'skipped') txt += `    Not attempted\n    Correct     : ${L[r.q.answer]}) ${r.q.options[r.q.answer]}\n`;
+      else                          txt += `    Correct     : ${L[r.q.answer]}) ${r.q.options[r.q.answer]}\n`;
+      txt += '\n';
+    });
+    txt += '\n';
+  });
+  txt += `${'='.repeat(50)}\nGenerated by Vocabulary Mock Test\n`;
+  return txt;
+}
+
+function downloadResultTxt() {
+  const blob = new Blob([buildTxt()], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = `vocab-${currentType}-set${currentSet + 1}.txt`; a.click();
+}
+
+function downloadResult() {
+  const total = questions.length;
+  const { results, correct, wrong, skipped } = getResults();
+  const pct = Math.round((correct / total) * 100);
+  const type = currentType === 'synonyms' ? 'Synonyms' : 'Antonyms';
+  const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+  const L = ['A','B','C','D'];
+  const ordered = [
+    ...results.filter(r => r.status === 'wrong'),
+    ...results.filter(r => r.status === 'skipped'),
+    ...results.filter(r => r.status === 'correct')
+  ];
+  let rows = '';
+  ordered.forEach(r => {
+    const status = r.status === 'wrong' ? '❌ Wrong' : r.status === 'skipped' ? '⚠ Skipped' : '✓ Correct';
+    const your   = r.chosen !== null ? `${L[r.chosen]}) ${r.q.options[r.chosen]}` : '—';
+    const corr   = `${L[r.q.answer]}) ${r.q.options[r.q.answer]}`;
+    const bg     = r.status === 'wrong' ? '#fff0f0' : r.status === 'skipped' ? '#fffbf0' : '#f0fff4';
+    rows += `<tr style="background:${bg}"><td>${r.i+1}</td><td>${r.q.q}</td><td>${status}</td><td>${your}</td><td>${corr}</td></tr>`;
+  });
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Result — ${type} Set ${currentSet+1}</title>
+<style>body{font-family:Arial,sans-serif;margin:40px;color:#111}h1{font-size:22px;margin-bottom:4px}.meta{color:#666;font-size:13px;margin-bottom:20px}.stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}.sc{border:1px solid #ddd;border-radius:8px;padding:10px 16px;text-align:center}.lbl{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}.val{font-size:22px;font-weight:600}.c .val{color:#27500A}.w .val{color:#791F1F}.s .val{color:#633806}table{width:100%;border-collapse:collapse;font-size:13px}th{background:#f1efe8;padding:9px 8px;border:1px solid #ddd;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em}td{padding:8px;border:1px solid #ddd}</style>
+</head><body>
+<h1>Vocabulary Mock Test — Result</h1>
+<div class="meta">${type} · Set ${currentSet+1} · ${date}</div>
+<div class="stats">
+  <div class="sc"><div class="lbl">Total</div><div class="val">${total}</div></div>
+  <div class="sc c"><div class="lbl">Correct</div><div class="val">${correct}</div></div>
+  <div class="sc w"><div class="lbl">Wrong</div><div class="val">${wrong}</div></div>
+  <div class="sc s"><div class="lbl">Skipped</div><div class="val">${skipped}</div></div>
+  <div class="sc"><div class="lbl">Score</div><div class="val">${pct}%</div></div>
+</div>
+<table><tr><th>#</th><th>Question</th><th>Status</th><th>Your Answer</th><th>Correct Answer</th></tr>${rows}</table>
+<p style="margin-top:20px;font-size:12px;color:#888">Generated by Vocabulary Mock Test App</p>
+</body></html>`;
+  const blob = new Blob([html], { type: 'text/html' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = `vocab-${currentType}-set${currentSet + 1}.html`; a.click();
+}
+
+/* ════════ INIT ════════ */
+(function init() {
+  document.getElementById('synBadge').textContent =
+    `${SYNONYMS.length} set(s) · ${SYNONYMS.reduce((a,s) => a + s.length, 0)} questions`;
+  document.getElementById('antBadge').textContent =
+    `${ANTONYMS.length} set(s) · ${ANTONYMS.reduce((a,s) => a + s.length, 0)} questions`;
+  show('homeView');
+})();
+</script>
+</body>
+</html>
