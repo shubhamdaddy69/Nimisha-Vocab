@@ -384,16 +384,16 @@
       <div class="q-number" id="qNumber"></div>
       <div class="q-text" id="qText"></div>
       <div class="options" id="optionsContainer"></div>
-    </div>
-    <div class="quiz-nav">
-      <div class="left">
-        <button class="back-btn" onclick="exitQuiz()">← Sets</button>
-        <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">← Previous</button>
-        <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Next →</button>
-      </div>
-      <div class="right">
-        <button class="nav-btn bk-btn" id="bookmarkBtn" onclick="toggleBookmark()">🔖 Bookmark</button>
-        <button class="nav-btn primary" id="submitBtn" onclick="confirmSubmit()">Submit</button>
+      <div class="quiz-nav" style="margin-top:1.25rem;">
+        <div class="left">
+          <button class="back-btn" onclick="exitQuiz()">← Sets</button>
+          <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">← Previous</button>
+          <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Next →</button>
+        </div>
+        <div class="right">
+          <button class="nav-btn bk-btn" id="bookmarkBtn" onclick="toggleBookmark()">🔖 Bookmark</button>
+          <button class="nav-btn primary" id="submitBtn" onclick="confirmSubmit()">Submit</button>
+        </div>
       </div>
     </div>
   </div>
@@ -438,8 +438,11 @@
 /* ================================================================
    HOW TO ADD QUESTIONS
    -------------------
-   Paste your questions inside the backtick strings below.
-   Each set holds 25 questions. Use EXACTLY this format:
+   Just paste ALL your synonym questions in ALL_SYNONYMS below,
+   and ALL your antonym questions in ALL_ANTONYMS below.
+   Use random serial numbers — the code auto-arranges into sets of 25.
+
+   Use EXACTLY this format per question:
 
    Q1. Your question text here
    A. Option one
@@ -453,15 +456,11 @@
    - Options must be exactly A. B. C. D. (capital letter + dot)
    - Ans: must be exactly "Ans:" followed by A, B, C, or D
    - Leave one blank line between questions
-   - Serial numbers in Q don't need to match set order — the
-     parser just reads them top to bottom
-
-   To add more sets: copy a RAW_SET block below and fill it in.
+   - Serial numbers don't need to be in order — just paste freely
 ================================================================ */
 
-/* -------- SYNONYMS -------- */
-
-const SYN_SET_1 = `
+/* -------- SYNONYMS (paste ALL synonym questions here) -------- */
+const ALL_SYNONYMS = `
 Q1. What is a synonym of PESSIMISTIC?
 A. Optimistic
 B. Cheerful
@@ -636,9 +635,7 @@ B. Drop
 C. Rise
 D. Downturn
 Ans: C
-`;
 
-const SYN_SET_2 = `
 Q26. What is a synonym of UPTICK?
 A. Decline
 B. Increase
@@ -813,9 +810,7 @@ B. Lenient
 C. Unremitting
 D. Forgiving
 Ans: C
-`;
 
-const SYN_SET_3 = `
 Q51. What is a synonym of RELENTLESS?
 A. Lenient
 B. Intermittent
@@ -844,15 +839,9 @@ C. Amplify
 D. Reduce
 Ans: C
 `;
-/* Paste more synonym sets here:
-const SYN_SET_4 = `
-Q1. ...
-`;
-*/
 
-/* -------- ANTONYMS -------- */
-
-const ANT_SET_1 = `
+/* -------- ANTONYMS (paste ALL antonym questions here) -------- */
+const ALL_ANTONYMS = `
 Q1. What is an antonym of PESSIMISTIC?
 A. Cynical
 B. Negative
@@ -1027,9 +1016,7 @@ B. Upsurge
 C. Drop
 D. Increase
 Ans: C
-`;
 
-const ANT_SET_2 = `
 Q26. What is an antonym of UPTICK?
 A. Rise
 B. Decline
@@ -1204,9 +1191,7 @@ B. Persistent
 C. Intermittent
 D. Unremitting
 Ans: C
-`;
 
-const ANT_SET_3 = `
 Q51. What is an antonym of RELENTLESS?
 A. Unyielding
 B. Persistent
@@ -1235,16 +1220,11 @@ C. Diminish
 D. Amplify
 Ans: C
 `;
-/* Paste more antonym sets here:
-const ANT_SET_4 = `
-Q1. ...
-`;
-*/
 
 /* ================================================================
    PARSER — do not edit below this line
 ================================================================ */
-function parseSet(rawText) {
+function parseAllQuestions(rawText) {
   const questions = [];
   const blocks = rawText.trim().split(/\n{2,}/);
   const letterMap = { A: 0, B: 1, C: 2, D: 3 };
@@ -1273,19 +1253,24 @@ function parseSet(rawText) {
   return questions;
 }
 
-const SYNONYMS = [
-  parseSet(SYN_SET_1),
-  parseSet(SYN_SET_2),
-  parseSet(SYN_SET_3)
-  /* Add: parseSet(SYN_SET_4), */
-];
+/* Auto-chunk a flat array into sets of SET_SIZE, attaching a globalIndex to each question */
+const SET_SIZE = 25;
+function chunkIntoSets(allQuestions) {
+  const sets = [];
+  for (let i = 0; i < allQuestions.length; i += SET_SIZE) {
+    sets.push(allQuestions.slice(i, i + SET_SIZE));
+  }
+  return sets;
+}
 
-const ANTONYMS = [
-  parseSet(ANT_SET_1),
-  parseSet(ANT_SET_2),
-  parseSet(ANT_SET_3)
-  /* Add: parseSet(ANT_SET_4), */
-];
+/* Attach a stable globalIndex to every question so bookmarks are exact */
+function attachIndices(sets) {
+  let idx = 0;
+  return sets.map(set => set.map(q => ({ ...q, globalIndex: idx++ })));
+}
+
+const SYNONYMS = attachIndices(chunkIntoSets(parseAllQuestions(ALL_SYNONYMS)));
+const ANTONYMS = attachIndices(chunkIntoSets(parseAllQuestions(ALL_ANTONYMS)));
 
 /* ════════ APP STATE ════════ */
 let currentType = null;
@@ -1320,16 +1305,17 @@ function storeMistakes(type, setIdx, results) {
   saveStorage(data);
 }
 
-/* Bookmark / unbookmark current question */
+/* Bookmark / unbookmark current question — uses globalIndex as unique ID */
 function toggleBookmark() {
   const data = loadStorage();
   if (!data.bookmarks) data.bookmarks = {};
   const key = getStorageKey(currentType, currentSet);
   if (!data.bookmarks[key]) data.bookmarks[key] = [];
   const q = questions[currentQ];
-  const idx = data.bookmarks[key].findIndex(b => b.q === q.q);
+  const uid = q.globalIndex;
+  const idx = data.bookmarks[key].findIndex(b => b.uid === uid);
   if (idx === -1) {
-    data.bookmarks[key].push({ q: q.q, options: q.options, answer: q.answer });
+    data.bookmarks[key].push({ uid, q: q.q, options: q.options, answer: q.answer });
   } else {
     data.bookmarks[key].splice(idx, 1);
     if (data.bookmarks[key].length === 0) delete data.bookmarks[key];
@@ -1345,7 +1331,7 @@ function isBookmarked() {
   const bk = data.bookmarks[key];
   if (!bk) return false;
   const q = questions[currentQ];
-  return bk.some(b => b.q === q.q);
+  return bk.some(b => b.uid === q.globalIndex);
 }
 
 function updateBookmarkBtn() {
@@ -1744,6 +1730,14 @@ function downloadResult() {
 
 /* ════════ INIT ════════ */
 (function init() {
+  /* Fix 4: One-time history wipe on the very first ever load.
+     After that, a 'historyCleared' flag is set so data is kept forever. */
+  const cleared = localStorage.getItem('vocabHistoryCleared');
+  if (!cleared) {
+    localStorage.removeItem('vocabQuizData');
+    localStorage.setItem('vocabHistoryCleared', '1');
+  }
+
   document.getElementById('synBadge').textContent =
     `${SYNONYMS.length} set(s) · ${SYNONYMS.reduce((a,s) => a + s.length, 0)} questions`;
   document.getElementById('antBadge').textContent =
