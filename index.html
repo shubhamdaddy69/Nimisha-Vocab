@@ -379,14 +379,15 @@
 
   <div class="quiz-view" id="quizView">
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <div class="q-palette" id="qPalette"></div>
+    <div style="margin-bottom:0.75rem;">
+      <button class="back-btn" onclick="exitQuiz()">← Sets</button>
+    </div>
     <div class="question-card">
       <div class="q-number" id="qNumber"></div>
       <div class="q-text" id="qText"></div>
       <div class="options" id="optionsContainer"></div>
       <div class="quiz-nav" style="margin-top:1.25rem;">
         <div class="left">
-          <button class="back-btn" onclick="exitQuiz()">← Sets</button>
           <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">← Previous</button>
           <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Next →</button>
         </div>
@@ -396,6 +397,7 @@
         </div>
       </div>
     </div>
+    <div class="q-palette" id="qPalette" style="margin-top:1.25rem;"></div>
   </div>
 
   <div class="result-view" id="resultView">
