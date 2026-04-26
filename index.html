@@ -323,7 +323,7 @@
 <div id="pause-overlay">
     <h2>⏸ PAUSED</h2>
     <p>Your quiz is paused. Take a break!</p>
-    <button id="resume-btn" onclick="resumeTest()">▶ RESUME QUIZ</button>
+    <button id="resume-btn" onclick="togglePause()">▶ RESUME QUIZ</button>
 </div>
 <div class="app">
   <div id="homeView">
@@ -395,6 +395,7 @@
     <div style="margin-bottom:0.75rem;display:flex;gap:8px;align-items:center;">
       <button class="back-btn" onclick="exitQuiz()">← Sets</button>
       <button class="back-btn" style="background:#4285f4;color:#fff;border:none;" onclick="openGoogle()">🔍 Google</button>
+      <div id="quiz-timer" style="margin-left:auto;font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:bold;background:#7c3aed;color:#fff;padding:6px 16px;border-radius:8px;">10:00</div>
     </div>
     <div class="question-card">
       <div class="q-number" id="qNumber"></div>
@@ -402,7 +403,7 @@
       <div class="options" id="optionsContainer"></div>
       <div class="quiz-nav" style="margin-top:1.25rem;">
         <div class="left">
-          <button id="pause-btn" style="background:#f59e0b;color:#fff;border:none;padding:6px 12px;border-radius:8px;font-family:Orbitron,sans-serif;font-size:0.65rem;font-weight:bold;cursor:pointer;" onclick="pauseTest()">⏸ PAUSE</button>
+          <button id="pause-btn" style="background:#f59e0b;color:#fff;border:none;padding:6px 12px;border-radius:8px;font-family:Orbitron,sans-serif;font-size:0.65rem;font-weight:bold;cursor:pointer;" onclick="togglePause()">⏸ PAUSE</button>
           <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">← Previous</button>
           <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Next →</button>
         </div>
@@ -2241,9 +2242,40 @@ function startSet(setIndex) {
   document.getElementById('submitBtn').className = 'nav-btn primary' + (isTeal ? ' teal' : '');
   renderQuestion();
   show('quizView');
+  startQuizTimer();
 }
 
-function exitQuiz() { selectType(currentType); }
+let quizTimerInt = null;
+let quizTimeLeft = 600;
+
+function startQuizTimer() {
+  clearInterval(quizTimerInt);
+  quizTimeLeft = 600;
+  updateTimerDisplay();
+  quizTimerInt = setInterval(() => {
+    if (window._paused) return;
+    quizTimeLeft--;
+    updateTimerDisplay();
+    if (quizTimeLeft <= 0) {
+      clearInterval(quizTimerInt);
+      document.getElementById('quiz-timer').textContent = '0:00';
+      document.getElementById('quiz-timer').style.background = '#dc2626';
+      alert('⏱ Time is up! Submitting your quiz.');
+      confirmSubmit();
+    }
+  }, 1000);
+}
+
+function updateTimerDisplay() {
+  const m = Math.floor(quizTimeLeft / 60);
+  const s = quizTimeLeft % 60;
+  const el = document.getElementById('quiz-timer');
+  if (!el) return;
+  el.textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+  el.style.background = quizTimeLeft <= 60 ? '#dc2626' : '#7c3aed';
+}
+
+function exitQuiz() { clearInterval(quizTimerInt); selectType(currentType); }
 
 /* ════════ QUIZ ════════ */
 function renderQuestion() {
@@ -2307,18 +2339,22 @@ function navigate(dir) {
 }
 
 
-function pauseTest() {
-    window._paused = true;
-    document.getElementById('pause-overlay').classList.add('active');
-    document.getElementById('pause-btn').textContent = '▶ RESUME';
-    document.getElementById('pause-btn').onclick = resumeTest;
+function togglePause() {
+    window._paused = !window._paused;
+    const btn = document.getElementById('pause-btn');
+    const overlay = document.getElementById('pause-overlay');
+    if (window._paused) {
+        overlay.classList.add('active');
+        btn.textContent = '▶ RESUME';
+        btn.style.background = '#059669';
+    } else {
+        overlay.classList.remove('active');
+        btn.textContent = '⏸ PAUSE';
+        btn.style.background = '#f59e0b';
+    }
 }
-function resumeTest() {
-    window._paused = false;
-    document.getElementById('pause-overlay').classList.remove('active');
-    document.getElementById('pause-btn').textContent = '⏸ PAUSE';
-    document.getElementById('pause-btn').onclick = pauseTest;
-}
+function pauseTest() { if (!window._paused) togglePause(); }
+function resumeTest() { if (window._paused) togglePause(); }
 function openGoogle() {
   const q = questions[currentQ];
   if (!q) return;
@@ -2330,6 +2366,7 @@ function openGoogle() {
 function confirmSubmit() {
   const skipped = questions.length - Object.keys(answers).length;
   if (skipped > 0 && !confirm(`You have ${skipped} unanswered question(s). Submit anyway?`)) return;
+  clearInterval(quizTimerInt);
   showResult();
 }
 
