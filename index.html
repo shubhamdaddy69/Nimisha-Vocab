@@ -309,9 +309,22 @@
   /* bookmark btn in quiz */
   .nav-btn.bk-btn { color: var(--amber-600); border-color: rgba(133,79,11,0.25); }
   .nav-btn.bk-btn.bookmarked { background: var(--amber-50); }
+
+  #pause-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.88); z-index:9999; flex-direction:column; align-items:center; justify-content:center; gap:20px; }
+  #pause-overlay.active { display:flex; }
+  #pause-overlay h2 { color:#fff; font-family:'Orbitron',sans-serif; font-size:1.4rem; letter-spacing:3px; margin:0; }
+  #pause-overlay p { color:#94a3b8; font-size:0.9rem; margin:0; }
+  #resume-btn { background:#7c3aed; color:#fff; border:none; padding:14px 40px; border-radius:10px; font-family:'Orbitron',sans-serif; font-size:1rem; font-weight:bold; cursor:pointer; }
+  #resume-btn:hover { background:#6d28d9; }
+  #pause-btn { background:#f59e0b; color:#fff; border:none; padding:6px 14px; border-radius:8px; font-family:'Orbitron',sans-serif; font-size:0.65rem; font-weight:bold; cursor:pointer; }
 </style>
 </head>
 <body>
+<div id="pause-overlay">
+    <h2>⏸ PAUSED</h2>
+    <p>Your quiz is paused. Take a break!</p>
+    <button id="resume-btn" onclick="resumeTest()">▶ RESUME QUIZ</button>
+</div>
 <div class="app">
   <div id="homeView">
     <div class="home-grid">
@@ -379,8 +392,9 @@
 
   <div class="quiz-view" id="quizView">
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-    <div style="margin-bottom:0.75rem;">
+    <div style="margin-bottom:0.75rem;display:flex;gap:8px;align-items:center;">
       <button class="back-btn" onclick="exitQuiz()">← Sets</button>
+      <button class="back-btn" style="background:#4285f4;color:#fff;border:none;" onclick="openGoogle()">🔍 Google</button>
     </div>
     <div class="question-card">
       <div class="q-number" id="qNumber"></div>
@@ -388,6 +402,7 @@
       <div class="options" id="optionsContainer"></div>
       <div class="quiz-nav" style="margin-top:1.25rem;">
         <div class="left">
+          <button id="pause-btn" style="background:#f59e0b;color:#fff;border:none;padding:6px 12px;border-radius:8px;font-family:Orbitron,sans-serif;font-size:0.65rem;font-weight:bold;cursor:pointer;" onclick="pauseTest()">⏸ PAUSE</button>
           <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">← Previous</button>
           <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Next →</button>
         </div>
@@ -2289,6 +2304,27 @@ function renderPalette() {
 function navigate(dir) {
   currentQ = Math.max(0, Math.min(questions.length - 1, currentQ + dir));
   renderQuestion();
+}
+
+
+function pauseTest() {
+    window._paused = true;
+    document.getElementById('pause-overlay').classList.add('active');
+    document.getElementById('pause-btn').textContent = '▶ RESUME';
+    document.getElementById('pause-btn').onclick = resumeTest;
+}
+function resumeTest() {
+    window._paused = false;
+    document.getElementById('pause-overlay').classList.remove('active');
+    document.getElementById('pause-btn').textContent = '⏸ PAUSE';
+    document.getElementById('pause-btn').onclick = pauseTest;
+}
+function openGoogle() {
+  const q = questions[currentQ];
+  if (!q) return;
+  const optsText = q.options.map((o, i) => `${String.fromCharCode(65+i)}. ${o}`).join(' | ');
+  const text = `${q.q} | ${optsText}`;
+  window.open('https://www.google.com/search?q=' + encodeURIComponent(text), '_blank');
 }
 
 function confirmSubmit() {
