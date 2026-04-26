@@ -414,6 +414,9 @@
       </div>
     </div>
     <div class="q-palette" id="qPalette" style="margin-top:1.25rem;"></div>
+    <div style="margin-top:0.5rem;">
+      <button id="paletteToggleBtn" onclick="togglePalette()" style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:6px 14px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;transition:background 0.1s,border-color 0.1s;">🧭 Hide Navigator</button>
+    </div>
   </div>
 
   <div class="result-view" id="resultView">
@@ -456,29 +459,38 @@
 /* ================================================================
    HOW TO ADD QUESTIONS
    -------------------
-   Just paste ALL your synonym questions in ALL_SYNONYMS below,
-   and ALL your antonym questions in ALL_ANTONYMS below.
-   Use random serial numbers — the code auto-arranges into sets of 25.
+   Paste ALL questions (both synonyms AND antonyms) in ALL_QUESTIONS below.
+   The code will automatically detect each question as Synonym or Antonym
+   by looking for the words "synonym" or "antonym" in the question text,
+   and arrange them into sets of 40 questions each.
 
    Use EXACTLY this format per question:
 
-   Q1. Your question text here
+   Q1. What is a synonym of HAPPY?       ← contains "synonym" → goes to Synonyms
    A. Option one
    B. Option two
    C. Option three
    D. Option four
    Ans: B
 
+   Q2. What is an antonym of HAPPY?      ← contains "antonym" → goes to Antonyms
+   A. Option one
+   B. Option two
+   C. Option three
+   D. Option four
+   Ans: C
+
    Rules:
    - Q must start with "Q" followed by a number and a dot
+   - The question text MUST contain the word "synonym" or "antonym"
    - Options must be exactly A. B. C. D. (capital letter + dot)
    - Ans: must be exactly "Ans:" followed by A, B, C, or D
    - Leave one blank line between questions
    - Serial numbers don't need to be in order — just paste freely
 ================================================================ */
 
-/* -------- SYNONYMS (paste ALL synonym questions here) -------- */
-const ALL_SYNONYMS = `
+/* -------- PASTE ALL QUESTIONS HERE (synonyms + antonyms mixed) -------- */
+const ALL_QUESTIONS = `
 Q1. What is a synonym of PESSIMISTIC?
 A. Optimistic
 B. Cheerful
@@ -4377,10 +4389,7 @@ B. Patient
 C. Placid
 D. Testy
 Ans: D
-`;
 
-/* -------- ANTONYMS (paste ALL antonym questions here) -------- */
-const ALL_ANTONYMS = `
 Q1. What is an antonym of PESSIMISTIC?
 A. Cynical
 B. Negative
@@ -8256,9 +8265,12 @@ Ans: D
 
 /* ================================================================
    PARSER — do not edit below this line
+   Auto-splits ALL_QUESTIONS into SYNONYMS and ANTONYMS by detecting
+   "synonym" or "antonym" in each question's text.
 ================================================================ */
-function parseAllQuestions(rawText) {
-  const questions = [];
+function parseAndSplitQuestions(rawText) {
+  const synonyms = [];
+  const antonyms = [];
   const blocks = rawText.trim().split(/\n{2,}/);
   const letterMap = { A: 0, B: 1, C: 2, D: 3 };
   for (const block of blocks) {
@@ -8281,13 +8293,19 @@ function parseAllQuestions(rawText) {
     const ansLetter = ansLine.replace(/^Ans:\s*/i, '').trim().toUpperCase();
     const answer = letterMap[ansLetter];
     if (answer === undefined) continue;
-    questions.push({ q, options: opts, answer });
+    const entry = { q, options: opts, answer };
+    if (/antonym/i.test(q)) {
+      antonyms.push(entry);
+    } else {
+      // default to synonyms (also catches "synonym" keyword)
+      synonyms.push(entry);
+    }
   }
-  return questions;
+  return { synonyms, antonyms };
 }
 
 /* Auto-chunk a flat array into sets of SET_SIZE, attaching a globalIndex to each question */
-const SET_SIZE = 25;
+const SET_SIZE = 40;
 function chunkIntoSets(allQuestions) {
   const sets = [];
   for (let i = 0; i < allQuestions.length; i += SET_SIZE) {
@@ -8302,8 +8320,9 @@ function attachIndices(sets) {
   return sets.map(set => set.map(q => ({ ...q, globalIndex: idx++ })));
 }
 
-const SYNONYMS = attachIndices(chunkIntoSets(parseAllQuestions(ALL_SYNONYMS)));
-const ANTONYMS = attachIndices(chunkIntoSets(parseAllQuestions(ALL_ANTONYMS)));
+const _parsed = parseAndSplitQuestions(ALL_QUESTIONS);
+const SYNONYMS = attachIndices(chunkIntoSets(_parsed.synonyms));
+const ANTONYMS = attachIndices(chunkIntoSets(_parsed.antonyms));
 
 /* ════════ APP STATE ════════ */
 let currentType = null;
@@ -8547,11 +8566,11 @@ function startSet(setIndex) {
 }
 
 let quizTimerInt = null;
-let quizTimeLeft = 600;
+let quizTimeLeft = 720;
 
 function startQuizTimer() {
   clearInterval(quizTimerInt);
-  quizTimeLeft = 600;
+  quizTimeLeft = 720;
   updateTimerDisplay();
   quizTimerInt = setInterval(() => {
     if (window._paused) return;
@@ -8632,6 +8651,15 @@ function renderPalette() {
     dot.onclick = () => { currentQ = i; renderQuestion(); };
     palette.appendChild(dot);
   });
+}
+
+let _paletteVisible = true;
+function togglePalette() {
+  _paletteVisible = !_paletteVisible;
+  const palette = document.getElementById('qPalette');
+  const btn = document.getElementById('paletteToggleBtn');
+  palette.style.display = _paletteVisible ? 'flex' : 'none';
+  btn.textContent = _paletteVisible ? '🧭 Hide Navigator' : '🧭 Show Navigator';
 }
 
 function navigate(dir) {
