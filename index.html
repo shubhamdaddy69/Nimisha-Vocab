@@ -62,68 +62,124 @@
 
   .type-card {
     position: relative; overflow: hidden;
-    border-radius: var(--radius-xl); padding: 2.25rem 1.75rem 1.75rem;
+    border-radius: var(--radius-xl); padding: 2.5rem 1.75rem 2rem;
     cursor: pointer; user-select: none;
-    transition: transform 0.18s, box-shadow 0.18s;
+    transition: transform 0.22s cubic-bezier(.22,.68,0,1.2), box-shadow 0.22s;
     border: 1.5px solid transparent;
   }
-  .type-card:hover { transform: translateY(-5px); }
+  .type-card:hover { transform: translateY(-8px) scale(1.02); }
   .type-card:active { transform: scale(0.97); }
 
   .type-card.syn {
-    background: linear-gradient(140deg, #3d35a0 0%, #6b5fe8 50%, #8b7ffa 100%);
-    border-color: rgba(124,111,247,0.4);
-    box-shadow: 0 8px 32px rgba(124,111,247,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+    background: linear-gradient(140deg, #2d27a0 0%, #5a4fd4 45%, #8b7ffa 100%);
+    border-color: rgba(139,127,250,0.5);
+    box-shadow: 0 8px 32px rgba(124,111,247,0.35), inset 0 1px 0 rgba(255,255,255,0.15);
   }
   .type-card.ant {
-    background: linear-gradient(140deg, #0a5c4a 0%, #0f9b7a 50%, #00d4b8 100%);
-    border-color: rgba(0,212,184,0.4);
-    box-shadow: 0 8px 32px rgba(0,212,184,0.25), inset 0 1px 0 rgba(255,255,255,0.08);
+    background: linear-gradient(140deg, #064e3b 0%, #0b8f6e 45%, #00d4b8 100%);
+    border-color: rgba(0,212,184,0.5);
+    box-shadow: 0 8px 32px rgba(0,212,184,0.28), inset 0 1px 0 rgba(255,255,255,0.1);
   }
-  .type-card:hover.syn { box-shadow: 0 14px 40px rgba(124,111,247,0.45); }
-  .type-card:hover.ant { box-shadow: 0 14px 40px rgba(0,212,184,0.35); }
+  .type-card:hover.syn { box-shadow: 0 18px 50px rgba(124,111,247,0.55), 0 0 0 1px rgba(139,127,250,0.4); }
+  .type-card:hover.ant { box-shadow: 0 18px 50px rgba(0,212,184,0.42), 0 0 0 1px rgba(0,212,184,0.4); }
+
+  /* Animated shimmer sweep */
+  .type-card::after {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 60%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.09), transparent);
+    transition: left 0.55s ease;
+    pointer-events: none;
+  }
+  .type-card:hover::after { left: 160%; }
 
   .type-card .card-bg-circle {
-    position: absolute; width: 180px; height: 180px; border-radius: 50%;
-    background: rgba(255,255,255,0.07); top: -50px; right: -50px; pointer-events: none;
+    position: absolute; width: 220px; height: 220px; border-radius: 50%;
+    background: rgba(255,255,255,0.08); top: -70px; right: -60px; pointer-events: none;
+    border: 1px solid rgba(255,255,255,0.06);
   }
   .type-card .card-bg-circle2 {
-    position: absolute; width: 110px; height: 110px; border-radius: 50%;
-    background: rgba(255,255,255,0.04); bottom: -25px; left: 15px; pointer-events: none;
+    position: absolute; width: 130px; height: 130px; border-radius: 50%;
+    background: rgba(255,255,255,0.05); bottom: -35px; left: 10px; pointer-events: none;
+  }
+  .type-card .card-bg-circle3 {
+    position: absolute; width: 70px; height: 70px; border-radius: 50%;
+    background: rgba(255,255,255,0.04); top: 20px; right: 80px; pointer-events: none;
   }
   .type-card .icon {
-    width: 56px; height: 56px; border-radius: 14px;
+    width: 62px; height: 62px; border-radius: 16px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 17px; font-weight: 800; margin-bottom: 1.1rem;
-    background: rgba(255,255,255,0.18); color: #fff; letter-spacing: 1px;
-    border: 1px solid rgba(255,255,255,0.2);
-    backdrop-filter: blur(6px);
+    font-size: 18px; font-weight: 900; margin-bottom: 1.25rem;
+    background: rgba(255,255,255,0.2); color: #fff; letter-spacing: 1px;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.3);
+    text-shadow: 0 1px 4px rgba(0,0,0,0.3);
   }
-  .type-card h2 { font-size: 21px; font-weight: 700; margin-bottom: 5px; color: #fff; }
-  .type-card p  { font-size: 13px; color: rgba(255,255,255,0.72); }
+  .type-card h2 { font-size: 24px; font-weight: 800; margin-bottom: 7px; color: #fff; letter-spacing: -0.3px; text-shadow: 0 1px 8px rgba(0,0,0,0.2); }
+  .type-card p  { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.5; }
   .type-card .badge {
-    display: inline-block; margin-top: 14px; font-size: 12px; padding: 4px 12px;
-    border-radius: 99px; background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9);
-    border: 1px solid rgba(255,255,255,0.22); font-weight: 600;
-    backdrop-filter: blur(4px);
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 18px; font-size: 12px; padding: 6px 14px;
+    border-radius: 99px; background: rgba(255,255,255,0.18); color: rgba(255,255,255,0.95);
+    border: 1px solid rgba(255,255,255,0.28); font-weight: 700;
+    backdrop-filter: blur(6px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
   }
+  .type-card .badge::before { content: '●'; font-size: 8px; color: rgba(255,255,255,0.7); }
 
   /* ── SET SELECTOR ── */
   .set-selector { display: none; }
   .set-selector h2 { font-size: 19px; font-weight: 700; margin-bottom: 4px; color: var(--text); }
   .set-selector .sub { font-size: 13px; color: var(--text-muted); margin-bottom: 1.5rem; }
-  .set-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 1.5rem; }
+  .set-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-bottom: 1.5rem; }
   .set-btn {
-    background: var(--surface2); border: 1.5px solid var(--border);
-    border-radius: var(--radius-md); padding: 10px 22px;
-    cursor: pointer; font-size: 14px; font-weight: 600;
-    color: var(--purple);
-    transition: background 0.12s, border-color 0.15s, transform 0.12s, box-shadow 0.12s;
+    position: relative; overflow: hidden;
+    background: var(--surface2);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg); padding: 18px 14px 14px;
+    cursor: pointer; font-size: 14px; font-weight: 700;
+    color: var(--text); text-align: center;
+    transition: transform 0.18s cubic-bezier(.22,.68,0,1.2), box-shadow 0.18s, border-color 0.15s, background 0.15s;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  /* Each set-btn gets a unique accent via nth-child cycling */
+  .set-btn:nth-child(5n+1) { --sb-color: #7c6ff7; --sb-glow: rgba(124,111,247,0.3); border-color: rgba(124,111,247,0.25); }
+  .set-btn:nth-child(5n+2) { --sb-color: #00d4b8; --sb-glow: rgba(0,212,184,0.25); border-color: rgba(0,212,184,0.22); }
+  .set-btn:nth-child(5n+3) { --sb-color: #f472b6; --sb-glow: rgba(244,114,182,0.28); border-color: rgba(244,114,182,0.22); }
+  .set-btn:nth-child(5n+4) { --sb-color: #fbbf24; --sb-glow: rgba(251,191,36,0.28); border-color: rgba(251,191,36,0.22); }
+  .set-btn:nth-child(5n+0) { --sb-color: #22d98a; --sb-glow: rgba(34,217,138,0.28); border-color: rgba(34,217,138,0.22); }
+
+  .set-btn::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--sb-color);
+    border-radius: 3px 3px 0 0;
+    opacity: 0.9;
+  }
+  .set-btn .sb-num {
+    font-size: 22px; font-weight: 900; color: var(--sb-color);
+    line-height: 1; font-family: 'Inter', sans-serif;
+    text-shadow: 0 0 20px var(--sb-glow);
+  }
+  .set-btn .sb-label {
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--text-muted);
+  }
+  .set-btn .sb-qs {
+    font-size: 11px; font-weight: 600;
+    color: var(--sb-color); opacity: 0.85;
+    background: rgba(255,255,255,0.05);
+    padding: 2px 10px; border-radius: 99px;
+    border: 1px solid rgba(255,255,255,0.07);
   }
   .set-btn:hover {
-    background: rgba(124,111,247,0.15); border-color: var(--purple);
-    transform: translateY(-2px); box-shadow: 0 4px 16px var(--purple-glow);
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 8px 28px var(--sb-glow);
+    border-color: var(--sb-color);
+    background: var(--surface3);
   }
+  .set-btn:active { transform: scale(0.97); }
 
   /* ── BACK BTN ── */
   .back-btn {
@@ -326,22 +382,33 @@
   .home-section-body { padding: 1rem 1.25rem; display: none; }
   .home-section-body.open { display: block; }
 
-  .set-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 10px; }
+  .set-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 12px; }
   .set-card-btn {
     background: var(--surface2); border: 1.5px solid var(--border);
-    border-radius: var(--radius-lg); padding: 1rem 1.1rem;
+    border-radius: var(--radius-lg); padding: 1.1rem 1.1rem 1rem;
     cursor: pointer; text-align: left;
-    transition: transform 0.13s, box-shadow 0.13s, border-color 0.13s;
+    transition: transform 0.18s cubic-bezier(.22,.68,0,1.2), box-shadow 0.18s, border-color 0.15s, background 0.15s;
     position: relative; overflow: hidden;
   }
-  .set-card-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(124,111,247,0.15); border-color: var(--purple); }
+  .set-card-btn::after {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    border-radius: 3px 3px 0 0;
+  }
+  .set-card-btn.mistakes-card::after { background: linear-gradient(90deg, var(--red-d), var(--red)); }
+  .set-card-btn.saved-card::after    { background: linear-gradient(90deg, var(--blue-d), var(--blue)); }
+  .set-card-btn:hover { transform: translateY(-4px); }
+  .set-card-btn.mistakes-card:hover { box-shadow: 0 8px 28px rgba(255,92,122,0.22); border-color: rgba(255,92,122,0.4); background: rgba(255,92,122,0.06); }
+  .set-card-btn.saved-card:hover    { box-shadow: 0 8px 28px rgba(96,165,250,0.22); border-color: rgba(96,165,250,0.4); background: rgba(96,165,250,0.06); }
   .set-card-btn:active { transform: scale(0.97); }
   .set-card-btn .sc-type { font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-hint); margin-bottom: 5px; }
-  .set-card-btn .sc-name { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .set-card-btn .sc-name { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
   .set-card-btn .sc-count { font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 99px; display: inline-block; }
   .set-card-btn.mistakes-card .sc-count { background: var(--red-dim); color: var(--red); border: 1px solid rgba(255,92,122,0.3); }
   .set-card-btn.saved-card .sc-count { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(96,165,250,0.3); }
-  .set-card-btn .sc-arrow { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 16px; color: var(--text-hint); }
+  .set-card-btn .sc-arrow { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 18px; color: var(--text-hint); transition: right 0.15s, color 0.15s; }
+  .set-card-btn.mistakes-card:hover .sc-arrow { color: var(--red); right: 9px; }
+  .set-card-btn.saved-card:hover .sc-arrow    { color: var(--blue); right: 9px; }
 
   .empty-state { text-align: center; padding: 1.5rem 1rem; color: var(--text-hint); font-size: 13px; }
   .empty-state .es-icon { font-size: 28px; margin-bottom: 6px; }
@@ -442,22 +509,107 @@
     </div>
 
     <div class="home-grid">
+
+      <!-- SYNONYMS CARD -->
       <div class="type-card syn" onclick="selectType('synonyms')">
         <div class="card-bg-circle"></div>
         <div class="card-bg-circle2"></div>
-        <div class="icon">SYN</div>
-        <h2>Synonyms</h2>
-        <p>Words with the same or similar meaning</p>
-        <span class="badge" id="synBadge">Loading...</span>
+        <div class="card-bg-circle3"></div>
+        <!-- SVG Illustration: two connected words / linked chain -->
+        <div class="card-illustration">
+          <svg viewBox="0 0 160 130" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <!-- Glow blobs -->
+            <ellipse cx="80" cy="65" rx="70" ry="55" fill="rgba(255,255,255,0.04)"/>
+            <!-- Left word bubble -->
+            <rect x="8" y="30" width="58" height="34" rx="10" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+            <text x="37" y="52" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="800" fill="white">HAPPY</text>
+            <!-- Right word bubble -->
+            <rect x="94" y="30" width="58" height="34" rx="10" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+            <text x="123" y="52" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="800" fill="white">JOYFUL</text>
+            <!-- Connecting link chain -->
+            <circle cx="80" cy="47" r="7" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+            <line x1="66" y1="47" x2="73" y2="47" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round"/>
+            <line x1="87" y1="47" x2="94" y2="47" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round"/>
+            <text x="80" y="51" text-anchor="middle" font-size="8" fill="white" font-weight="900">=</text>
+            <!-- Bottom word pairs -->
+            <rect x="18" y="78" width="44" height="22" rx="7" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <text x="40" y="93" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" font-weight="700" fill="rgba(255,255,255,0.85)">FAST</text>
+            <rect x="68" y="78" width="44" height="22" rx="7" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <text x="90" y="93" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" font-weight="700" fill="rgba(255,255,255,0.85)">SWIFT</text>
+            <line x1="62" y1="89" x2="68" y2="89" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/>
+            <rect x="18" y="107" width="44" height="20" rx="7" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
+            <text x="40" y="121" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="600" fill="rgba(255,255,255,0.55)">BRAVE</text>
+            <rect x="68" y="107" width="44" height="20" rx="7" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
+            <text x="90" y="121" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="600" fill="rgba(255,255,255,0.55)">BOLD</text>
+            <line x1="62" y1="117" x2="68" y2="117" stroke="rgba(255,255,255,0.22)" stroke-width="1.2" stroke-linecap="round"/>
+            <!-- Sparkles -->
+            <circle cx="148" cy="22" r="2.5" fill="rgba(255,255,255,0.6)"/>
+            <circle cx="140" cy="14" r="1.5" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="155" cy="30" r="1.2" fill="rgba(255,255,255,0.35)"/>
+            <circle cx="12" cy="18" r="2" fill="rgba(255,255,255,0.4)"/>
+            <circle cx="7" cy="26" r="1.2" fill="rgba(255,255,255,0.25)"/>
+          </svg>
+        </div>
+        <div class="card-content">
+          <div class="icon">SYN</div>
+          <h2>Synonyms</h2>
+          <p>Words with the same or similar meaning</p>
+          <span class="badge" id="synBadge">Loading...</span>
+        </div>
       </div>
+
+      <!-- ANTONYMS CARD -->
       <div class="type-card ant" onclick="selectType('antonyms')">
         <div class="card-bg-circle"></div>
         <div class="card-bg-circle2"></div>
-        <div class="icon">ANT</div>
-        <h2>Antonyms</h2>
-        <p>Words with opposite meanings</p>
-        <span class="badge" id="antBadge">Loading...</span>
+        <div class="card-bg-circle3"></div>
+        <!-- SVG Illustration: two opposing arrows / opposites -->
+        <div class="card-illustration">
+          <svg viewBox="0 0 160 130" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;">
+            <!-- Glow blob -->
+            <ellipse cx="80" cy="60" rx="68" ry="52" fill="rgba(255,255,255,0.04)"/>
+            <!-- Left bubble: HOT -->
+            <rect x="6" y="28" width="54" height="34" rx="10" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+            <text x="33" y="44" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.7)">🔥</text>
+            <text x="33" y="57" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" font-weight="800" fill="white">HOT</text>
+            <!-- Right bubble: COLD -->
+            <rect x="100" y="28" width="54" height="34" rx="10" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="1.2"/>
+            <text x="127" y="44" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.7)">❄️</text>
+            <text x="127" y="57" text-anchor="middle" font-family="Inter,sans-serif" font-size="10.5" font-weight="800" fill="white">COLD</text>
+            <!-- Opposing arrows in center -->
+            <polygon points="80,40 68,47 80,54" fill="rgba(255,255,255,0.55)"/>
+            <polygon points="80,40 92,47 80,54" fill="rgba(255,255,255,0.55)"/>
+            <rect x="77" y="43" width="6" height="8" fill="rgba(255,255,255,0.12)"/>
+            <!-- Bottom pairs -->
+            <rect x="6" y="76" width="54" height="22" rx="7" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <text x="33" y="91" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.85)">DARK</text>
+            <rect x="100" y="76" width="54" height="22" rx="7" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <text x="127" y="91" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="rgba(255,255,255,0.85)">LIGHT</text>
+            <!-- Double-headed arrow -->
+            <line x1="62" y1="87" x2="98" y2="87" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/>
+            <polygon points="62,87 67,84 67,90" fill="rgba(255,255,255,0.5)"/>
+            <polygon points="98,87 93,84 93,90" fill="rgba(255,255,255,0.5)"/>
+            <rect x="6" y="105" width="54" height="20" rx="7" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
+            <text x="33" y="119" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="600" fill="rgba(255,255,255,0.55)">FAST</text>
+            <rect x="100" y="105" width="54" height="20" rx="7" fill="rgba(255,255,255,0.07)" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>
+            <text x="127" y="119" text-anchor="middle" font-family="Inter,sans-serif" font-size="8" font-weight="600" fill="rgba(255,255,255,0.55)">SLOW</text>
+            <line x1="62" y1="115" x2="98" y2="115" stroke="rgba(255,255,255,0.2)" stroke-width="1.2" stroke-linecap="round"/>
+            <polygon points="62,115 66,112.5 66,117.5" fill="rgba(255,255,255,0.2)"/>
+            <polygon points="98,115 94,112.5 94,117.5" fill="rgba(255,255,255,0.2)"/>
+            <!-- Sparkles -->
+            <circle cx="150" cy="20" r="2.5" fill="rgba(255,255,255,0.55)"/>
+            <circle cx="143" cy="12" r="1.5" fill="rgba(255,255,255,0.35)"/>
+            <circle cx="10" cy="16" r="2" fill="rgba(255,255,255,0.4)"/>
+          </svg>
+        </div>
+        <div class="card-content">
+          <div class="icon">ANT</div>
+          <h2>Antonyms</h2>
+          <p>Words with opposite meanings</p>
+          <span class="badge" id="antBadge">Loading...</span>
+        </div>
       </div>
+
     </div>
 
   </div>
@@ -8624,7 +8776,7 @@ function selectType(type) {
   data.forEach((set, i) => {
     const btn = document.createElement('button');
     btn.className = 'set-btn';
-    btn.textContent = `Set ${i + 1}  (${set.length} Qs)`;
+    btn.innerHTML = `<span class="sb-num">${i + 1}</span><span class="sb-label">Set</span><span class="sb-qs">${set.length} Qs</span>`;
     btn.onclick = () => startSet(i);
     grid.appendChild(btn);
   });
