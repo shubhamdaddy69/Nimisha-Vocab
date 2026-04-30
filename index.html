@@ -393,15 +393,15 @@
   .option.locked.correct-ans, .option.locked.wrong-ans { opacity: 1; }
 
   /* nav buttons */
-  .quiz-nav { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-top: 0.75rem; }
-  .quiz-nav .left, .quiz-nav .right { display: flex; gap: 10px; }
+  .quiz-nav { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; margin-top: 0.75rem; }
+  .quiz-nav .left, .quiz-nav .right { display: contents; }
   .nav-btn {
-    padding: 10px 0; border-radius: var(--radius-md);
+    padding: 10px 4px; border-radius: var(--radius-md);
     border: 1.5px solid var(--border);
-    font-size: 14px; font-weight: 600; cursor: pointer;
+    font-size: 13px; font-weight: 600; cursor: pointer;
     background: var(--surface2); color: var(--text);
     transition: background 0.12s, border-color 0.12s, transform 0.12s, box-shadow 0.12s;
-    min-width: 100px; text-align: center;
+    text-align: center; width: 100%;
   }
   .nav-btn:hover { background: var(--surface3); border-color: var(--border-md); transform: translateY(-2px); }
   .nav-btn:disabled { opacity: 0.25; cursor: not-allowed; transform: none; box-shadow: none; }
@@ -709,13 +709,12 @@
   <!-- ── ERROR PRO QUIZ VIEW ── -->
   <div class="ep-quiz-view" id="epQuizView">
     <div style="margin-bottom:0.75rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-      <button class="back-btn" onclick="exitEpQuiz()">← Cards</button>
-      <button class="back-btn" style="background:#4285f4;color:#fff;border:none;" onclick="openGoogle()">🔍 Google</button>
-      <span id="epSetLabel" style="font-size:13px;font-weight:700;color:#f87171;margin-left:4px;"></span>
+      <button class="back-btn" style="background:#4285f4;color:#fff;border:none;" onclick="openGoogleEp()">🔍 Google</button>
       <button onclick="togglePalette()" style="background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:6px 14px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;">🧭 Palette</button>
+      <span id="epSetLabel" style="font-size:13px;font-weight:700;color:#f87171;margin-left:4px;"></span>
       <button onclick="openEpModal()" style="margin-left:auto;background:linear-gradient(135deg,#dc2626,#f87171);color:#fff;border:none;padding:7px 16px;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer;box-shadow:0 3px 10px rgba(220,38,38,0.35);">✏️ Paste Questions</button>
     </div>
-    <div class="progress-bar"><div class="progress-fill" id="epProgressFill" style="background:linear-gradient(90deg,#dc2626,#f87171);"></div></div>
+    <div style="display:none;"><div class="progress-fill" id="epProgressFill" style="background:linear-gradient(90deg,#dc2626,#f87171);"></div></div>
     <div class="ep-question-card" id="epQuestionCard">
       <div id="epEmptyState" style="text-align:center;padding:3rem 1rem;color:var(--text-muted);">
         <div style="font-size:3rem;margin-bottom:1rem;">📋</div>
@@ -766,26 +765,22 @@
   </div>
 
   <div class="quiz-view" id="quizView">
+    <div style="display:none;"><div class="progress-fill" id="progressFill"></div></div>
     <div style="margin-bottom:0.75rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
       <button id="pause-btn" style="background:#f59e0b;color:#fff;border:none;padding:6px 12px;border-radius:8px;font-family:Orbitron,sans-serif;font-size:0.65rem;font-weight:bold;cursor:pointer;" onclick="togglePause()">⏸ PAUSE</button>
       <button class="back-btn" style="background:#4285f4;color:#fff;border:none;" onclick="openGoogle()">🔍 Google</button>
       <button id="paletteToggleBtn" onclick="togglePalette()" style="background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--radius-md);padding:6px 14px;font-size:12px;font-weight:600;color:var(--text-muted);cursor:pointer;transition:background 0.12s,border-color 0.12s;">🧭 Palette</button>
       <div id="quiz-timer" style="font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:bold;background:#7c3aed;color:#fff;padding:6px 16px;border-radius:8px;margin-left:auto;">10:00</div>
     </div>
-    <div class="progress-bar" style="margin-bottom:0.75rem;"><div class="progress-fill" id="progressFill"></div></div>
     <div class="question-card">
       <div class="q-number" id="qNumber"></div>
       <div class="q-text" id="qText"></div>
       <div class="options" id="optionsContainer"></div>
-      <div class="quiz-nav" style="margin-top:1.25rem;">
-        <div class="left">
-          <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">← Prev</button>
-          <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Next →</button>
-        </div>
-        <div class="right">
-          <button class="nav-btn bk-btn" id="bookmarkBtn" onclick="toggleBookmark()">🔖 Save</button>
-          <button class="nav-btn primary" id="submitBtn" onclick="confirmSubmit()">Submit</button>
-        </div>
+      <div class="quiz-nav" style="margin-top:1.25rem;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;">
+        <button class="nav-btn" id="prevBtn" onclick="navigate(-1)">← Prev</button>
+        <button class="nav-btn" id="nextBtn" onclick="navigate(1)">Next →</button>
+        <button class="nav-btn bk-btn" id="bookmarkBtn" onclick="toggleBookmark()">🔖 Save</button>
+        <button class="nav-btn primary" id="submitBtn" onclick="confirmSubmit()">Submit</button>
       </div>
     </div>
     <div class="q-palette" id="qPalette" style="margin-top:1.25rem;"></div>
@@ -10704,6 +10699,8 @@ function show(id) {
   if (id === 'homeView') renderHomeSections();
 }
 
+function goHome() { clearInterval(quizTimerInt); show('homeView'); }
+
 function selectType(type) {
   currentType = type;
   const data = type === 'synonyms' ? SYNONYMS : ANTONYMS;
@@ -10883,6 +10880,14 @@ function togglePause() {
 function pauseTest() { if (!window._paused) togglePause(); }
 function resumeTest() { if (window._paused) togglePause(); }
 function openGoogle() {
+  const q = questions[currentQ];
+  if (!q) return;
+  const optsText = q.options.map((o, i) => `${String.fromCharCode(65+i)}. ${o}`).join(' | ');
+  const text = `${q.q} | ${optsText}`;
+  window.open('https://www.google.com/search?q=' + encodeURIComponent(text), '_blank');
+}
+
+function openGoogleEp() {
   const q = questions[currentQ];
   if (!q) return;
   const optsText = q.options.map((o, i) => `${String.fromCharCode(65+i)}. ${o}`).join(' | ');
