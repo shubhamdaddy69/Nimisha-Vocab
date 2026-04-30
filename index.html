@@ -59,8 +59,9 @@
   /* ── HOME ── */
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap');
 
-  .home-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 0.5rem; }
-  @media(max-width:480px){ .home-grid { grid-template-columns: 1fr; } }
+  .home-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-top: 0.5rem; }
+  @media(max-width:600px){ .home-grid { grid-template-columns: 1fr 1fr; } }
+  @media(max-width:380px){ .home-grid { grid-template-columns: 1fr; } }
 
   /* Home type cards */
   .type-card {
@@ -95,6 +96,114 @@
   }
   .type-card:hover.syn .cloud-body { box-shadow: 0 0 0 2px rgba(139,127,250,0.8), 0 18px 55px rgba(99,88,245,0.65), 0 2px 0 rgba(255,255,255,0.2) inset; }
   .type-card:hover.ant .cloud-body { box-shadow: 0 0 0 2px rgba(52,211,153,0.75), 0 18px 55px rgba(5,150,105,0.6), 0 2px 0 rgba(255,255,255,0.18) inset; }
+  .type-card.err .cloud-body {
+    background: linear-gradient(145deg, #7f1d1d 0%, #dc2626 50%, #f87171 100%);
+    box-shadow:
+      0 0 0 2px rgba(248,113,113,0.55),
+      0 10px 40px rgba(220,38,38,0.5),
+      0 2px 0 rgba(255,255,255,0.12) inset;
+  }
+  .type-card:hover.err .cloud-body { box-shadow: 0 0 0 2px rgba(248,113,113,0.8), 0 18px 55px rgba(220,38,38,0.65), 0 2px 0 rgba(255,255,255,0.2) inset; }
+
+  /* ── ERROR PRO VIEW ── */
+  .errorpro-view { display: none; }
+  .ep-set-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap: 12px; margin-bottom: 1.5rem; }
+  .ep-set-btn {
+    position: relative; overflow: hidden;
+    background: var(--surface2); border: 1.5px solid rgba(220,38,38,0.3);
+    border-radius: var(--radius-lg); padding: 18px 14px 14px;
+    cursor: pointer; font-size: 14px; font-weight: 700;
+    color: var(--text); text-align: center;
+    transition: transform 0.18s cubic-bezier(.22,.68,0,1.2), box-shadow 0.18s, border-color 0.15s, background 0.15s;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+  }
+  .ep-set-btn::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: #f87171; border-radius: 3px 3px 0 0; opacity: 0.9;
+  }
+  .ep-set-btn .sb-num { font-size: 22px; font-weight: 900; color: #f87171; line-height: 1; }
+  .ep-set-btn .sb-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+  .ep-set-btn .sb-qs { font-size: 11px; font-weight: 600; color: #f87171; opacity: 0.85; background: rgba(255,255,255,0.05); padding: 2px 10px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.07); }
+  .ep-set-btn:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 8px 28px rgba(220,38,38,0.35); border-color: #f87171; background: var(--surface3); }
+  .ep-set-btn:active { transform: scale(0.97); }
+
+  /* Error Pro quiz card */
+  .ep-quiz-view { display: none; }
+  .ep-question-card {
+    background: var(--surface); border: 1.5px solid rgba(220,38,38,0.25);
+    border-radius: var(--radius-xl); padding: 2rem 1.75rem 1.75rem;
+    margin-bottom: 1.25rem; box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+  }
+  .ep-q-number {
+    display: inline-block; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    color: #f87171; background: rgba(220,38,38,0.14);
+    padding: 3px 12px; border-radius: 99px; margin-bottom: 14px;
+    border: 1px solid rgba(220,38,38,0.3);
+  }
+  .ep-q-text { font-size: 17px; font-weight: 600; line-height: 1.55; margin-bottom: 1.25rem; color: var(--text); }
+  .ep-options { display: flex; flex-direction: column; gap: 10px; }
+  .ep-option {
+    display: flex; align-items: center; gap: 14px;
+    padding: 13px 16px; border-radius: var(--radius-lg);
+    border: 1.5px solid var(--border);
+    font-size: 15px; font-weight: 500;
+    background: var(--surface2); color: var(--text);
+  }
+  .ep-option-letter {
+    width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800;
+    background: var(--surface3); color: #f87171;
+    border: 1px solid rgba(220,38,38,0.25);
+  }
+  .ep-option.ep-correct { background: var(--green-dim); border-color: var(--green); color: var(--green); }
+  .ep-option.ep-correct .ep-option-letter { background: var(--green); color: #0b0d14; border-color: var(--green); }
+  .ep-option.ep-wrong { background: var(--red-dim); border-color: var(--red); color: var(--red); }
+  .ep-option.ep-wrong .ep-option-letter { background: var(--red); color: #fff; border-color: var(--red); }
+  .ep-exp {
+    margin-top: 1rem; padding: 12px 16px;
+    background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.25);
+    border-radius: var(--radius-md); font-size: 13.5px; color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .ep-exp strong { color: var(--amber); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; display: block; margin-bottom: 4px; }
+  .ep-nav { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-top: 0.75rem; }
+  .ep-nav .left, .ep-nav .right { display: flex; gap: 10px; }
+
+  /* Error Pro paste modal */
+  .ep-modal-overlay {
+    display: none; position: fixed; inset: 0; z-index: 9000;
+    background: rgba(0,0,0,0.85); backdrop-filter: blur(8px);
+    align-items: center; justify-content: center;
+  }
+  .ep-modal-overlay.active { display: flex; }
+  .ep-modal {
+    background: var(--surface); border: 1.5px solid rgba(220,38,38,0.3);
+    border-radius: var(--radius-xl); padding: 1.75rem; width: 92%; max-width: 560px;
+    max-height: 85vh; overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  }
+  .ep-modal h3 { font-size: 17px; font-weight: 800; color: #f87171; margin-bottom: 4px; }
+  .ep-modal p { font-size: 12px; color: var(--text-muted); margin-bottom: 1rem; line-height: 1.5; }
+  .ep-modal textarea {
+    width: 100%; height: 220px; background: var(--surface2);
+    border: 1.5px solid rgba(220,38,38,0.25); border-radius: var(--radius-md);
+    color: var(--text); font-size: 13px; font-family: 'Inter', monospace;
+    padding: 12px; resize: vertical; line-height: 1.6;
+    outline: none; transition: border-color 0.15s;
+  }
+  .ep-modal textarea:focus { border-color: #f87171; }
+  .ep-modal .ep-modal-btns { display: flex; gap: 10px; margin-top: 12px; justify-content: flex-end; }
+  .ep-modal-btn {
+    padding: 9px 22px; border-radius: var(--radius-md);
+    font-size: 13px; font-weight: 700; cursor: pointer; border: none;
+    transition: transform 0.12s, box-shadow 0.12s;
+  }
+  .ep-modal-btn.save { background: linear-gradient(135deg, #dc2626, #f87171); color: #fff; box-shadow: 0 4px 14px rgba(220,38,38,0.4); }
+  .ep-modal-btn.save:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(220,38,38,0.55); }
+  .ep-modal-btn.cancel { background: var(--surface2); color: var(--text-muted); border: 1.5px solid var(--border); }
+  .ep-modal-btn.cancel:hover { background: var(--surface3); }
 
   .cloud-body::before, .cloud-body::after { content: none; }
   .cloud-bump-r { display: none; }
@@ -560,8 +669,80 @@
         </div>
       </div>
 
+      <!-- ERROR PRO CARD -->
+      <div class="type-card err" onclick="openErrorPro()" style="padding-top:28px;">
+        <div class="cloud-bump-r"></div>
+        <div class="cloud-body">
+          <div class="cloud-shimmer"></div>
+          <div class="cloud-inner">
+            <div class="card-icon" style="font-size:13px;">ERR</div>
+            <h2>Error Pro</h2>
+            <p>Spot the error questions</p>
+            <span class="badge" id="errBadge">10 Cards</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
+  </div>
+
+  <!-- ── ERROR PRO VIEW (10 cards) ── -->
+  <div class="errorpro-view" id="errorproView">
+    <button class="back-btn" onclick="goHome()">← Back</button>
+    <div style="height:1.25rem"></div>
+    <h2 style="font-size:19px;font-weight:700;margin-bottom:4px;color:var(--text);">Error Pro</h2>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:1.5rem;">Select a card to view or paste questions</p>
+    <div class="ep-set-grid" id="epSetGrid"></div>
+  </div>
+
+  <!-- ── ERROR PRO QUIZ VIEW ── -->
+  <div class="ep-quiz-view" id="epQuizView">
+    <div style="margin-bottom:0.75rem;display:flex;gap:8px;align-items:center;">
+      <button class="back-btn" onclick="exitEpQuiz()">← Cards</button>
+      <span id="epSetLabel" style="font-size:13px;font-weight:700;color:#f87171;margin-left:4px;"></span>
+      <button onclick="openEpModal()" style="margin-left:auto;background:linear-gradient(135deg,#dc2626,#f87171);color:#fff;border:none;padding:7px 16px;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer;box-shadow:0 3px 10px rgba(220,38,38,0.35);">✏️ Paste Questions</button>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="epProgressFill" style="background:linear-gradient(90deg,#dc2626,#f87171);"></div></div>
+    <div class="ep-question-card" id="epQuestionCard">
+      <div id="epEmptyState" style="text-align:center;padding:3rem 1rem;color:var(--text-muted);">
+        <div style="font-size:3rem;margin-bottom:1rem;">📋</div>
+        <div style="font-size:16px;font-weight:600;margin-bottom:8px;color:var(--text);">No Questions Yet</div>
+        <div style="font-size:13px;">Click <strong style="color:#f87171;">✏️ Paste Questions</strong> to add questions in the format shown.</div>
+      </div>
+      <div id="epQContent" style="display:none;">
+        <div class="ep-q-number" id="epQNumber"></div>
+        <div class="ep-q-text" id="epQText"></div>
+        <div class="ep-options" id="epOptionsContainer"></div>
+        <div class="ep-exp" id="epExpBox" style="display:none;"><strong>Explanation</strong><span id="epExpText"></span></div>
+      </div>
+    </div>
+    <div class="ep-nav" id="epNav" style="display:none;">
+      <div class="left">
+        <button class="nav-btn" id="epPrevBtn" onclick="epNavigate(-1)">← Previous</button>
+        <button class="nav-btn" id="epNextBtn" onclick="epNavigate(1)">Next →</button>
+      </div>
+      <div class="right">
+        <span id="epQCounter" style="font-size:13px;color:var(--text-muted);font-weight:600;align-self:center;"></span>
+      </div>
+    </div>
+    <div class="q-palette" id="epPalette" style="margin-top:1.25rem;"></div>
+  </div>
+
+  <!-- ── ERROR PRO PASTE MODAL ── -->
+  <div class="ep-modal-overlay" id="epModalOverlay">
+    <div class="ep-modal">
+      <h3>✏️ Paste Questions</h3>
+      <p>Paste your questions below. Each question must follow this format:<br>
+      <code style="font-size:11px;background:var(--surface2);padding:2px 6px;border-radius:4px;color:#f87171;">
+        Q1. Question text<br>A. Option A<br>B. Option B<br>C. Option C<br>D. Option D<br>E. Option E (optional)<br>Ans: A<br>Exp:- Explanation text
+      </code></p>
+      <textarea id="epPasteArea" placeholder="Q1. The boy was playing in the garden&#10;A. The&#10;B. boy&#10;C. playing&#10;D. in&#10;Ans: C&#10;Exp:- 'Playing' should be 'play' here.&#10;&#10;Q2. She have gone to market..."></textarea>
+      <div class="ep-modal-btns">
+        <button class="ep-modal-btn cancel" onclick="closeEpModal()">Cancel</button>
+        <button class="ep-modal-btn save" onclick="saveEpQuestions()">Save Questions</button>
+      </div>
+    </div>
   </div>
 
   <div class="set-selector" id="setView">
@@ -8504,6 +8685,1803 @@ const _parsed = parseAndSplitQuestions(ALL_QUESTIONS);
 const SYNONYMS = attachIndices(chunkIntoSets(_parsed.synonyms));
 const ANTONYMS = attachIndices(chunkIntoSets(_parsed.antonyms));
 
+/* ================================================================
+   ERROR PRO — 10 cards, paste questions for each card below.
+   Each card is an array of questions. Format per question:
+   { q: "Question text", options: ["A text","B text","C text","D text","E text (optional)"], answer: 0 }
+   answer = index of correct option (0=A, 1=B, 2=C, 3=D, 4=E)
+
+   EASIER WAY: Use the template strings below.
+   Paste your questions inside the backticks for each card
+   using EXACTLY this format:
+
+   Q1. Question text
+   A. Option one
+   B. Option two
+   C. Option three
+   D. Option four
+   E. Option five   ← optional
+   Ans: B
+   Exp:- Explanation here  ← optional
+
+================================================================ */
+
+function parseEPCard(raw) {
+  const qs = [];
+  const letterMap = { A:0, B:1, C:2, D:3, E:4 };
+  const blocks = raw.trim().split(/\n(?=Q\d+[\.\)])/i).filter(Boolean);
+  blocks.forEach(block => {
+    const lines = block.split('\n').map(l => l.trim()).filter(Boolean);
+    if (!lines.length) return;
+    const qLine = lines[0].replace(/^Q\d+[\.\)]\s*/i, '').trim();
+    if (!qLine) return;
+    const options = [];
+    let answer = 0;
+    let exp = '';
+    lines.slice(1).forEach(l => {
+      const optM = l.match(/^([A-Ea-e])[\.\)]\s+(.+)/);
+      if (optM) { options.push(optM[2].trim()); return; }
+      const ansM = l.match(/^Ans\s*[:\-]\s*([A-Ea-e])/i);
+      if (ansM) { answer = letterMap[ansM[1].toUpperCase()] ?? 0; return; }
+      const expM = l.match(/^Exp\s*[:\-]+\s*(.*)/i);
+      if (expM) { exp = expM[1].trim(); }
+    });
+    if (options.length >= 2) qs.push({ q: qLine, options, answer, exp });
+  });
+  return qs;
+}
+
+/* ── Adverb ── paste questions inside the backticks below */
+const EP_RAW_1 = `Q1. I don't like (a)/ such nasty (b)/ things (c)/ nor he does. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — "nor he does" should be "nor does he" — after negative connectors like nor, inversion occurs (auxiliary before subject).
+
+Q2. Under a tree (a)/ was sitting the saint (b)/ whom we had seen (c)/ some where else. (d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q3. 'Under no circumstances (a)/ we can help(b)/ you in this illegal (c)/ work', said Manager. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'can' should come before 'we'. With 'Under no circumstances', inversion is required: Aux. verb comes before Subject.
+
+Q4. Not only we lost (a)/ what we had on our disposal (b)/ but we also (c)/ lost our patience (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — After 'Not only', auxiliary did is used and 'lost' becomes 'lose' — because not only…but also joins two verbs.
+
+Q5. The eastwards wind helped (a)the boat going from (b)the western bank to the eastern (c)/ bank of the river.(d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'eastwards' should be 'eastward'. Eastwards is an Adverb; eastward is an Adjective modifying noun wind.
+
+Q6. Every member (a)/ of the family is (b)/ addicted to drinking (c)/ and so Tom is (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'so Tom is' should be 'so is Tom'. In colloquial English, after so, the auxiliary comes before the subject.
+
+Q7. He said that the examination was bad(a)/ and added that he could not answer (b)/ questions enough (c)/ to pass it ./(d) No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No Error
+
+Q8. Where else (a)/ did you go besides (b)/ the office ?'she asked (c)/ her husband(d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'else' is superfluous (unnecessary).
+
+Q9. I know that eventually (a)/ he will succumb to me (b)/ and confess that he(c)/ has committed a crime. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q10. Before the game she felt surely (a)/ of winning, but after five minutes (b)/ she realized that it was not (c)/ going to be so easy. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'surely' should be 'sure'. Felt is a copula verb; after it, an Adjective (sure) is used, not an Adverb.
+
+Q11. I hardly ever (a)/ see him because (b)/ in my opinion he is not (c)/ a man to be admired./ (d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No Error
+
+Q12. They are very senior(a)/ to me(b)/ so I dare not play a joke (c)/ on them. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'very' should be 'much'. Very is used before the Positive Degree; much is used before the Comparative Degree.
+
+Q13. He never liked (a)/ to treat his brothers friendly (b)/ that's why he could not (c)/ win their love and favour. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No Error
+
+Q14. She looked (a)/ at him lovely(b)/ but he did not (c)/ respond to her (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'lovely' should be 'lovingly'. Lovely is an adjective; lovingly is an Adverb of manner.
+
+Q15. When carefully examined,(a)/ it will give us (b)/ a clue to the mystery of (c)/ the case. (d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'carefully' should come after 'examined' because Adverbs of Manner (carefully, critically, etc.) come after the verb.
+
+Q16. He asked me to (a)/ completely forget her (b)/but only I know(c)/ how easy it is to say so (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'completely' should come after her because using it between to and forget creates a Split Infinitive error.
+
+Q17. Somebody reported to (a)/the contractor that his partner(c)/ had only died (d)/a week before.(e)/No Error
+A. (a)
+B. (c)
+C. (d)
+D. (e)
+E. No Error
+Ans: C
+Exp: — 'only' should be replaced by 'a week ago'. Only died means simply died, which has no correct meaning; the sentence means he died a week before.
+
+Q18. Who will believe (a)/ that she was not (b)/ hardly -hit by her (c)/ husband's death?(d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'hardly' should be 'hard'. Hardly means almost not; hard means severely/intensely. Hard-hit means severely hit.
+
+Q19. "Nobody should try (a)/ to disturb me (b)/ without any urgency ", /(c)/ the Doctor said to his assistants. (d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No Error
+
+Q20. My friend said (a)/ that he was only too glad (b)/ to hear the result (c)/ of his wife.(d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q21. If you ask me, (a)/ Shyama is quite all right (b)/ but I can't tell you (c)/ much about Radha. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'quite' and 'all' cannot be used together. Only one of them can be used.
+
+Q22. Not only drinking (a)/ but also smoking (b)/ is very injurious (c)/ to health.(d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q23. Such obstacles will (a)/ not stop him, nothing never (b)/did, this is why he is progressing (c)/ by leaps and bounds.(d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'never' should be 'ever'. Nothing + never is incorrect; Nothing + ever is used.
+
+Q24. The old man is blindly (a)/ so don't call him a liar when (b)/ he says that he (c)/ can't read (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'blindly' should be 'blind'. Blindly is an Adverb; blind is an Adjective used after To Be as subject complement. Adverb+Adjective form is needed here.
+
+Q25. When asked he (a)/ took tea (b)/ and said that it (c)/ tasted sweetly (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'sweetly' should be 'sweet'. Verbs like taste, feel, seem, appear, look, smell, remain are linking verbs that take Adjectives after them.
+
+Q26. When the prince saw the princess (a)/ he cried out that he had (b)/ never seen such (c)/ a beautiful lady before./(d)No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No Error
+
+Q27. Being much contented with the sincerity (a)/ of the members of the staff (b)/ the C.M said that the state (c)/ needed sincere men like them.(d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'much' should be 'very'. Very is used with positive degree adjectives/participles.
+
+Q28. He is a linguist (a)/ and always tries to (b)/ make his students (c)/ pronounce a word correctly. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'and' should be 'so' or 'this is the reason why'. Linguist and correctly pronouncing have a cause-effect relationship.
+
+Q29. He was very (a)/ tired of work (b)/ so he said that he was (c)/ sorry to accompany us .(d)/No Error(e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q30. I liked that opportune moment (a)/ where the workers proved their might(b)/ to take on the company (c)/and came out victorious.(d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'where' should be 'when'. Where (Relative Adverb) refers to place; when refers to time.
+
+Q31. My brother does (a)/ not know to make (b)/ friends, so he leads, (c)/ a lonely life (d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — Between know and to, 'how' must be used. After know, the structure is know how/when/where/what + Infinitive (To+V₁).
+
+Q32. He was fortunately (a)/ not present on (b)/ the rostrum when(c)/ the bomb exploded. (d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'fortunately' should come at the beginning of the sentence. Adverbs describing the entire sentence are typically placed at the sentence start.
+
+Q33. This room is very (a)/ beautiful but too much (b)/ small to accomodate (c)/ all of you (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'too much' should be 'much too'. Too much + noun; much too + Adjective.
+
+Q34. Hardly he likes (a)/ to hear my name (b)/ after the rift which occurred(c)/ between him and me. (d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'hardly' should use 'does' and 'likes' should become 'like'. With hardly, rarely, scarcely, seldom, inversion occurs: auxiliary before subject, then base verb.
+
+Q35. I came across (a)/ her in Delhi last month (b)/ and invited her(c)/ to come to patna. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q36. All of them will execute (a)/ the plan so skilfully (b)/ that their officer (c)/ will feel surprised. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q37. Only by talking to (a)/ the officers concerned (b)/ they will make out the hidden (c)/ implications of the agreement (d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'Only' should be followed by 'to'. Meaning: By talking only to the officers concerned.
+
+Q38. Although he only earns (a)/ six hundred rupees a month (b)/ he manages to support (c)/ his family. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'only' should be placed before six hundred rupees. Only, almost, even etc. generally come just before the word they modify.
+
+Q39. India played very careful (a)/ right from the beginning of the match (b)/ held at Sharjah in order to (c)/win the match. (d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'careful' should be 'carefully'. An Adverb is needed to modify the verb played.
+
+Q40. The leaders of the striking (a)/ teachers called on the chief Minister (b)/ for negotiation and (c)/returned happily (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q41. His essay was unmatched (a)/ so he was awarded the best prize (b)/in the form of a shield made of silver and enamelled (c)/with some precious stones. (d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q42. I met Neetu about (a)/ two years ago and have (b)/ remembered her(c)/ever for. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'for' should be replaced by 'since'. Ever since is used as an Adverb; ever since goes with present perfect, while the first clause is in simple past.
+
+Q43. The students requested their Principal (a)/ to be enough kind to grant (b)/ them five thousand rupees for (c)/ the reconstruction of the tennis court. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'enough' should come after the Adjective kind. Enough as an Adverb always comes after the Adjective/Adverb it modifies.
+
+Q44. The imported articles (a)/ which you sell are (b)/ enough costly to allow the pocket (c)/of an ordinary man to buy them(d)/ No Error(e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'enough' should come after 'costly'. Enough (Adverb of quantity) always follows the Adjective/Adverb it describes.
+
+Q45. He is almost quite competent (a)/ for the post of Manager (b)/ so when given a chance, (c)/ he can lead the company to its goal. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'almost' cannot be used before 'quite'. Quite does not take any Adverb before it.
+
+Q46. The amount which the company (a)/ has paid to the(b)/ dependents of the dead worker (c)/ was fairly unjustified (d)/ No Error(e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'fairly' should be 'quite' or 'rather'. Fairly is used before adjectives with positive meaning; rather/quite are used with negative/undesirable adjectives.
+
+Q47. He has been trying (a)/ to lure her for months (b)/ but owing to his misfortune he has (c)/ not still succeeded. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'still' should not be used; 'yet' should replace it, placed after 'succeeded': not succeeded yet.
+
+Q48. They were exceptional good (a)/ orators, so all of us (b)/ listened to them (c)/ very attentively. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'exceptional' should be 'exceptionally'. Good is an Adjective and exceptional is also an Adjective — an Adjective cannot describe another Adjective. An Adverb (exceptionally) is needed.
+
+Q49. The captain came (a)/ presently but I (b)/ can't say where he has (c)/ slipped out unnoticed.(d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'presently' should not be used here. Presently (Adverb of time) means without delay/shortly and is used in future tense.
+
+Q50. Prabha was exorbitantly paid (a)/ for how skilful she received (b)/ the visitors and entertained(c)/ them (d)/No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'skilful' should be 'skilfully'. An Adverb is needed to describe the verb received.
+
+Q51. Although he is my bosom friend,(a)/ I cannot ask him for (b)/money without any (c)/ vividly reason. (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'vividly' should be 'vivid'. Vividly is an Adverb that cannot describe a Noun; vivid is an Adjective that describes the noun reason.
+
+Q52. My friend's actual job (a)/ involves a lot (b)/ of administration. (c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — 'actual job' should be 'job actually'. Actually should qualify involves.
+
+Q53. What man can die (a)/ better than(b)/ serving his country ?(c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — Replace with How can man die to give appropriate meaning.
+
+Q54. Look at what (a)/ I am doing (b)/ and do like I do (c)/No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'like' should be 'as'. As is an Adverb that qualifies an action.
+
+Q55. For several years now (a)/ my newspaper agent has been spelling (b)/ my name incorrectly. (c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: D
+Exp: No Error
+
+Q56. He only plays a subsidiary (a)/ role in the management (b)/ of this organization.(c)/No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — 'only' should come before a subsidiary role as it qualifies it.
+
+Q57. Mother does not hardly (a)/ know what happened (b)/ in school yesterday (c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — Hardly, scarcely, rarely etc. are negative adverbs and cannot take another negative word. Remove not; correct: Mother hardly knows.
+
+Q58. I am coming directly (a)/ to my office (b)/ from the station (c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — 'directly' should be 'direct'. Direct means straight/without stopping; both exist but directly means in a direct manner. Here direct is correct.
+
+Q59. The professor informed that (a)/ they had all done (b)/ very badly. (c)/No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: D
+Exp: No Error
+
+Q60. Seldom we have been (a)/ treated in such (b)/ a rude manner.(c)/No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — When a sentence begins with a negative adverb like never, barely, seldom etc., the auxiliary verb comes before the subject. Place 'have' before 'we'.
+
+Q61. The doctor asked his patient to regularly take his medicine.
+A. (a) asked his patient
+B. (b) to regularly take his medicine
+C. (c) No error
+D. (d) The doctor
+Ans: B
+Exp: — Adverb 'regularly' should be used at the end of the sentence. It should read: to take his medicine regularly.
+
+Q62. The results of the survey were fairly disappointing.
+A. (a) of the survey were
+B. (b) The results
+C. (c) fairly disappointing
+D. (d) No Error
+Ans: C
+Exp: — 'fairly' is generally used with pleasant/positive adjectives. Disappointing is unpleasant, so 'rather' should replace 'fairly'.
+
+Q63. So hoarse he was that he could not make the speech.
+A. (a) So hoarse he was
+B. (b) that he could not make
+C. (c) the speech
+D. (d) No Error
+Ans: A
+Exp: — When a sentence begins with so, inversion is required: So hoarse was he that...
+
+Q64. I really do regret not to learn to play the violin when I had so many opportunities to learn and practise in school.
+A. (a) No Error
+B. (b) I really do regret not to learn to play the violin
+C. (c) When I had so many opportunities
+D. (d) To learn and practise in school
+Ans: B
+Exp: — Regret takes -ing form. Should be regret not learning. Also for official announcements regret takes to + V₁.
+
+Q65. He flew (a)/ over extensively (b)/ the Pacific last winter. (c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — Place 'extensively' before 'over'.
+
+Q66. Seldom if ever (a)/ nature does operate (b)/ in closed and separate compartments. (c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — When a sentence begins with seldom if ever, it takes inversion. Should read: seldom if ever does nature operate.
+
+Q67. One must learn (a)/ to distinguish (b)/ good from bad. (c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — After learn, wh-family is used. Should read: one must learn how to distinguish.
+
+Q68. After toiling very hardly (a)/ over a long period of time (b)/ he found that he had met no profit at all (c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — 'hardly' should be 'hard'. Hardly is an Adverb of Frequency (almost not); hard is an Adverb of Manner (with great effort).
+
+Q69. The Beatles (a)/ will ever be my favourite (b)/ pop group. (c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'ever' should be 'always'.
+
+Q70. The hockey match (a)/ between India and Pakistan (b)/ was much exciting .(c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'much' should be 'very'. Very is used before present participles used as adjectives.
+
+Q71. The scientists (a)/ could not hardly (b)/ complete all the experiments. (c)/No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — Hardly is itself negative; it cannot take another negative. Remove not: could hardly.
+
+Q72. We need to surround ourselves with(a)/ caring people particular loved ones (b)/ who bring hope and support to our hearts and minds and with whom we can communicate.(c)/No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'particular' should be 'particularly'. An Adverb is needed to qualify loved ones.
+
+Q73. No sooner the minister had heard (a)/ about the accident (b)/ than he rushed to the spot.(c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — When a sentence begins with No Sooner, inversion is required: had comes before the minister.
+
+Q74. Padmini had not rarely missed (a)/ a dance performance or festival since(b)/ she was eight years old.(c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — Rarely is itself a negative word and should not take another negative word with it. Remove not: had rarely missed.
+
+Q75. Old habits (a)/ die (b)/ hardly. (c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'hardly' should be 'hard'. Hardly = almost not; hard = with great effort/force.
+
+Q76. He works hardly (a)/ to make (b)/ both ends meet. (c)/No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — 'hardly' should be 'hard'. Same reasoning as above.
+
+Q77. It was in 2006 (a)/ that we first flew(b)/ to the united states.(c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'that' should be 'when'. 2006 denotes time, so when is the correct Relative Adverb.
+
+Q78. This is our second reminder (a)/ and we are much surprised (b)/ at receiving no answer from you. (c)/No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: D
+Exp: No Error
+
+Q79. He thinks (a)/ himself (b)/ as a great scholar. (c)/No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'as' should be removed. Verbs like think, consider, call, appoint, make, name, choose do not take as.
+
+Q80. In the garden (a)/ were the more beautiful flowers (b)/ and silver bells(c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — When a sentence begins with in the garden, inversion occurs. But since there is no sense of comparison, use of more is redundant. Remove the more. However the most can be used.
+
+Q81. Thank you (a)/ I am fine (b)/ completely.(c)/No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — An Adverb qualifies an Adjective and is generally placed before the Adjective. Place completely before fine.
+
+Q82. His son (a)/ is working (b)/ very hardly.(c)/No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — Same rule: hardly should be hard.
+
+Q83. The old man felled (a)/ some of the trees in the garden (b)/ with hardly no effort at all. (c)/ No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — Hardly is negative; replace hardly no effort with hardly any effort.
+
+Q84. John is working very hardly (a)/ as the examinations (b)/ are fast approaching (c)/No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — 'hardly' should be 'hard'. Hard (adv.) = putting a lot of energy into an activity.
+
+Q85. India is enough prepared (a)/ to host any kind of game, (b)/ however, the olympic committee, (c)/ has several misgivings about the feasibility (d)/ No errror .(e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'prepared' should be followed by 'Enough'. Structure: Adj./Adv. + Enough + To + V₁.
+
+Q86. Her lawyer is enough witted to (a)/ wriggle her out of the unexpected (b)/ situation which has (c)/ arised somehow (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'Witted' should be followed by 'Enough'. Enough as an Adverb comes after the Adjective/Adverb it modifies: witted enough.
+
+Q87. Japan has gone (a)/ far ahead in the field of technology, (b)/ so we a little expect that any (c)/ other country would be able to beat it (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'A' should be removed; use little alone. A little = somewhat (positive); little = almost not (negative).
+
+Q88. you must know that (a)/ we have taken (b)/ enough rest so (c)/ we are a little tired (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'A' should be removed; use little. Little = almost not.
+
+Q89. The Indian team is in its (a)/ prime condition, (b)/ so the strategies adopted (c)/ by the opponent matters a little (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'A little' should be used. A little = somewhat/slightly.
+
+Q90. His preparation is not (a)/ upto the mark,(b)/ so I am little worried about (c)/ his performance in the examination (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'A little' should be used. The sentence is affirmative in sense, so a little is appropriate.
+
+Q91. He looks a little (a)/ concerned about the financial crunch his company (b)/ has incurred, while he should have gone. (c)/ deep into the matter and discovered the real cause of the disaster (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'A little' should be replaced by 'little'. Little = almost not, which fits the negative sense here.
+
+Q92. You cannot judge India (a)/ by how it looks (b)/ As a matter of fact, (c)/ it is fairly a rich country (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'A Fairly Rich Country' should be used. Fairly modifies adjectives in a positive sense.
+
+Q93. You are right here (a)/ because I, too, found it (b)/ rather difficult a problem (c)/ to deal with (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'Rather' should be replaced by 'Too'. Structure: Too + Adj. + Noun + To infinitive.
+
+Q94. I really cannot work (a)/ In fairly bad weather (b)/ condition, so I have (c)/ decided to get back (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'Fairly Bad' should be 'Rather Bad'. Fairly is used with pleasant adjectives; rather is used with negative/undesirable adjectives.
+
+Q95. They are working on (a)/ a rather interesting project which (b)/ will prove a boon to (c)/ those living in rural areas (d)/ No error(e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'Rather' should be replaced by 'Fairly'. Fairly is used before positive/pleasant adjectives.
+
+Q96. The question he has (a)/ put is fairly an involving one,(b)/ so I need some more (c)/ time to answer it (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'Fairly' should be replaced by 'Rather'. Rule: Fairly is used with pleasant adjectives; rather is used with negative/undesirable adjectives.
+
+Q97. The universe is still (a)/ a mystery to our (b)/ scientists because (c)/ it is fairly too big to explore (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'Fairly' should be replaced by 'Rather'. Fairly is never used with too.
+
+Q98. This world is (a)/ very much cruel to one (b)/and all of us, however (c)/ we love to live it at best (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'Much' should be removed. Past Participle takes very much; Comparative Degree takes very much; but plain adjectives in positive degree take only very.
+
+Q99. It would be (a)/ nice if (b)/ you speak to him (c)/ a little less loudly (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q100. Not better price (a)/ can you avail yourself of (b)/ amid the kind of (c)/ competition we have in the market today (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'No Better price' should be used. Before Comparative Degree, No is used.
+
+Q101. How true is (a)/ the fact that learning (b)/ Hindi is far difficult (c)/ than learning English (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'Far' should be replaced by 'More'. The sentence involves comparison (than), so Comparative Degree (more difficult) is needed.
+
+Q102. Today you are (a)/ looking very (b)/ smarter than (c)/ all other girls sitting here (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'Very' should be replaced by 'Much'. With Comparative Degree adjectives, much is used as an intensifier.
+
+Q103. I know that you (a)/always give good ideas (b)/ but this time you have (c)/ given an even good one (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'Even Good' should be 'Even Better'. A new idea is being compared to a previous one, so the Comparative Degree (better) is needed.
+
+Q104. That was (a)/ the more worst (b)/ situation that (c)/ I had ever undergone in my life (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'More' should be removed. Before Superlative Degree, more is not used.
+
+Q105. You will find everybody (a)/ Saying that it is (b)/ the much best movie (c)/ ever made in the indian film industry (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'Much The Best Movie' should be used. Structure: much + the + Superlative degree of Adj.
+
+Q106. You have really come up with (a)/ a much intelligent idea (b)/ and it will (c)/ definitely serve our purpose (d)/ No error . (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No Error
+
+Q107. If you compare my sister (a)/ with her classmates, (b)/ you will find her very better (c)/ than all other girls (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'Very better' should be 'Much Better'. Comparative Degree takes much, not very.
+
+Q108. It is none too bad, (a)/ so I would like to (b)/ do it and have (c)/ a new experience in life (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q109. My last journey was (a)/ none too pleasant and I enjoyed (b)/ the allowing sights of flora and fauna (c)/ through the tinsel window pan (d)/ No Error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'None Too' should be replaced by 'Only Too'. None too = not very; only too = very much.
+
+Q110. We searched for a doctor (a)/ far and away but we (b)/ did not find any, so we decided to (c)/ leave the village only next morning (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'Far and Away' should be 'Far and wide'. Far and Away = decidedly; Far and wide = in all directions.
+
+Q111. He got angry (a)/ when I asked (b)/ him how much (c)/ late he was (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'Much' should be removed. How and Adjective should not have much between them.
+
+Q112. I always notice (a)/ one thing that she (b)/ comes when I am (c)/ away from home (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'When' should be replaced by 'While'. While refers to a time period during which something happens.
+
+Q113. The government has announced (a)/ that medicine will be (b)/ distributed freely among those (c)/ who are below the poverty line (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q114. When I was in mumbai, (a)/ I used to get back (b)/ home timely and shally (c)/ My daughter, would play with me (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q115. If you ask Obama (a)/ if he belongs to the muslim origin, (b)/ he will say that (c)/ certainly he does (d)/ No error(e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'Certainly' should come before the whole sentence. Certainly (sentence-modifying adverb) is placed at the beginning.
+
+Q116. He admittedly said (a)/ that certainly blood (b)/ is always, (c)/ thicker than water (d)/No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q117. Of course, you are going (a)/ to be a winner, (b)/ if you continue to work.(c)/ with the same spirit (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q118. I was delighted to (a)/ here him say that (b)/ he would of course, (c)/ be there by the next evening (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q119. The container got empty (a)/ because the water in it (b)/ flowed out little by little (c)/ through a tiny pore on it (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: E
+Exp: No error
+
+Q120. We all know that (a)/ India is progressing (b)/ by and by (c)/ and will definitely become a superpower by 2020 (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'By and By' should be replaced by 'One by one'. By and by = तुरंत/Eventully; meaning doesn't fit here.
+
+Q121. All the students are requested (a)/ to make their exit by and by, (b)/ so that there may not be (c)/ any stampede around here (d)/No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'By and By' should be replaced by 'Gradually'. By and by = gradually/eventually — here gradually is the more precise word.
+
+Q122. She keeps calling (a)/ me up now and then and now (b)/ I am bored (c)/ of this act of hers (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'Now and then' should be replaced by 'off and on'. Now and then = occasionally; off and on = intermittently.
+
+Q123. When I was (a)/ in Chicago, (b)/ I would often go to (c)/ discotheque off and on (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'Off and on' should be replaced by 'Now and then'. Off and on = intermittently; now and then = occasionally, which suits better.
+
+Q124. So far I have watched (a)/ a number of comic movies (b)/ but this one I think is relatively (c)/ more hilarious than all the previous ones (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'Relatively' should be removed. With Comparative Degree + than, relatively is not used.
+
+Q125. your friend is looking (a)/ relatively more confused, (b)/ so you have to make him (c)/ understand the things in the best possible manner (d)/ No error .(e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'More' should be removed. Relatively and Comparatively are not used with the Comparative Degree form.
+
+Q126. People living in urban areas (a)/ have been making (b)/ comparatively more progress (c)/ than those living in rural areas (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'Comparatively' should be removed. Comparatively is not used alongside the Comparative Degree.
+
+Q127. The flat you have decided (a)/ to buy is preferably more (b)/ impressive with various (c)/ romantic features (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'Preferably' should be removed. Preferably is not used with Comparative Degree + than.
+
+Q128. On the basis of the economic (a)/ growth recorded so far, (b)/ we can say that India is (c)/ relatively more progressive than Pakistan (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'Relatively' should be removed. Same rule as above.
+
+Q129. Your brother's performance (a)/ is said to be comparatively (b)/ better than.(c)/ all other participants' (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'Comparatively' should be removed. Comparative Degree does not take comparatively.
+
+Q130. I presently received (a)/ a piece of news and (b)/ it is so shocking that I do not (c)/ want to break it to others (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'I have just received' should be used. Presently/directly/shortly are used for Future Action (very soon), not for past received news.
+
+Q131. The bus was crowded enough, (a)/ so I decided to not (b)/ to get into it and (c)/ hired a private cab (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'Too crowded' should be used. Structure: Too + Adj + To + infinitive.
+
+Q132. The buildings have been (a)/ enough decorated to (b)/ welcome the (c)/ newly wed couple (d)/ No error(e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'Decorated Enough' should be used. Enough as Adverb comes after the word it modifies.
+
+Q133. He is too intelligent (a)/ to handle the (b)/ situation in a (c)/ successful manner (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — He is Intelligent Enough to Handle — should be used. Too…to implies inability; enough…to implies ability.
+
+Q134. When you learn about his nature, (a)/ you will find him (b)/ fastidious enough to (c)/ convince him on any point (d)/ No error. (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'Too Fastidious to Convince' should be used. Too…to = so much that it cannot be done.
+
+Q135. The face of this (a)/ country girl (b)/is too beautiful (c) No Error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'Too' should be replaced by 'Very'. Too implies excess/negative; very is a simple intensifier.
+
+Q136. Rohan was leading (a)/ a happy and leisurely (b)/ life after his retirement (c)/ from service. (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'Leisurely' is both an Adjective and an Adverb, and here it is being used as an Adjective modifying life, which is fine. However, Leisurely as an adverb modifying leading is also acceptable. No error actually — but answer key marks (b): leisurely is an adjective here modifying noun life is acceptable. No change needed in standard usage.
+
+Q137. We swam up to the drowning man caught hold of his clothes (a)/ before he could go down again (b)/ and pulled him out safe to the shore. (c)/No error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'Safe' should be 'safely'. Safe is an Adjective; safely is the Adverb needed to describe pulled him out.
+
+Q138. He studied (a)/ so hardly (b)/ that he was sure of passing. (c)/ No error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'Hardly' should be 'hard'. Hardly = Adverb of Frequency (almost not); hard = Adverb of Manner (with great effort). Hard is placed after main verb.
+
+Q139. To the men who worked so hard in the project ,(a)/ the news was (b)/ profound disappointing. (c)/ No error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'Profound' should be 'profoundly'. Profoundly is an Adverb (deeply/intensely); profound is an Adjective. An Adverb is needed to describe disappointing.
+
+Q140. The mouth was (a)/ reportedly upset (b)/ over his sister's death (c)/ about a fortnight behind. (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'Behind' should be 'ago'. Behind = preposition meaning at the back; ago = Adverb of time referring to past time. I came here a month ago.
+
+Q141. The government's earnings (a)/ through royalty, dividends and profit sharing (b)/ have been steady rising (c)/ over the years. (d)/No errro (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'Steady' should be 'steadily'. Steady = Adjective (unchanging); Steadily = Adverb (in a steady manner). An Adverb is needed to describe rising.
+
+Q142. The air is very (a)/ hotter today (b)/ than yesterday (c)/No errro (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — No very is needed. Hotter is already Comparative Degree; very is not used before it (use much instead if needed).
+
+Q143. It was fortunate (a)/ all of the inmates escaped (b)/ from the blazing fire .(c)/ No errro(d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — 'It was fortunate' should be 'Fortunately'. Fortunate is an Adjective (suitable/fitting); Fortunately is an Adverb describing the whole sentence.
+
+Q144. We admired (a)/ his many (b)/ attempts bravely (c)/ to enter the burning building. (d)/ No errro (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'Bravely' should be 'of bravery'. Bravely is an Adverb describing a Verb; bravery is a Noun. Here attempts of bravery is the correct phrase.
+
+Q145. The cost of food items (a)/ is increasing so rapid (b)/ making it unaffordable (c)/ to a majority of the people. (d)/ No errro (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'So rapid' should be 'So rapidly'. Rapid is an Adjective; rapidly is an Adverb needed to modify increasing.
+
+Q146. My friends was (a)/ bruised (b)/ quiet badly in a recent accident. (c)/No errro (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'Quiet' should be 'quite'. Quiet is an Adjective (silent); quite is an Adverb meaning completely/fully.
+
+Q147. Rakesh anger asked (a)/ his son to tell him (b)/ what had happened to (c)/ the food and drinks kept in the fridge. (d)/No errro (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'Anger' should be 'angrily'. Anger is a Noun; angrily is an Adverb needed to describe how he asked.
+
+Q148. The tennis player easy through (a)/ the opening set before her opponent (b)/ rallied to take the final two sets (c)/ for the biggest victory of her young career. (d)/ No errro (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'Easy through' should be 'easily through'. Easy is an Adjective; easily is the Adverb needed. Through is a preposition; easily modifies it adverbially.
+
+Q149. The buzz at the party was (a)/ that a famous(b)/ filmstar and politician (c)/ would probable drop by for a while. (d)/ No errro (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'probable' should be 'probably'. Probable is an Adjective; probably (possibly/संभवतः) is an Adverb needed to describe would drop.
+
+Q150. More than half the food products (a)/ targetted at babies and toddlers have (b)/ a high sugar content and are (c)/ excessive sweet.(d)/No errro (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: D
+Exp: — 'Excessive' should be 'excessively'. Sweet is an Adjective; excessively is an Adverb modifying it.
+
+Q151. When he found out that (a)/the girl had escaped(b)/ he was absolute(c)/ irritated and furious.(d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'Absolute' should be 'absolutely'. Absolute is an Adjective; absolutely is an Adverb modifying irritated and furious.
+
+Q152. They waited patient (a)/ for the chairman's speech (b)/ to end in order (c)/ to begin the discussion. (d)/No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'Patient' should be 'patiently'. Patient is an Adjective; patiently is the Adverb needed to describe how they waited.
+
+Q153. Mr.Gupta insisted (a)/ that he was (b)/ fully prepare (c)/ to prevent the proposal. (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: C
+Exp: — 'prepare' should be 'prepared'. He needs be + prepared (past participle adjective); fully (Adverb) modifies it.
+
+Q154. I tried to read your letter, (a)/ but it was so bad written (b)/ that I had to leave the attempt. (c)/No error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'bad' should be 'badly'. Badly is an Adverb modifying written (past participle).
+
+Q155. RBI is in favour (a)/ of ending currently (b)/ policies governing operations of (c)/ foreign banks in India. (d)/ No error(e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'Currently' should be replaced by 'current'. Currently is an Adverb; current is an Adjective modifying the noun policies.
+
+Q156. Mostly of the (a)/ newly recruited officers (b)/ have no experience (c)/ in the banking sector. (d)/No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: A
+Exp: — 'Mostly' should be replaced by 'Most'. Mostly is an Adverb; Most is an Adjective/Pronoun used with of.
+
+Q157. Though he was (a)/ no relating to me, (b)/ I helped him by (c)/ giving money and profitable advice. (d)/ No error (e)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+E. (e)
+Ans: B
+Exp: — 'No relating' should be 'not related'. In passive voice, Be (is/are/am/was/were/been/being) + V3 is used.
+
+Q158. He invited me (a)/ to often (b)/ visit him (c)/No error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'Often' should come before invited. Always, often, seldom, never, hardly etc. are placed before the main verb.
+
+Q159. Often in political campaigns, a point is reached at which (a)/ the candidates take out their gloves (b)/ and start slugging with bare fists (c)/ No error (d)
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: E
+Exp: No error
+
+Q160. (a) All the pupils/ (b) stood up respectively/ (c) as the guru entered the room./ (d) no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'respectively' should be 'respectfully'. Respectfully = in a respectful manner; respectively = in the order mentioned.
+
+Q161. (a) Her speech was not clearly (b)/ but we understood (c)/ the underlying meaning (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'clearly' should be replaced; speech was not clear (adjective needed after linking verb).
+
+Q162. (a) She sounded (b)/ very sadly after (c)/ the death of her pet (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'sadly' should be 'sad'. Sound is a linking (stative) verb; it takes a Subject Complement (Adjective), not an Adverb.
+
+Q163. (a) Veena worked (b)/ very hardly (c)/ as she wanted to be a surgeon (d)/ no eror
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'hardly' should be 'hard'. Same rule — hard = with great effort.
+
+Q164. (a) You should have (b)/ sufficiently collateral (c)/ to pay back the loan (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'sufficiently' should be 'sufficient'. Sufficient is an Adjective describing collateral (noun); sufficiently is an Adverb.
+
+Q165. (a) You have (b)/ acted nobler than (c)/ all of us (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — No error in standard reading, but technically more nobly is correct. Nobly's comparative degree is more nobly.
+
+Q166. (a) You always (c)/ come lately (c)/ to class (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B/C
+Exp: — 'lately' should be 'late'. Lately = recently; late = not on time. Both late Adjective and Adverb form are the same.
+
+Q167. (a) When she received the good news. (b)/ she ran straightly (c)/ to call up her parents (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'straightly' should be 'straight'. Fast, Hard, Straight, late, outright etc. have the same Adjective and Adverb form.
+
+Q168. (a) When I read his biography (b)/ I hardly found something (c)/ in his character that I could admire (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'something' should be 'anything'. Hardly is negative; with negative sentences, anything replaces something.
+
+Q169. (a) Vijay could not scarcely conceal (b)/ his happiness (c)/ at my resignation. (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — 'scarcely' should not be used with not. Scarcely is itself negative; remove not: could scarcely conceal.
+
+Q170. (a) We should (b)/ keep our belongings (c)/ orderly (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'orderly' should be replaced by 'in an orderly manner'. Orderly is an Adjective; here an Adverbial phrase is needed to modify keep.
+
+Q171. (a) We seldom or ever (b)/ go out these days (c)/ because it is too hot now a days (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — 'seldom or ever' should be 'Seldom or never'. Seldom or never = hardly ever; seldom if ever = occasionally.
+
+Q172. (a) We must try (b)/ to save our hardly (c)/ earned money (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'hardly' should be 'hard'. Hard-earned = earned with great effort (Adverb of manner); hardly earned would mean almost not earned.
+
+Q173. (a) Though he was brave (b)/ he could not face the ups and downs (c)/ of life manly (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'manly' should be 'manfully' or 'in a manly manner'. Manly is an Adjective; an Adverb is needed to modify face.
+
+Q174. (a) The teacher asked (b)/ the students to (c)/ talk loudly (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'loudly' should be 'aloud'. Loudly = making a lot of noise; aloud = in a voice that can be heard.
+
+Q175. (a) The state government (b)/ appointed him as (c)/ officer-in-charge (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'appoint (verb)' is followed directly without as. Appoint, consider, make, name etc. do not take as.
+
+Q176. (a) It rained (b)/ like cats and dogs (c)/throughout the night (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'like' should not be used here. Cats and dogs, rained — the verb uses an Adverbial phrase; like (preposition) is incorrect here.
+
+Q177. (a) Great leaders tried (b)/ to eradicate social evil practices (c)/ with tooth and nail/ (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'with' preposition is unnecessary. Tooth and nail is already used as an Adverbial phrase.
+
+Q178. (a) She knows (b)/ riding (c)/ a horse (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'riding' should be 'how to ride'. After know, wonder, directly using an infinitive without how to is incorrect.
+
+Q179. (a)/ She is either (b)/ dumb or deaf (c)/ if not both (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'not both' should be 'neither'. Both implies positive; neither is the negative equivalent for two things.
+
+Q180. (a) She had barely (b)/ nothing to wear (c)/ when she came to me for help (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'nothing' should not follow barely. Barely is itself negative; use anything: barely anything to wear.
+
+Q181. (a) She does her (b)/ work good as she (c)/ is a trained nurse (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'good' should be 'well'. Good is an Adjective; well is an Adverb needed to modify does.
+
+Q182. (a) She did her job (b)/ as better as she (c)/ could do (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'better' should be 'well'. In as…as structure, Positive Degree Adjective/Adverb is used; as well as is correct.
+
+Q183. (a) Outright rejection (b)/ of my plea (c)/ disappointed me (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: D
+Exp: No error
+
+Q184. (a) Never in the history (b)/ there has been (c)/ as shrewd a mentor as chanakya (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'has' should come before there. With seldom, never, rarely, hardly, scarcely etc., the auxiliary comes before the subject.
+
+Q185. (a) My father (b)/ is very quicker than (c)/ I at chess (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'very' should be 'much'. Quicker is Comparative Degree; much intensifies Comparative Degree adjectives.
+
+Q186. (a) Mangoes taste (b)/ more sweetly than (c)/ any other fruit of this world (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'sweetly' should be 'sweet'. Taste is a linking (stative) verb; it takes a Subject Complement (Adjective sweet), not an Adverb.
+
+Q187. (a) I see him often (b)/ at the (c)/ bus terminal (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: E
+Exp: No error
+
+Q188. (a) I refused to consider (b)/ him as an honest boy (c)/ as he had cheated many people (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B
+Exp: — 'as' should be removed. Consider, make, elect, select, appoint, think etc. do not take as.
+
+Q189. (a) I refused to accompany him (b)/ because he was (c)/ so boring (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'So' should be replaced by 'very'. So as an Adverb requires a that clause to follow; without it, very is used.
+
+Q190. (a) I never remember (b)/ to have met a more intelligent (c)/ man in my life (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — 'never' should come after remember. Remember should not be made negative; use not with met: I remember never having met.
+
+Q191. (a) I have never seen (b)/ a coward man (c)/ like sohan (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — No error with standard meaning; but technically cowardly (Adjective form of coward) should be used as it modifies man.
+
+Q192. (a) I did not know hardly (b)/ anyone in the college (c)/ and so I felt lonely all the time (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — 'hardly' should not take not. Hardly is itself negative; remove not: I hardly knew anyone.
+
+Q193. (a) I am full of energy (b)/ today because I (c)/ soundly slept last night (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'soundly' should come after slept. Slept is an intransitive verb; Adverb of Manner comes after the main verb.
+
+Q194. (a) He is niggard (b)/ and saves each (c)/ and every paise (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — 'Niggard' should have article a before it. Niggard is a singular countable noun; a is required before it.
+
+Q195. (a) He is enough tall (b)/ to be selected as sub inspector (c)/ in delhi police (D)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: A
+Exp: — 'enough' should come after tall. Structure: Positive degree Adjective + enough + in infinitive.
+
+Q196. (a) He is being (b)/ very politely (c)/ for the reason best known to him (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: B/C
+Exp: — 'politely' should be 'polite'. Being is a linking verb; its Subject Complement should be an Adjective (polite), not an Adverb.
+
+Q197. (a) A man of fifty (b)/ cannot be called (c)/ as young (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — Here the sentence means a 50-year-old cannot be called young; as is incorrect. Verbs like call do not take as.
+
+Q198. (a) A soldier is (b)/ taught never to (c)/ fight cowardly (d)/ no error
+A. (a)
+B. (b)
+C. (c)
+D. (d)
+Ans: C
+Exp: — 'cowardly' should not be used as an Adverb to modify fight because cowardly is an Adjective. Use cowardly as an Adjective form — in a cowardly manner or check: cowardly has no separate Adverb form so the correct expression is in a cowardly manner.
+`;
+
+/* ── CARD 2 ── */
+const EP_RAW_2 = `
+`;
+
+/* ── CARD 3 ── */
+const EP_RAW_3 = `
+`;
+
+/* ── CARD 4 ── */
+const EP_RAW_4 = `
+`;
+
+/* ── CARD 5 ── */
+const EP_RAW_5 = `
+`;
+
+/* ── CARD 6 ── */
+const EP_RAW_6 = `
+`;
+
+/* ── CARD 7 ── */
+const EP_RAW_7 = `
+`;
+
+/* ── CARD 8 ── */
+const EP_RAW_8 = `
+`;
+
+/* ── CARD 9 ── */
+const EP_RAW_9 = `
+`;
+
+/* ── CARD 10 ── */
+const EP_RAW_10 = `
+`;
+
+const ERROR_PRO_CARDS = [
+  parseEPCard(EP_RAW_1),
+  parseEPCard(EP_RAW_2),
+  parseEPCard(EP_RAW_3),
+  parseEPCard(EP_RAW_4),
+  parseEPCard(EP_RAW_5),
+  parseEPCard(EP_RAW_6),
+  parseEPCard(EP_RAW_7),
+  parseEPCard(EP_RAW_8),
+  parseEPCard(EP_RAW_9),
+  parseEPCard(EP_RAW_10),
+];
+
 /* ════════ APP STATE ════════ */
 let currentType = null;
 let currentSet  = null;
@@ -8708,13 +10686,12 @@ function openReview(mode, key, items, title) {
 
 /* ════════ NAVIGATION ════════ */
 function show(id) {
-  ['homeView','setView','quizView','resultView','reviewView'].forEach(v => {
+  ['homeView','setView','quizView','resultView','reviewView','errorproView','epQuizView'].forEach(v => {
     const el = document.getElementById(v);
     if (el) el.style.display = v === id ? 'block' : 'none';
   });
   if (id === 'homeView') renderHomeSections();
 }
-function goHome() { show('homeView'); }
 
 function selectType(type) {
   currentType = type;
@@ -8751,6 +10728,13 @@ function startSet(setIndex) {
   const isTeal = currentType === 'antonyms';
   document.getElementById('progressFill').className = 'progress-fill' + (isTeal ? ' teal' : '');
   document.getElementById('submitBtn').className = 'nav-btn primary' + (isTeal ? ' teal' : '');
+  document.getElementById('submitBtn').style.background = '';
+  document.getElementById('submitBtn').style.boxShadow = '';
+  // Reset back button label and card border
+  const backBtn = document.querySelector('#quizView .back-btn');
+  if (backBtn) backBtn.textContent = '← Sets';
+  const qCard = document.querySelector('.question-card');
+  if (qCard) qCard.style.borderColor = '';
   renderQuestion();
   show('quizView');
   startQuizTimer();
@@ -8786,7 +10770,11 @@ function updateTimerDisplay() {
   el.style.background = quizTimeLeft <= 60 ? '#dc2626' : '#7c3aed';
 }
 
-function exitQuiz() { clearInterval(quizTimerInt); selectType(currentType); }
+function exitQuiz() {
+  clearInterval(quizTimerInt);
+  if (currentType === 'errorpro') { openErrorPro(); }
+  else { selectType(currentType); }
+}
 
 /* ════════ QUIZ ════════ */
 function renderQuestion() {
@@ -8799,19 +10787,17 @@ function renderQuestion() {
   document.getElementById('qText').textContent = q.q;
   const container = document.getElementById('optionsContainer');
   container.innerHTML = '';
-  ['A','B','C','D'].forEach((letter, i) => {
+
+  // Support up to 5 options (A-E) for Error Pro; standard is A-D
+  const letters = ['A','B','C','D','E'];
+  const numOpts = q.options.length;
+  letters.slice(0, numOpts).forEach((letter, i) => {
     const div = document.createElement('div');
     let cls = 'option';
     if (hasAnswer) {
-      // Always highlight the correct answer in green
-      if (i === q.answer) {
-        cls += ' correct-ans';
-      } else if (i === chosen && chosen !== q.answer) {
-        // The wrong choice gets red
-        cls += ' wrong-ans';
-      } else {
-        cls += ' locked';
-      }
+      if (i === q.answer)                          cls += ' correct-ans';
+      else if (i === chosen && chosen !== q.answer) cls += ' wrong-ans';
+      else                                          cls += ' locked';
     }
     div.className = cls;
     div.innerHTML = `<span class="option-letter">${letter}</span><span>${q.options[i]}</span>`;
@@ -8820,6 +10806,16 @@ function renderQuestion() {
     }
     container.appendChild(div);
   });
+
+  // Show explanation for Error Pro after answering
+  if (hasAnswer && currentType === 'errorpro' && q.exp) {
+    const expDiv = document.createElement('div');
+    expDiv.className = 'ep-exp';
+    expDiv.style.marginTop = '1rem';
+    expDiv.innerHTML = `<strong>Explanation</strong>${q.exp}`;
+    container.appendChild(expDiv);
+  }
+
   const answered = Object.keys(answers).length;
   document.getElementById('progressFill').style.width = `${(answered / total) * 100}%`;
   renderPalette();
@@ -8906,10 +10902,10 @@ function showResult() {
   const { results, correct, wrong, skipped } = getResults();
   storeMistakes(currentType, currentSet, results);
   const pct = Math.round((correct / total) * 100);
-  const type = currentType === 'synonyms' ? 'Synonyms' : 'Antonyms';
+  const type = currentType === 'synonyms' ? 'Synonyms' : currentType === 'antonyms' ? 'Antonyms' : `Error Pro — Card ${currentSet + 1}`;
   const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
 
-  document.getElementById('resultTitle').textContent = `${type} — Set ${currentSet + 1} Result`;
+  document.getElementById('resultTitle').textContent = currentType === 'errorpro' ? `${type} Result` : `${type} — Set ${currentSet + 1} Result`;
   document.getElementById('resultSubtitle').textContent = `Submitted on ${date}`;
   document.getElementById('statTotal').textContent   = total;
   document.getElementById('statCorrect').textContent = correct;
@@ -8958,18 +10954,21 @@ function showResult() {
   show('resultView');
 }
 
-function retakeSet() { startSet(currentSet); }
+function retakeSet() {
+  if (currentType === 'errorpro') { openEpCard(currentSet); }
+  else { startSet(currentSet); }
+}
 
 /* ════════ DOWNLOADS ════════ */
 function buildTxt() {
   const total = questions.length;
   const { results, correct, wrong, skipped } = getResults();
   const pct = Math.round((correct / total) * 100);
-  const type = currentType === 'synonyms' ? 'Synonyms' : 'Antonyms';
+  const type = currentType === 'synonyms' ? 'Synonyms' : currentType === 'antonyms' ? 'Antonyms' : `Error Pro Card ${currentSet + 1}`;
   const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
   const L = ['A','B','C','D'];
   let txt = `VOCABULARY MOCK TEST — RESULT REPORT\n${'='.repeat(50)}\n`;
-  txt += `Type    : ${type}\nSet     : Set ${currentSet + 1}\nDate    : ${date}\n${'='.repeat(50)}\n\n`;
+  txt += `Type    : ${type}\nSet     : ${currentType === 'errorpro' ? 'Card' : 'Set'} ${currentSet + 1}\nDate    : ${date}\n${'='.repeat(50)}\n\n`;
   txt += `SUMMARY\n${'-'.repeat(30)}\nTotal     : ${total}\nCorrect   : ${correct}\nWrong     : ${wrong}\nSkipped   : ${skipped}\nScore     : ${correct}/${total} (${pct}%)\n\n`;
   [
     { label: 'WRONG ATTEMPTS',     items: results.filter(r => r.status === 'wrong') },
@@ -9001,7 +11000,8 @@ function downloadResult() {
   const total = questions.length;
   const { results, correct, wrong, skipped } = getResults();
   const pct = Math.round((correct / total) * 100);
-  const type = currentType === 'synonyms' ? 'Synonyms' : 'Antonyms';
+  const type = currentType === 'synonyms' ? 'Synonyms' : currentType === 'antonyms' ? 'Antonyms' : `Error Pro Card ${currentSet + 1}`;
+  const setLabel = currentType === 'errorpro' ? `Card ${currentSet+1}` : `Set ${currentSet+1}`;
   const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
   const L = ['A','B','C','D'];
   const ordered = [
@@ -9017,11 +11017,11 @@ function downloadResult() {
     const bg     = r.status === 'wrong' ? '#fff0f0' : r.status === 'skipped' ? '#fffbf0' : '#f0fff4';
     rows += `<tr style="background:${bg}"><td>${r.i+1}</td><td>${r.q.q}</td><td>${status}</td><td>${your}</td><td>${corr}</td></tr>`;
   });
-  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Result — ${type} Set ${currentSet+1}</title>
+  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Result — ${type}</title>
 <style>body{font-family:Arial,sans-serif;margin:40px;color:#111}h1{font-size:22px;margin-bottom:4px}.meta{color:#666;font-size:13px;margin-bottom:20px}.stats{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}.sc{border:1px solid #ddd;border-radius:8px;padding:10px 16px;text-align:center}.lbl{font-size:11px;color:#888;text-transform:uppercase;letter-spacing:.04em;margin-bottom:3px}.val{font-size:22px;font-weight:600}.c .val{color:#27500A}.w .val{color:#791F1F}.s .val{color:#633806}table{width:100%;border-collapse:collapse;font-size:13px}th{background:#f1efe8;padding:9px 8px;border:1px solid #ddd;text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em}td{padding:8px;border:1px solid #ddd}</style>
 </head><body>
 <h1>Vocabulary Mock Test — Result</h1>
-<div class="meta">${type} · Set ${currentSet+1} · ${date}</div>
+<div class="meta">${type} · ${setLabel} · ${date}</div>
 <div class="stats">
   <div class="sc"><div class="lbl">Total</div><div class="val">${total}</div></div>
   <div class="sc c"><div class="lbl">Correct</div><div class="val">${correct}</div></div>
@@ -9035,6 +11035,62 @@ function downloadResult() {
   const blob = new Blob([html], { type: 'text/html' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob); a.download = `vocab-${currentType}-set${currentSet + 1}.html`; a.click();
+}
+
+/* ════════ ERROR PRO ════════ */
+const EP_CARD_NAMES = [
+  'Card 1','Card 2','Card 3','Card 4','Card 5',
+  'Card 6','Card 7','Card 8','Card 9','Card 10'
+];
+
+let epCurrentCard = 0;
+
+function openErrorPro() {
+  const grid = document.getElementById('epSetGrid');
+  grid.innerHTML = '';
+  ERROR_PRO_CARDS.forEach((qs, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'ep-set-btn';
+    btn.innerHTML = `<span class="sb-num">${i + 1}</span><span class="sb-label">${EP_CARD_NAMES[i]}</span><span class="sb-qs">${qs.length > 0 ? qs.length + ' Qs' : 'Empty'}</span>`;
+    btn.onclick = () => openEpCard(i);
+    grid.appendChild(btn);
+  });
+  showEp('errorproView');
+}
+
+function openEpCard(idx) {
+  epCurrentCard = idx;
+  currentType = 'errorpro';
+  currentSet  = idx;
+  questions   = shuffle(ERROR_PRO_CARDS[idx]);
+  answers     = {};
+  currentQ    = 0;
+  // Red theme for Error Pro
+  document.getElementById('progressFill').className = 'progress-fill';
+  document.getElementById('progressFill').style.background = 'linear-gradient(90deg,#dc2626,#f87171)';
+  document.getElementById('submitBtn').className = 'nav-btn primary';
+  document.getElementById('submitBtn').style.background = 'linear-gradient(135deg,#dc2626,#f87171)';
+  document.getElementById('submitBtn').style.boxShadow = '0 4px 16px rgba(220,38,38,0.4)';
+  // Change back button label to "← Cards"
+  const backBtn = document.querySelector('#quizView .back-btn');
+  if (backBtn) backBtn.textContent = '← Cards';
+  // Red border on question card
+  const qCard = document.querySelector('.question-card');
+  if (qCard) qCard.style.borderColor = 'rgba(220,38,38,0.35)';
+  renderQuestion();
+  show('quizView');
+  startQuizTimer();
+}
+
+function exitEpQuiz() { openErrorPro(); }
+
+function showEp(id) {
+  const allViews = ['homeView','setView','quizView','resultView','reviewView','errorproView','epQuizView'];
+  allViews.forEach(v => {
+    const el = document.getElementById(v);
+    if (el) el.style.display = v === id ? 'block' : 'none';
+  });
+  if (id === 'homeView') renderHomeSections();
 }
 
 /* ════════ INIT ════════ */
