@@ -696,6 +696,15 @@
     <div class="ep-set-grid" id="epSetGrid"></div>
   </div>
 
+  <!-- ── ERROR PRO SUB-SET VIEW (sets within a card) ── -->
+  <div style="display:none;" id="epSubsetView">
+    <button class="back-btn" onclick="openErrorPro()">← Cards</button>
+    <div style="height:1.25rem"></div>
+    <h2 id="epSubsetTitle" style="font-size:19px;font-weight:700;margin-bottom:4px;color:#f87171;"></h2>
+    <p id="epSubsetSub" style="font-size:13px;color:var(--text-muted);margin-bottom:1.5rem;"></p>
+    <div class="ep-set-grid" id="epSubsetGrid"></div>
+  </div>
+
   <!-- ── ERROR PRO QUIZ VIEW ── -->
   <div class="ep-quiz-view" id="epQuizView">
     <div style="margin-bottom:0.75rem;display:flex;gap:8px;align-items:center;">
@@ -823,7 +832,7 @@
    Paste ALL questions (both synonyms AND antonyms) in ALL_QUESTIONS below.
    The code will automatically detect each question as Synonym or Antonym
    by looking for the words "synonym" or "antonym" in the question text,
-   and arrange them into sets of 40 questions each.
+   and arrange them into sets of 30 questions each.
 
    Use EXACTLY this format per question:
 
@@ -8666,7 +8675,7 @@ function parseAndSplitQuestions(rawText) {
 }
 
 /* Auto-chunk a flat array into sets of SET_SIZE, attaching a globalIndex to each question */
-const SET_SIZE = 40;
+const SET_SIZE = 30;
 function chunkIntoSets(allQuestions) {
   const sets = [];
   for (let i = 0; i < allQuestions.length; i += SET_SIZE) {
@@ -8731,8 +8740,20 @@ function parseEPCard(raw) {
   return qs;
 }
 
-/* ── Adverb ── paste questions inside the backticks below */
-const EP_RAW_1 = `Q1. I don't like (a)/ such nasty (b)/ things (c)/ nor he does. (d)/ No Error (e)
+/* ── CARD 1 ── paste questions inside the backticks below */
+const EP_RAW_1 = `
+`;
+
+/* ── CARD 2 ── */
+const EP_RAW_2 = `
+`;
+
+/* ── CARD 3 ── */
+const EP_RAW_3 = `
+`;
+
+/* ── CARD 4 ── */
+const EP_RAW_4 = `Q1. I don't like (a)/ such nasty (b)/ things (c)/ nor he does. (d)/ No Error (e)
 A. (a)
 B. (b)
 C. (c)
@@ -10433,18 +10454,6 @@ Ans: C
 Exp: — 'cowardly' should not be used as an Adverb to modify fight because cowardly is an Adjective. Use cowardly as an Adjective form — in a cowardly manner or check: cowardly has no separate Adverb form so the correct expression is in a cowardly manner.
 `;
 
-/* ── CARD 2 ── */
-const EP_RAW_2 = `
-`;
-
-/* ── CARD 3 ── */
-const EP_RAW_3 = `
-`;
-
-/* ── CARD 4 ── */
-const EP_RAW_4 = `
-`;
-
 /* ── CARD 5 ── */
 const EP_RAW_5 = `
 `;
@@ -10686,7 +10695,7 @@ function openReview(mode, key, items, title) {
 
 /* ════════ NAVIGATION ════════ */
 function show(id) {
-  ['homeView','setView','quizView','resultView','reviewView','errorproView','epQuizView'].forEach(v => {
+  ['homeView','setView','quizView','resultView','reviewView','errorproView','epQuizView','epSubsetView'].forEach(v => {
     const el = document.getElementById(v);
     if (el) el.style.display = v === id ? 'block' : 'none';
   });
@@ -10772,7 +10781,7 @@ function updateTimerDisplay() {
 
 function exitQuiz() {
   clearInterval(quizTimerInt);
-  if (currentType === 'errorpro') { openErrorPro(); }
+  if (currentType === 'errorpro') { openEpSubsets(epCurrentCard); }
   else { selectType(currentType); }
 }
 
@@ -10902,7 +10911,7 @@ function showResult() {
   const { results, correct, wrong, skipped } = getResults();
   storeMistakes(currentType, currentSet, results);
   const pct = Math.round((correct / total) * 100);
-  const type = currentType === 'synonyms' ? 'Synonyms' : currentType === 'antonyms' ? 'Antonyms' : `Error Pro — Card ${currentSet + 1}`;
+  const type = currentType === 'synonyms' ? 'Synonyms' : currentType === 'antonyms' ? 'Antonyms' : `${EP_CARD_NAMES[epCurrentCard]} — Set ${epCurrentSubset + 1}`;
   const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
 
   document.getElementById('resultTitle').textContent = currentType === 'errorpro' ? `${type} Result` : `${type} — Set ${currentSet + 1} Result`;
@@ -10955,7 +10964,7 @@ function showResult() {
 }
 
 function retakeSet() {
-  if (currentType === 'errorpro') { openEpCard(currentSet); }
+  if (currentType === 'errorpro') { openEpCard(epCurrentCard, epCurrentSubset); }
   else { startSet(currentSet); }
 }
 
@@ -11038,43 +11047,106 @@ function downloadResult() {
 }
 
 /* ════════ ERROR PRO ════════ */
+/* ── EDIT CARD NAMES HERE ── change any name inside the quotes below */
 const EP_CARD_NAMES = [
-  'Card 1','Card 2','Card 3','Card 4','Card 5',
-  'Card 6','Card 7','Card 8','Card 9','Card 10'
+  'Noun',   /* ← Card 1  name */
+  'pronoun 2',   /* ← Card 2  name */
+  'verb',   /* ← Card 3  name */
+  'Adverb',   /* ← Card 4  name */
+  'Adjective',   /* ← Card 5  name */
+  'Pronoun',   /* ← Card 6  name */
+  'preposition',   /* ← Card 7  name */
+  'Conjunction',   /* ← Card 8  name */
+  'Interjection',   /* ← Card 9  name */
+  'Laar Lehsun',  /* ← Card 10 name */
 ];
 
 let epCurrentCard = 0;
+let epCurrentSubset = 0;
 
+/* Chunk a card's questions into sets of SET_SIZE */
+function chunkEpCard(cardIdx) {
+  const all = ERROR_PRO_CARDS[cardIdx];
+  const chunks = [];
+  for (let i = 0; i < all.length; i += SET_SIZE) {
+    chunks.push(all.slice(i, i + SET_SIZE));
+  }
+  return chunks;
+}
+
+/* Level 1 — 10 Cards grid */
 function openErrorPro() {
   const grid = document.getElementById('epSetGrid');
   grid.innerHTML = '';
   ERROR_PRO_CARDS.forEach((qs, i) => {
     const btn = document.createElement('button');
     btn.className = 'ep-set-btn';
-    btn.innerHTML = `<span class="sb-num">${i + 1}</span><span class="sb-label">${EP_CARD_NAMES[i]}</span><span class="sb-qs">${qs.length > 0 ? qs.length + ' Qs' : 'Empty'}</span>`;
-    btn.onclick = () => openEpCard(i);
+    const chunks = chunkEpCard(i);
+    const setCount = chunks.length;
+    const qCount   = qs.length;
+    btn.innerHTML = `
+      <span class="sb-num">${i + 1}</span>
+      <span class="sb-label">${EP_CARD_NAMES[i]}</span>
+      <span class="sb-qs">${qCount > 0 ? qCount + ' Qs · ' + setCount + ' set' + (setCount !== 1 ? 's' : '') : 'Empty'}</span>`;
+    btn.onclick = () => openEpSubsets(i);
     grid.appendChild(btn);
   });
   showEp('errorproView');
 }
 
-function openEpCard(idx) {
-  epCurrentCard = idx;
+/* Level 2 — Sets within a card */
+function openEpSubsets(cardIdx) {
+  epCurrentCard = cardIdx;
+  const chunks = chunkEpCard(cardIdx);
+  const name   = EP_CARD_NAMES[cardIdx];
+
+  document.getElementById('epSubsetTitle').textContent = name;
+  document.getElementById('epSubsetSub').textContent =
+    `${ERROR_PRO_CARDS[cardIdx].length} questions · ${chunks.length} set${chunks.length !== 1 ? 's' : ''} of ${SET_SIZE}`;
+
+  const grid = document.getElementById('epSubsetGrid');
+  grid.innerHTML = '';
+
+  if (chunks.length === 0) {
+    grid.innerHTML = `<p style="color:var(--text-muted);font-size:13px;">No questions in this card yet.</p>`;
+    showEp('epSubsetView');
+    return;
+  }
+
+  chunks.forEach((chunk, si) => {
+    const btn = document.createElement('button');
+    btn.className = 'ep-set-btn';
+    btn.innerHTML = `
+      <span class="sb-num">${si + 1}</span>
+      <span class="sb-label">Set ${si + 1}</span>
+      <span class="sb-qs">${chunk.length} Qs</span>`;
+    btn.onclick = () => openEpCard(cardIdx, si);
+    grid.appendChild(btn);
+  });
+
+  showEp('epSubsetView');
+}
+
+/* Level 3 — Quiz for one set within a card */
+function openEpCard(cardIdx, subsetIdx) {
+  epCurrentCard   = cardIdx;
+  epCurrentSubset = subsetIdx;
   currentType = 'errorpro';
-  currentSet  = idx;
-  questions   = shuffle(ERROR_PRO_CARDS[idx]);
+  currentSet  = subsetIdx;
+  const chunks = chunkEpCard(cardIdx);
+  questions   = shuffle(chunks[subsetIdx]);
   answers     = {};
   currentQ    = 0;
-  // Red theme for Error Pro
+  // Red theme
   document.getElementById('progressFill').className = 'progress-fill';
   document.getElementById('progressFill').style.background = 'linear-gradient(90deg,#dc2626,#f87171)';
   document.getElementById('submitBtn').className = 'nav-btn primary';
   document.getElementById('submitBtn').style.background = 'linear-gradient(135deg,#dc2626,#f87171)';
   document.getElementById('submitBtn').style.boxShadow = '0 4px 16px rgba(220,38,38,0.4)';
-  // Change back button label to "← Cards"
+  // Back button → goes to sub-set list
   const backBtn = document.querySelector('#quizView .back-btn');
-  if (backBtn) backBtn.textContent = '← Cards';
-  // Red border on question card
+  if (backBtn) { backBtn.textContent = '← Sets'; backBtn.onclick = () => { clearInterval(quizTimerInt); openEpSubsets(epCurrentCard); }; }
+  // Red border
   const qCard = document.querySelector('.question-card');
   if (qCard) qCard.style.borderColor = 'rgba(220,38,38,0.35)';
   renderQuestion();
@@ -11085,7 +11157,7 @@ function openEpCard(idx) {
 function exitEpQuiz() { openErrorPro(); }
 
 function showEp(id) {
-  const allViews = ['homeView','setView','quizView','resultView','reviewView','errorproView','epQuizView'];
+  const allViews = ['homeView','setView','quizView','resultView','reviewView','errorproView','epQuizView','epSubsetView'];
   allViews.forEach(v => {
     const el = document.getElementById(v);
     if (el) el.style.display = v === id ? 'block' : 'none';
