@@ -10739,8 +10739,6 @@ function startSet(setIndex) {
   document.getElementById('submitBtn').style.background = '';
   document.getElementById('submitBtn').style.boxShadow = '';
   // Reset back button label and card border
-  const backBtn = document.querySelector('#quizView .back-btn');
-  if (backBtn) backBtn.textContent = '← Sets';
   const qCard = document.querySelector('.question-card');
   if (qCard) qCard.style.borderColor = '';
   renderQuestion();
@@ -11150,9 +11148,6 @@ function openEpCard(cardIdx, subsetIdx) {
   document.getElementById('submitBtn').className = 'nav-btn primary';
   document.getElementById('submitBtn').style.background = 'linear-gradient(135deg,#dc2626,#f87171)';
   document.getElementById('submitBtn').style.boxShadow = '0 4px 16px rgba(220,38,38,0.4)';
-  // Back button → goes to sub-set list
-  const backBtn = document.querySelector('#quizView .back-btn');
-  if (backBtn) { backBtn.textContent = '← Sets'; backBtn.onclick = () => { clearInterval(quizTimerInt); openEpSubsets(epCurrentCard); }; }
   // Red border
   const qCard = document.querySelector('.question-card');
   if (qCard) qCard.style.borderColor = 'rgba(220,38,38,0.35)';
