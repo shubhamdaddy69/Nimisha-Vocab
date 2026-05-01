@@ -107,25 +107,36 @@
 
   /* ── ERROR PRO VIEW ── */
   .errorpro-view { display: none; }
-  .ep-set-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px,1fr)); gap: 12px; margin-bottom: 1.5rem; }
+  .ep-set-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px,1fr)); gap: 16px; margin-bottom: 1.5rem; }
   .ep-set-btn {
     position: relative; overflow: hidden;
-    background: var(--surface2); border: 1.5px solid rgba(220,38,38,0.3);
-    border-radius: var(--radius-lg); padding: 18px 14px 14px;
+    border: none; border-radius: 18px;
+    padding: 22px 14px 18px;
     cursor: pointer; font-size: 14px; font-weight: 700;
-    color: var(--text); text-align: center;
-    transition: transform 0.18s cubic-bezier(.22,.68,0,1.2), box-shadow 0.18s, border-color 0.15s, background 0.15s;
-    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: #fff; text-align: center;
+    transition: transform 0.22s cubic-bezier(.22,.68,0,1.3), box-shadow 0.22s;
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    min-height: 110px; justify-content: center;
   }
-  .ep-set-btn::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    background: #f87171; border-radius: 3px 3px 0 0; opacity: 0.9;
+  .ep-set-btn::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.18) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.5s ease;
+    pointer-events: none;
   }
-  .ep-set-btn .sb-num { font-size: 22px; font-weight: 900; color: #f87171; line-height: 1; }
-  .ep-set-btn .sb-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
-  .ep-set-btn .sb-qs { font-size: 11px; font-weight: 600; color: #f87171; opacity: 0.85; background: rgba(255,255,255,0.05); padding: 2px 10px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.07); }
-  .ep-set-btn:hover { transform: translateY(-5px) scale(1.03); box-shadow: 0 8px 28px rgba(220,38,38,0.35); border-color: #f87171; background: var(--surface3); }
-  .ep-set-btn:active { transform: scale(0.97); }
+  .ep-set-btn:hover::after { transform: translateX(100%); }
+  .ep-set-btn:hover { transform: translateY(-8px) scale(1.05); }
+  .ep-set-btn:active { transform: scale(0.96); }
+  .ep-set-btn .sb-icon {
+    font-size: 28px; line-height: 1; display: block;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    transition: transform 0.22s cubic-bezier(.22,.68,0,1.5);
+  }
+  .ep-set-btn:hover .sb-icon { transform: scale(1.25) rotate(-5deg); }
+  .ep-set-btn .sb-label { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,0.35); }
+  .ep-set-btn .sb-qs { font-size: 10.5px; font-weight: 600; background: rgba(255,255,255,0.22); color: #fff; padding: 3px 10px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.3); }
+
 
   /* Error Pro quiz card */
   .ep-quiz-view { display: none; }
@@ -226,38 +237,28 @@
   .type-card:hover .cloud-shimmer { left: 150%; }
 
   .type-card .card-icon {
-    width: 48px; height: 48px; border-radius: 14px;
+    width: 72px; height: 72px; border-radius: 22px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 15px; font-weight: 900; letter-spacing: 0.5px;
-    background: rgba(255,255,255,0.22); color: #fff;
-    border: 1.5px solid rgba(255,255,255,0.4);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 3px 12px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.35);
-    font-family: 'Nunito', sans-serif;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.25);
-    margin-bottom: 0.15rem;
+    font-size: 40px;
+    background: rgba(255,255,255,0.22);
+    border: 2px solid rgba(255,255,255,0.4);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.4);
+    margin-bottom: 0.5rem;
+    transition: transform 0.22s cubic-bezier(.22,.68,0,1.5);
   }
+  .type-card:hover .card-icon { transform: scale(1.18) rotate(-6deg); }
   .type-card h2 {
     font-family: 'Nunito', sans-serif;
-    font-size: 18px; font-weight: 900; color: #fff;
-    letter-spacing: -0.2px;
-    text-shadow: 0 1px 6px rgba(0,0,0,0.25);
+    font-size: 20px; font-weight: 900; color: #fff;
+    letter-spacing: -0.3px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
     margin: 0;
   }
-  .type-card p {
-    font-size: 11.5px; color: rgba(255,255,255,0.78);
-    line-height: 1.4; margin: 0;
-  }
-  .type-card .badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    margin-top: 0.3rem; font-size: 10.5px; padding: 4px 11px;
-    border-radius: 99px; background: rgba(255,255,255,0.2); color: rgba(255,255,255,0.97);
-    border: 1px solid rgba(255,255,255,0.32); font-weight: 800;
-    backdrop-filter: blur(6px);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.22);
-    font-family: 'Nunito', sans-serif;
-  }
-  .type-card .badge::before { content: '✦'; font-size: 7px; color: rgba(255,255,255,0.75); }
+  .type-card p { display: none; }
+  .type-card .badge { display: none; }
+  .type-card .badge::before { display: none; }
+  #synBadge, #antBadge, #errBadge { display: none !important; }
 
   /* ── SET SELECTOR ── */
   .set-selector { display: none; }
@@ -270,9 +271,10 @@
     border: 1.5px solid var(--border);
     border-radius: var(--radius-lg); padding: 18px 14px 14px;
     cursor: pointer; font-size: 14px; font-weight: 700;
-    color: var(--text); text-align: center;
+    color: var(--text) !important; text-align: center;
     transition: transform 0.18s cubic-bezier(.22,.68,0,1.2), box-shadow 0.18s, border-color 0.15s, background 0.15s;
     display: flex; flex-direction: column; align-items: center; gap: 6px;
+    background: var(--surface2) !important;
   }
   /* Each set-btn gets a unique accent via nth-child cycling */
   .set-btn:nth-child(5n+1) { --sb-color: #7c6ff7; --sb-glow: rgba(124,111,247,0.3); border-color: rgba(124,111,247,0.25); }
@@ -648,10 +650,16 @@
         <div class="cloud-body">
           <div class="cloud-shimmer"></div>
           <div class="cloud-inner">
-            <div class="card-icon">SYN</div>
+            <div class="card-icon" style="font-size:0;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);">
+              <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="14" cy="21" r="9" stroke="white" stroke-width="2.5" fill="rgba(255,255,255,0.15)"/>
+                <circle cx="28" cy="21" r="9" stroke="white" stroke-width="2.5" fill="rgba(255,255,255,0.15)"/>
+                <path d="M19 21 Q21 17 23 21 Q21 25 19 21Z" fill="white" opacity="0.9"/>
+                <line x1="4" y1="21" x2="10" y2="21" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <line x1="32" y1="21" x2="38" y2="21" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
             <h2>Synonyms</h2>
-            <p>Same or similar meaning</p>
-            <span class="badge" id="synBadge">Loading...</span>
           </div>
         </div>
       </div>
@@ -662,10 +670,12 @@
         <div class="cloud-body">
           <div class="cloud-shimmer"></div>
           <div class="cloud-inner">
-            <div class="card-icon">ANT</div>
+            <div class="card-icon" style="font-size:0;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);">
+              <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 21 L17 12 L17 18 L25 18 L25 12 L34 21 L25 30 L25 24 L17 24 L17 30 Z" fill="white" opacity="0.9"/>
+              </svg>
+            </div>
             <h2>Antonyms</h2>
-            <p>Words with opposite meanings</p>
-            <span class="badge" id="antBadge">Loading...</span>
           </div>
         </div>
       </div>
@@ -676,10 +686,14 @@
         <div class="cloud-body">
           <div class="cloud-shimmer"></div>
           <div class="cloud-inner">
-            <div class="card-icon" style="font-size:13px;">ERR</div>
+            <div class="card-icon" style="font-size:0;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.4);">
+              <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 6 L37 33 H5 Z" stroke="white" stroke-width="2.5" stroke-linejoin="round" fill="rgba(255,255,255,0.15)"/>
+                <line x1="21" y1="17" x2="21" y2="25" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                <circle cx="21" cy="29" r="1.5" fill="white"/>
+              </svg>
+            </div>
             <h2>Error Pro</h2>
-            <p>Spot the error questions</p>
-            <span class="badge" id="errBadge">10 Cards</span>
           </div>
         </div>
       </div>
@@ -14988,7 +15002,7 @@ const EP_CARD_NAMES = [
   'preposition',   /* ← Card 7  name */
   'Conjunction',   /* ← Card 8  name */
   'Interjection',   /* ← Card 9  name */
-  'Laar Lehsun',  /* ← Card 10 name */
+  'Tense',  /* ← Card 10 name */
 ];
 
 let epCurrentCard = 0;
@@ -15010,12 +15024,30 @@ function openErrorPro() {
   grid.innerHTML = '';
   ERROR_PRO_CARDS.forEach((qs, i) => {
     const btn = document.createElement('button');
+    const EP_ICONS = ['📝','🔤','⚡','🌟','🎨','🔮','🗺️','🔗','💥','⏱️'];
+    const EP_GRADIENTS = [
+      ['#6366f1','#8b5cf6','rgba(99,102,241,0.5)'],
+      ['#0ea5e9','#06b6d4','rgba(14,165,233,0.5)'],
+      ['#10b981','#059669','rgba(16,185,129,0.5)'],
+      ['#f59e0b','#ef4444','rgba(245,158,11,0.5)'],
+      ['#ec4899','#a855f7','rgba(236,72,153,0.5)'],
+      ['#14b8a6','#0891b2','rgba(20,184,166,0.5)'],
+      ['#f97316','#dc2626','rgba(249,115,22,0.5)'],
+      ['#8b5cf6','#ec4899','rgba(139,92,246,0.5)'],
+      ['#22d3ee','#6366f1','rgba(34,211,238,0.5)'],
+      ['#84cc16','#10b981','rgba(132,204,22,0.5)'],
+    ];
+    const [c1,c2,glow] = EP_GRADIENTS[i];
     btn.className = 'ep-set-btn';
+    btn.style.background = `linear-gradient(135deg,${c1},${c2})`;
+    btn.style.boxShadow = `0 8px 24px ${glow}`;
+    btn.onmouseenter = () => { btn.style.boxShadow = `0 16px 40px ${glow}`; };
+    btn.onmouseleave = () => { btn.style.boxShadow = `0 8px 24px ${glow}`; };
     const chunks = chunkEpCard(i);
     const setCount = chunks.length;
     const qCount   = qs.length;
     btn.innerHTML = `
-      <span class="sb-num">${i + 1}</span>
+      <span class="sb-icon">${EP_ICONS[i]}</span>
       <span class="sb-label">${EP_CARD_NAMES[i]}</span>
       <span class="sb-qs">${qCount > 0 ? qCount + ' Qs · ' + setCount + ' set' + (setCount !== 1 ? 's' : '') : 'Empty'}</span>`;
     btn.onclick = () => openEpSubsets(i);
@@ -15043,11 +15075,29 @@ function openEpSubsets(cardIdx) {
     return;
   }
 
+  const SET_ICONS = ['1️⃣','2️⃣','3️⃣','4️⃣','5️⃣','6️⃣','7️⃣','8️⃣','9️⃣','🔟'];
+  const EP_GRADIENTS2 = [
+    ['#6366f1','#8b5cf6','rgba(99,102,241,0.5)'],
+    ['#0ea5e9','#06b6d4','rgba(14,165,233,0.5)'],
+    ['#10b981','#059669','rgba(16,185,129,0.5)'],
+    ['#f59e0b','#ef4444','rgba(245,158,11,0.5)'],
+    ['#ec4899','#a855f7','rgba(236,72,153,0.5)'],
+    ['#14b8a6','#0891b2','rgba(20,184,166,0.5)'],
+    ['#f97316','#dc2626','rgba(249,115,22,0.5)'],
+    ['#8b5cf6','#ec4899','rgba(139,92,246,0.5)'],
+    ['#22d3ee','#6366f1','rgba(34,211,238,0.5)'],
+    ['#84cc16','#10b981','rgba(132,204,22,0.5)'],
+  ];
+  const [c1,c2,glow] = EP_GRADIENTS2[cardIdx] || EP_GRADIENTS2[0];
   chunks.forEach((chunk, si) => {
     const btn = document.createElement('button');
     btn.className = 'ep-set-btn';
+    btn.style.background = `linear-gradient(135deg,${c1},${c2})`;
+    btn.style.boxShadow = `0 8px 24px ${glow}`;
+    btn.onmouseenter = () => { btn.style.boxShadow = `0 16px 40px ${glow}`; };
+    btn.onmouseleave = () => { btn.style.boxShadow = `0 8px 24px ${glow}`; };
     btn.innerHTML = `
-      <span class="sb-num">${si + 1}</span>
+      <span class="sb-icon">${SET_ICONS[si] || (si+1)}</span>
       <span class="sb-label">Set ${si + 1}</span>
       <span class="sb-qs">${chunk.length} Qs</span>`;
     btn.onclick = () => openEpCard(cardIdx, si);
@@ -15102,10 +15152,10 @@ function showEp(id) {
     localStorage.setItem('vocabHistoryCleared', '1');
   }
 
-  document.getElementById('synBadge').textContent =
-    `${SYNONYMS.length} set(s) · ${SYNONYMS.reduce((a,s) => a + s.length, 0)} questions`;
-  document.getElementById('antBadge').textContent =
-    `${ANTONYMS.length} set(s) · ${ANTONYMS.reduce((a,s) => a + s.length, 0)} questions`;
+  const _sb = document.getElementById('synBadge');
+  if (_sb) _sb.textContent = `${SYNONYMS.length} set(s) · ${SYNONYMS.reduce((a,s) => a + s.length, 0)} questions`;
+  const _ab = document.getElementById('antBadge');
+  if (_ab) _ab.textContent = `${ANTONYMS.length} set(s) · ${ANTONYMS.reduce((a,s) => a + s.length, 0)} questions`;
   renderHomeSections();
   show('homeView');
 })();
