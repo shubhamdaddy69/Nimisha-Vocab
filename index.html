@@ -8739,8 +8739,15 @@ function parseEPCard(raw) {
     let answer = 0;
     let exp = '';
     lines.slice(1).forEach(l => {
+      // Match options with text after them: "A. some text"
       const optM = l.match(/^([A-Ea-e])[\.\)]\s+(.+)/);
       if (optM) { options.push(optM[2].trim()); return; }
+      // Match blank options: "A." or "A" alone (for sentence-correction style questions)
+      const blankOptM = l.match(/^([A-Ea-e])[\.\)]?\s*$/);
+      if (blankOptM) { options.push('(' + blankOptM[1].toUpperCase() + ')'); return; }
+      // Match numeric answer: "Ans: 2" or "Ans: D"
+      const ansNumM = l.match(/^Ans\s*[:\-]\s*(\d+)/i);
+      if (ansNumM) { answer = (parseInt(ansNumM[1]) - 1) || 0; return; }
       const ansM = l.match(/^Ans\s*[:\-]\s*([A-Ea-e])/i);
       if (ansM) { answer = letterMap[ansM[1].toUpperCase()] ?? 0; return; }
       const expM = l.match(/^Exp\s*[:\-]+\s*(.*)/i);
