@@ -8752,7 +8752,2621 @@ function parseEPCard(raw) {
 }
 
 /* ── CARD 1 ── paste questions inside the backticks below */
-const EP_RAW_1 = `
+const EP_RAW_1 = `Q1. We were expecting (a) / at least a (b) / week's holiday (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error. Time expressions like "week's" or "day's" correctly take an apostrophe-s.
+
+Q2. I like all subjects, but (a) / economics have been the (b) / most intriguing of them for me (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- 'Economics' is a subject name and takes a singular verb. Use "economics has been."
+
+Q3. Your mathematics (a) / is beyond (b) / my understanding (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- When "Mathematics" is preceded by a possessive adjective (your, my, his), it refers to calculation skills and takes a plural verb. Use "Your mathematics are beyond..."
+
+Q4. Mother-in-laws from different (a) / daily soaps have been (b) / nominated for this category (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- To pluralize a compound noun, add 's' to the root word. Use "Mothers-in-law."
+
+Q5. I want my belonging (a) / to be moved to my (b) / new house at Bandra (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- The word "belonging" is not used as a noun for possessions. Use "belongings."
+
+Q6. I can tell you everything (a) / because I was one (b) / of the looker-ones (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- The plural of "looker-on" is "lookers-on."
+
+Q7. I need some money (a) / because I have to (b) / buy another spectacles (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- "Spectacles" is a pair noun and is always plural. Use "another pair of spectacles."
+
+Q8. She has gifted (a) / me a shirt (b) / and trousers (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error. "Trousers" is correctly used in the plural.
+
+Q9. A few children (a) / are very quick at (a) / learning alphabets (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- "Alphabet" means the set of letters. "Alphabets" means different languages. Use "alphabet" here.
+
+Q10. He is planning (a) / to go abroad (b) / for higher study (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- The standard expression for academic pursuit is "higher studies" (plural).
+
+Q11. After this unexpected (a) / victory, all the players (a) / are in high spirit (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use the idiom "in high spirits" (plural) to mean cheerful.
+
+Q12. I am trying to trace his (a) / where about, so that (b) / he may be consulted (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- The noun is "whereabouts" (always plural in form).
+
+Q13. I want to know if (a) / you have read any (b) / of John Keats poems (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Possession is required. Use "John Keats' poems" or "John Keats's poems."
+
+Q14. The jury has (a) / different views (b) / on this issue (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- When members of a collective noun (jury) have different opinions, the noun acts as a plural. Use "The jury have."
+
+Q15. The efficiency of an (a) / employee also depends on the (b) / surrounding in which he or she works (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "surroundings" (plural) to refer to the environment.
+
+Q16. I want to know (a) / where the headquarter of (b) / Delhi police is situated (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- The word is "headquarters." It is used in the same form for both singular and plural.
+
+Q17. He got so tired (a) / that he wanted to take (b) / a rest in the shadow of a tree (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "shade" for the cool area under a tree. "Shadow" is the dark shape of a specific object.
+
+Q18. It will take at least (a) / one and a half year (b) / to complete this project (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- After "one and a half," the noun must be plural. Use "one and a half years."
+
+Q19. Some seats are (a) / reserved for disabled (b) / in each compartment (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "the disabled." "The + Adjective" acts as a plural noun representing a whole group.
+
+Q20. My family has (a) / lived in this area (b) / from times immemorial (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- The correct idiom is "time immemorial" (singular).
+
+Q21. The analysis you (a) / have given is far (b) / more trustworthy (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error.
+
+Q22. You must know (a) / that the wages (b) / of sin are death (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- When "wages" means "result" or "consequence," it takes a singular verb. Use "is death."
+
+Q23. You have to get at least (a) / passing marks in Mathematics (b) / so you need to study harder (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "pass marks." "Passing marks" is a common Indianism but is grammatically incorrect.
+
+Q24. The balance in his saving (a) / account is not enough for him (b) / to avail himself of these facilities (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- It is always a "savings account" (plural).
+
+Q25. Many of us don't (a) / know the exact reason (b) / of the earthquake (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "the exact cause" of the earthquake. Reason is used for human actions; cause is for natural phenomena.
+
+Q26. Some required measures (a) / have to be taken to increase (b) / the proceed of the annual sale (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "proceeds" (plural) when referring to money obtained from a sale or event.
+
+Q27. We will find a lamp-post (a) / at the front (b) / side of the (c) / institute (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- The word "side" is redundant. Use "at the front of the institute."
+
+Q28. Payal went (a) / to her friend's house (b) / and gave her two (c) / ten-rupees note (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- In a compound adjective, the unit remains singular. Use "ten-rupee notes."
+
+Q29. The same board (a) / is used (b) / for chess (c) / as well as for draughts (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No error.
+
+Q31. Ten kilometers (a) / is a long distance (b) / but five years (c) / are not a long period (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Periods of time (five years) are treated as a single unit. Use "five years is not a long period."
+
+Q32. Nobody's claim (a) / to be a permanent member (b) / of the IMF is valid (c) / in the eyes of the committee (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error.
+
+Q33. Many a man's life is in danger (a) / if the Government does not take (b) / any serious action to (c) / safeguard us (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error. "Many a" is followed by a singular noun and verb.
+
+Q34. The President of India (a) / constitutional power is limitless (b) / but it is the P.M. who is, (c) / indeed, powerful (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Possession is needed. Use "The President of India's constitutional power."
+
+Q35. Many of the questions' (a) / given in this question paper (b) / are so difficult that (c) / many of the students may fail (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Remove the apostrophe. "Questions" is a simple plural here, not possessive.
+
+Q36. This blade's edge (a) / is sharper than any (b) / other blade's, said (c) / the sales representative of the company (d) / No error
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- Non-living things usually do not take an apostrophe-s. Use "The edge of this blade."
+
+Q37. You will not (a) / be allowed (b) / to go anywhere else (c) / to play outdoor games (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error.
+
+Q38. Now I have come (a) / to know why he always (b) / remains at loggers-head with his wife (c) / and mother-in-law (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- The correct idiom is "at loggerheads" (plural).
+
+Q39. "I know nothing (a) / about his where about (b) / Do you?" (c) / he said to me (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use "whereabouts" (plural form).
+
+Q40. Owing to his heavy engagement, (a) / he could not write even the two-third (b) / of the book of which (c) / the publication was expected before January (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use "two-thirds" (plural) because the numerator (two) is greater than one.
+
+Q41. Not to speak of failure (a) / even a tragedy (b) / does not affect (c) / his high spirits (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error.
+
+Q42. The severe cyclonic storm (A) / has left behind (B) / a trial of misery (C) / No Error (D)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "trail" (a path or series of traces). "Trial" means a test or legal hearing.
+
+Q43. It is not possible for me (1) / to give you the accurate date (2) / of my departure yet. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: 2
+Exp:- Use "exact date." While accurate is not strictly wrong, "exact" is the idiomatic standard for calendar dates.
+
+Q44. All my hope (1) / were duped (2) / and I was plunged in deep sorrow (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: 1
+Exp:- Use "hopes" (plural) because the verb "were" is plural.
+
+Q45. The book, being written (1) / in simple language, is suitable for children (2) / as it contains many good advices. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: 3
+Exp:- "Advice" is uncountable. Use "much good advice" or "many pieces of advice."
+
+Q46. Every conceivable race and nationality (1) / had its shared of suffering (2) / in the world wars (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: 2
+Exp:- Use "share" (noun). "Shared" is a verb.
+
+Q47. Sudhakar's house (a) / is at (b) / a stone's throw (c) / from here (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error. "A stone's throw" is a correct idiomatic measure of distance.
+
+Q48. There was (a) / no money in the bank (b) / in Dhananjay's (c) / and Mritunjay's joint account (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- In a joint account, the apostrophe-s is used only with the second name. Use "Dhananjay and Mritunjay's."
+
+Q49. Linguistic (a) / is (b) / the study (c) / of language (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- The subject is "Linguistics" (always plural in form).
+
+Q50. The offsprings of this (a) / species leave their parents (b) / as soon as they mature (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- "Offspring" is used for both singular and plural. "Offsprings" is incorrect.
+
+Q51. Sunrise (a) / is a (b) / great (c) / phenomena (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- "Phenomena" is plural. Use the singular "phenomenon."
+
+Q52. The way to increase the production of the food (a) / is to bring more land (b) / under cultivation. (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- Remove "the" before food. General categories of nouns do not take "the." Use "production of food."
+
+Q53. He did not know even (a) / the name of the scientist (b) / who discovered (c) / the laws of the earth gravitational force (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "Earth's gravitational force." Celestial bodies take apostrophe-s.
+
+Q54. The blind's life (a) / is really very miserable (b) / because they can't see (c) / what happens around them (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- "The + Adjective" (The blind) cannot take an apostrophe-s. Use "The life of the blind."
+
+Q55. Brutus' role in 'Julius Ceasure' (a) / is very attractive as (b) / well as important as far as (c) / the action of the play is concerned (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error. Names ending in 's' can take just an apostrophe.
+
+Q56. Yeats's poetry is characterised (a) / by his unique style (b) / which he developed (c) / during the long span of his life (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error.
+
+Q57. Delhi's water supply (a) / system is certainly (b) / as good as is expected (c) / in a capital town (d) / No Error (d)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No Error.
+
+Q58. You are one of those (a) / luckiest man who (b) / attained name and fame not by (c) / labour but by chance (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- After "one of those," the noun must be plural. Use "luckiest men."
+
+Q59. I do my best (a) / but I don't understand why (b) / I do not get expected (c) / marks in the examination (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error.
+
+Q60. 'I have never seen (a) / such a lovely spectacles (b) / in my life', said (c) / the passer-by (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- "Spectacles" (plural) means glasses. Here, "a lovely spectacle" (singular) is correct, meaning a sight or scene.
+
+Q61. 'There are only (a) / certain boy that are sincere (b) / and deligent and that can do well in the examination (c) / said the class teacher (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- "Certain" must be followed by a plural noun. Use "certain boys."
+
+Q62. These type of books (a) / are certainly helpful to the students (b) / preparing for the Banking Service (c) / Examinations (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- "These" is plural. Use "These types" or "This type."
+
+Q63. The issues are (a) / very complex and the problem (b) / is that they are bound to be obscured (c) / by these hypocritical politicians (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error.
+
+Q64. Vermin (1) / does much harm (2) / to crops (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: 2
+Exp:- "Vermin" is a collective noun that is always plural. Use "do much harm."
+
+Q65. Essay writing is an art (1) / that requires many planning (2) / on the part of the writer. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: 2
+Exp:- "Planning" is uncountable. Use "much planning."
+
+Q66. These buildings decoration (a) / is not as much (b) / impressive as it (c) / ought to be (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Non-living things do not take apostrophe-s. Use "The decoration of these buildings."
+
+Q67. His maid servant (a) / behaviour is undoubtedly (b) / indecent but I don't (c) / understand how he tolerates it (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Possession is needed. Use "maid servant's behavior."
+
+Q68. Keeping in view (a) / the public's demands, (b) / the company has declared to improve the quality and lower (c) / the prices of its products (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use "public demand." In this standard phrase, "public" acts as an adjective.
+
+Q69. When I arrived (a) / at the gate of his (b) / house, I found his (c) / locking up the door (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- Use the possessive pronoun before a gerund. Use "found him locking up" (if object focus) or "found his locking up" (if action focus). Usually, "found him" is the error targeted.
+
+Q70. He told her (a) / that he had ever seen (b) / her with his (c) / mind's eye (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error. "Mind's eye" is a correct idiomatic expression.
+
+Q71. Many of the MPs absented (a) / themselves from (b) / Parliament when some issues of the highest national importance (c) / were to be discussed (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error.
+
+Q72. The pretty woman (a) / sitting in the car is (b) / the daughter of (c) / the one of the headman of the village (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "one of the headmen." After "one of the," the noun must be plural.
+
+Q73. India and China's present (a) / condition nearly indicate (b) / that both the countries (c) / will face a lot of problems in the coming time (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Both countries have separate conditions. Use "India's and China's."
+
+Q73 (Part 2). 'Please convey my best (a) / regard and wishes to the Boss', (b) / the secretary said to the peon (c) / of the Manager (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Use "regards" (plural) when sending greetings.
+
+Q74. To the whale, its (1) / tail is the sole (2) / mean of propulsion. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: 3
+Exp:- Use "means" (singular/plural same). "Mean" is an average or signifies a definition.
+
+Q75. No beggar who comes (1) / to our doors (2) / goes back empty handed. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: 4
+Exp:- No Error.
+
+Q76. For a full week (1) / she enjoyed the benefits (2) / of being a big sister. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: 4
+Exp:- No Error.
+
+Q77. I express my gratitudes (1) / to all those who (2) / have voted for me. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: 1
+Exp:- "Gratitude" is uncountable. Use "gratitude."
+
+Q78. I had invited (1) / all my sister-in-laws (2) / to my son's birthday party. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: 2
+Exp:- Pluralize the root word. Use "sisters-in-law."
+
+Q79. I postponed him (a) / going to Delhi tonight as (b) / I wanted him to deal with (c) / one of my major problems (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Use possessive before a gerund. Use "his going to Delhi."
+
+Q80. 'Everybody's business (a) / is nobody's business', (b) / said the teacher (c) / to the students (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error.
+
+Q81. Everybody should be careful (a) / to fulfil the society's demands (b) / and thereby show his (c) / attachment to it (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error. "Society" can take an apostrophe-s.
+
+Q82. It was India's (a) / past glory (b) / that attracted (c) / a number of invaders in the remote past (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error.
+
+Q83. The doctor declared that (a) / the patient's intestine was (b) / not working properly and so he needed (c) / medical treatment for a long time (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- The word is used as "intestines" (plural).
+
+Q84. He has ordered (a) / 2000 bricks (b) / for the proposed (c) / hotel and bar (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- When "brick" is used as building material, it is uncountable. Use "2000 brick."
+
+Q85. When you see his (a) / offsprings, you can't (b) / believe that he is (c) / above seventy (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Use "offspring" (same for singular and plural).
+
+Q86. Wordsworth's poetries (a) / is characterised by his subtle description (b) / of the beauty and liveliness (c) / of Nature (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- "Poetry" is uncountable. Use "poetry."
+
+Q87. He uses a fine (a) / quality of shampoo (b) / so his hairs are (c) / black and attractive (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- "Hair" is uncountable when referring to the entire head. Use "his hair is."
+
+Q88. His means (a) / are very limited (b) / yet he does not curtail (c) / his expenditure and spends lavishly (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error. "Means" (income) takes a plural verb.
+
+Q89. If you are in the wrong gears (1) / the car won't be (2) / able to climb the hill. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: 1
+Exp:- You can only be in one gear at a time. Use "wrong gear."
+
+Q90. The food basket contained (1) / a dark chocolate, an eclair and a pastry (2) / neatly wrapped in foil paper. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: 4
+Exp:- No Error.
+
+Q91. The former P.M. of India's (a) / Mr. P.V. Narsimha Rao's (b) / visit to Japan strengthened the relationship (c) / between India and Japan (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Double possession is wrong. Use "The former P.M. of India, Mr. P.V. Narsimha Rao's visit."
+
+Q92. When Jaya and Shyama (a) / came across Jyoti, they (b) / caught one another hands (c) / and talked for a while (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- Possession is needed. Use "one another's hands."
+
+Q93. He came to his wits (a) / end when he found (b) / that his younger (c) / brother had slapped his wife (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- The idiom is "at his wit's end" (singular).
+
+Q94. He suggested to me (a) / that I should go to the nursery (b) / to bring some beautiful (c) / summer's flowers (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "summer flowers." Seasons usually act as adjectives without apostrophe-s.
+
+Q95. Unfortunately for me (a) / the root cause of my frustration lies (b) / in the Governments (c) / dubious policy (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- Possession is needed. Use "Government's."
+
+Q96. The beautiful surrounding (a) / of the palace (b) / attracted a large number of tourists (c) / coming from abroad (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Use "surroundings" (plural).
+
+Q97. He has bought (a) / a dozen of copies (b) / of British English Grammar, (c) / which is a very popular book among the students (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Remove "of." Use "a dozen copies."
+
+Q98. Two summons (a) / have been issued by the court (b) / but you have not (c) / turned up yet (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- "Summons" is singular. Use the plural "summonses."
+
+Q99. If a student needs (a) / advice about careers, (b) / he should consult (c) / the careers officer (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error.
+
+Q100. 'The Headquarter (a) / of the Army is in Delhi'; it's really very (b) / surprising that you do not know (c) / even this fact (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Use "headquarters" (always plural in form)
+
+Q101. The factory complex houses a shop floor (1) / and 10 cubicles for the staff in an area (2) / of about thousand squares metres. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "square metres." "Square" acts as an adjective here and should not be pluralized.
+
+Q102. I asked the shopkeeper (1) / "Do you have change (2) / for a five hundred rupees note?" (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "five hundred rupee note." In compound adjectives, the unit (rupee) remains singular.
+
+Q103. The landlord could not (1) / tell which of the servant (2) / broke the glass (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- After "which of the," use a plural noun. Use "servants."
+
+Q104. The government (1) / must provide facilities for the (2) / upbringing of women. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- "Upbringing" is used for children. For adults (women), use "upliftment" or "empowerment."
+
+Q105. He is chiefly concerned (a) / with his own problems (b) / but you say (c) / that his is not (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error.
+
+Q106. I do not want (a) / to bring her to my home (b) / because her rashness (c) / is quite intolerable (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error.
+
+Q107. I have read (a) / many plays of Shaw's (b) / who is called the (c) / Shakespeare of our age (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use "Shaw." "Many plays of Shaw" already indicates possession via "of"; adding an apostrophe creates an incorrect double possessive.
+
+Q108. I appreciate you (a) / helping the poor (b) / who are really the most ignored and completely deprived (c) / section of our society (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Use the possessive case before a gerund. Use "your helping."
+
+Q109. The wall of this magnificent (a) / building is (b) / fifty foot high and its paintings (c) / are very striking (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use "fifty feet" (plural).
+
+Q110. The brethrens (a) / of this locality are always (b) / at daggers drawn without any (c) / apparent reason (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- "Brethren" is already the plural of brother (in a community sense). "Brethrens" is incorrect.
+
+Q111. All his sister-in-laws (a) / are extremely beautiful (b) / to look at so the question (c) / of selection is very puzzling (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Use "sisters-in-law." To pluralize compound nouns, add 's' to the principal word.
+
+Q112. 'Language consists of several stratums', (a) / said a linguist (b) / in his lecture on Language (c) / and Linguistics (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- The plural of "stratum" is "strata."
+
+Q113. The haves should (a) / not look scornfully (b) / at the haves not rather they should (c) / try to encourage them to work hard (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- The correct plural for "have-not" is "have-nots."
+
+Q114. She always fed (1) / her childrens (2) / before she fed her dog. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- "Children" is already plural. Use "children."
+
+Q115. The people gathered at the funeral to pay respect.
+(1) No error (2) The people gathered (3) at the funeral (4) to pay respect
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- Use "pay respects" (plural) when attending a funeral or visiting someone to show sympathy.
+
+Q116. Did you hear any news about the political situation while you were in the country?
+(1) about the political situation while you were in that country? (2) many news (3) Did you hear (4) No error
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error. "News" is an uncountable noun correctly used here.
+
+Q117. This is Johns book on the table.
+(1) No error (2) Johns book (3) on the table (4) This is
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "John's" (possessive) to indicate ownership of the book.
+
+Q118. Your son's-in-law's (a) / friend is seriously ill (b) / and he wants you (c) / to see him as soon as possible (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Use "son-in-law's." In compound nouns, apostrophe-s is only placed at the end of the entire unit.
+
+Q119. Very few soldiers (a) / dared to turn (b) / a deaf ear to their (c) / Commander's-in-Chief orders (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "Commander-in-Chief's." Possession in compound nouns is marked at the final word.
+
+Q120. The survey gives (a) / us much knowledge of the (b) / public's opinion (c) / on the matter of terrorism (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- Use "public opinion." "Public" acts as an adjective; the possessive form "public's" is not used in this standard phrase.
+
+Q121. The teacher said (a) / to us that one ought (b) / to work hard in order (c) / to attain one goal (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "one's goal." The indefinite pronoun "one" must be followed by its own possessive form "one's."
+
+Q122. He says that (a) / a two-miles walk (b) / always keeps him (c) / healthy and fresh (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use "two-mile walk." When a measurement acts as a compound adjective before a noun, the unit remains singular.
+
+Q123. After he had delivered (a) / the speech, he said that he hoped (b) / to be conspicuously understood (c) / and forgiven for any lapses (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- Use "clearly understood." "Conspicuously" means attracting notice, which doesn't fit the context of understanding a speech.
+
+Q124. All the Chiefs Ministers (a) / are responsible for the (b) / pitiable condition of their (c) / states (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Use "Chief Ministers." Only the principal noun (Minister) is pluralized in such compound structures.
+
+Q125. The sheafs / of the wheat-plants were too heavy (b) / for me to (c) / carry on the head (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- The plural of "sheaf" is "sheaves."
+
+Q126. I saw only (a) / five police who (b) / were running after (c) / the bank-robbers (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use "policemen." "Police" is used for the entire force; when referring to a specific number of individuals, use "policemen."
+
+Q127. I watched how the pianist used her left hand.
+(a) I watched how (b) the pianist (c) No error (d) used her left hand
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- No error.
+
+Q128. Bobby learnt the alphabets at the age of two.
+(a) No error (b) age of two (c) Bobby learnt the (d) alphabets at the
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- Use "alphabet." "Alphabet" refers to the entire set of letters in a language.
+
+Q129. A five-men (1) / enquiry committee was appointed (2) / to look into the matter. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- Use "five-man" (singular). Measurement units used in compound adjectives do not take the plural form.
+
+Q130. It is true (a) / that I met (b) / the Chief Minister (c) / at one of my friend's houses (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "one of my friends' houses." After "one of," the noun must be plural.
+
+Q131. As we are told, (a) / this idea of Mrs. Gandhi's (b) / was totally valid in the (c) / present condition of India (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No Error.
+
+Q132. The officer said (a) / that he appreciated (b) / his staffs coming on time (c) / and co-operating him (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- Use "staff's." Possession is required before the gerund "coming." Note that "staff" is typically used in the singular form to represent a group.
+
+Q133. The expert mason reported to (a) / the owner of the hotel that (b) / there was no question (c) / of the wall's falling down (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Non-living things generally do not take an apostrophe-s. Use "the falling down of the wall."
+
+Q134. For your sake (a) / as well as your wife (b) / we all wish that you may (c) / get that job (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use "wife's." The comparison must be parallel: "your sake" compared to "your wife's (sake)."
+
+Q135. The class teacher (a) / gave him a home work (b) / and instructed him to do it (c) / at night (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- "Homework" is an uncountable noun. Remove the indefinite article "a."
+
+Q136. An earthquake (a) / is a natural phenomenon (b) / and nobody can (c) / check it, be sure (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No error.
+
+Q137. Your advices are (a) / the proof of your (b) / discriminating mind and (c) / pragmatic approach (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- "Advice" is an uncountable noun. Use "advice is."
+
+Q138. Running a five stars (a) / hotel needs much more (b) / money than what we have in (c) / our account (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Use "five-star hotel." Compound adjectives acting as modifiers do not take the plural form.
+
+Q139. He said that (a) / he always kept in his pocket (b) / a bundle of one hundred (c) / rupees notes (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- Use "rupee notes." The unit "rupee" acts as part of a compound adjective here and must remain singular.
+
+Q140. I saw (1) / two deers (2) / in the woods. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- The plural of "deer" is "deer."
+
+Q141. Reading is no longer popular among the youthful of today. As the influence of the internet has taken over a very important and active hobby.
+(1) among the youthful of today (2) very important and active hobby (3) influence of the internet (4) No error
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- Use "the youth" (noun) instead of "youthful" (adjective).
+
+Q142. The International Day against Drug Abuse and Illicit Traffickings is observed on June 26th.
+(1) Drug Abuse and Illicit Traffickings (2) No Error (3) is observed on June 26th (4) The International Day against
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- "Trafficking" is an uncountable noun. Use "Trafficking."
+
+Q143. The first inning (1) / of the match (2) / was very sensational. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- The word is "innings," which is used in both singular and plural senses.
+
+Q144. The life of the rich (a) / is not in many (b) / ways as peaceful (c) / as that of the poor's. (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "the poor." "The + Adjective" (The poor) acts as a plural noun and does not require an apostrophe-s here.
+
+Q145. The Finance Minister (a) / boasts of improving (b) / the economic condition of (c) / the country's (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "the country." The possessive "'s" is redundant after "of."
+
+Q146. Your tone of speaking (a) / as well as your friends (b) / is really extremely sarcastic (c) / yet we never take it seriously (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use "your friend's" (meaning your friend's tone).
+
+Q147. America's problems (a) / are, however, (b) / not so serious (c) / and awful as India (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Comparison must be parallel. Use "India's" (meaning India's problems).
+
+Q148. He did not approve (a) / of his son raising (b) / stupid questions and thereby (c) / vexing the teacher (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use the possessive case "son's" before the gerund "raising."
+
+Q149. I stopped (a) / his going out late at night (b) / because the situation (c) / in the town was very tense (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No error.
+
+Q150. A ton's weight / is too heavy for (a) / anyone to (b) / carry on his head (c) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Use "a ton weight." Units of measurement used as adjectives should remain singular.
+
+Q151. I visited (a) / John's and Mary's (b) / house (b) / twice but found (c) / the couple absent (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- For joint possession of the same house, use "John and Mary's."
+
+Q152. He informed me (a) / that he had gone to (b) / one of the Minister's residences (c) / and stayed there all night (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- Use "Ministers' residences." After "one of the," the noun must be plural.
+
+Q153. The present datas (a) / show that the illiteracy rate (b) / in India has fallen down but not (c) / to the level of expectation (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- "Data" is plural (singular: datum). "Datas" is an incorrect plural form.
+
+Q154. In the last elections (a) / the electorates' (b) / disinterestedness puzzled (c) / the politicians very much (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- "Electorate" is a collective noun. Use "electorate's" (singular possessive).
+
+Q155. It is harmful (a) / to take cupsful (b) / of tea (c) / five times a day (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- The correct plural form is "cupfuls."
+
+Q156. The majority of the woman (a) / teachers are persuading (b) / the Principal to consider (c) / their demands (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- In such compound nouns, pluralize both parts. Use "women teachers."
+
+Q157. All the girls students (a) / of the college are advised (b) / to sit in the (c) / Girls' Common Room (d) / No Error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Use "girl students." The first noun acts as a modifier and stays singular.
+
+Q158. In these days of inflation (1) / a ten rupees note will not buy you (2) / even an ordinary meal. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "ten-rupee note."
+
+Q159. In India, hill stations (1) / usually have (2) / beautiful sceneries. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- "Scenery" is an uncountable noun. Use "scenery."
+
+Q160. The new device (1) / aims at eliminating (2) / the risk of short circuiting. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error.
+
+Q161. Many persons must have read (1) / The Arabian Nights, (2) / which is very interesting. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error. Although plural in title, "The Arabian Nights" is a single book and takes a singular verb.
+
+Q162. When I was passing through the forest (1) / I happened to see (2) / a number of deers. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "deer" (plural is same as singular).
+
+Q163. Eighty-five thousand rupees (1) / is a large sum of money (2) / to earn in a month. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error. A specific amount is treated as a single unit.
+
+Q164. My father gave me (1) / a pair of binocular (2) / on my birthday. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "binoculars."
+
+Q165. You shall get (1) / all the informations (2) / if you read this book carefully. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- "Information" is an uncountable noun. Use "information."
+
+Q166. I bought (1) / two (2) / shlippers. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "a pair of slippers." Nouns that consist of two parts are used as a "pair."
+
+Q167. An eminent surgeon (1) / is visiting the hospital (2) / to attend a surgeons' conference. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error.
+
+Q168. The European central (a)/Bank has said that if all(b) / Euro-Zone nation continue to carry out economic reforms as protugal and Ireland have (c) / then the central bank will guarantee future bailouts. (d)/ No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- Use "nations." After "all," a plural noun is required.
+
+Q169. Policy analysts are reacting to the inflation paranoia (a) / with proposing that (b) / central bankers hit the brakes (c) / on their expansionary policies. (d) / No error
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "by proposing."
+
+Q170. We have taken on (a) / the responsibility of (b) / arranging the required training (c) / and supervise of the new staff. (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "supervision" (noun) to maintain parallelism with "arranging."
+
+Q171. The couple's work in (a) / upgrading rural technicians (b) / has set a benchmarking (c) / for future generations. (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- Use "benchmark" (noun).
+
+Q172. The argument assumes that (a) / early detection of the disease (b) / will lead to an immediate drop in (c) / the mortality rating from this disease. (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "mortality rate."
+
+Q173. According to government estimates (a) / at least four million tonnes of sugar (b) / will have to be imported (c) / this year because of a poor monsoon. (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No error.
+
+Q174. With the litreracy rates in this (a) / region as low as 10% (b) / we need to encourage the (c) / local people to build schools. (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No error.
+
+Q175. In cities people don't (a) / always have the time to (b) / catch up with old friends or (c) / spend times with their family. (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "time" (uncountable).
+
+Q176. It had (a) / all begun (b) / in a brightly lit room as I dreamily ran (c) / my fingers over the surfaced of globe. (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "surface" (noun form).
+
+Q177. Hectic schedules can (a) / take a toll on anybody and (b) / the solutions to this is (c) / a quick holiday to some exotic location (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- The subject is plural (solutions). Use "are."
+
+Q178. The RBI has proposed to introduce (a) / polymer notes after taking into considering (b) / the cost and longevity (c) / associated with their manufacturing (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use "consideration" (noun form).
+
+Q179. Building biogas plants will help to reduce (a) / greenhouse gas emissions by reducing (b) / the consuming of conventional fuels (c) / such as firewood and kerosene (d) / No error
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "consumption" (noun form).
+
+Q180. A year after the global financial crisis saw (a) / students from the best B-schools across the world struggling for a job (b) / a surgery on management education this year thrown (c) / up some rather interesting findings. (d) / No error
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Contextual error: Use "survey" instead of "surgery."
+
+Q181. Airline managements should note (a) / that the ultimate passenger untiredliness (b) / is to have their planes crashed (c) / due to the adopted of unsafe procedures. (d) / No error
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- Use "adoption" (noun form).
+
+Q182. The award ceremony ended (a) / on a note of good cheer (b) / with audiences responding warmly (c) / to its line up of films. (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No error.
+
+Q183. Since universities have more (a) / space in their campuses, they (b) / have been asked to open fire detection control rooms (c) / as a mandatory measure. (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No error.
+
+Q184. Households across the state are either opting for (a) / a more modest lifestyle or compromising on (b) / the nutritional value of their food in efforts to negate (c) / the price rise of essential commodities, cereals, vegetables and fruits. (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: E
+Exp:- No error.
+
+Q185. Corporates have benefited tremendously (a) / from the government's timely (b) / decision to waive (c) / various tax. (d) / All correct (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- After "various," a plural noun is required. Use "taxes."
+
+Q186. Since you are unable (a) / to repay the loan you have no alternate (b) / but to seek (c) / an extension. (d) / All correct (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use "alternative" (noun).
+
+Q187. There are many insurance (a) / disputes now-a-days because of, (b) / most people do not fully (c) / understand the terms and conditions of their policies. (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use "because" (conjunction) rather than "because of" since it is followed by a full clause.
+
+Q188. Without a doubt, (a) / Ahmad is the most (b) / sincere of all the (c) / student in the class. (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "students" (plural after 'all the').
+
+Q189. The meteorological department (a) / predicted that the (b) / rains and thunderstorm may (c) / continue throughout today. (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- Use "thunderstorms" to maintain plural consistency with "rains."
+
+Q190. The French (a) / have strange (b) / habits (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error.
+
+Q191. There were many (a) / females (b) / in the compartment (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- In a social context, use "women" rather than the biological term "females."
+
+Q192. You have (a) / a big number (b) / of money (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "a large amount." "Amount" is used for uncountable nouns like money.
+
+Q193. Anu saw (a) / her shade (b) / in the river (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "shadow" or "reflection."
+
+Q194. My uncle's secretary's wife (a) / is (b) / very charming. (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- Avoid double possessives. Use "The wife of my uncle's secretary."
+
+Q195. The Indian team (a) / defeated the Australian (b) / by an inning (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "innings."
+
+Q196. The two brothers (a) / helped in (b) / each other homework (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "each other's" (possessive).
+
+Q197. This is (a) / not my bag, (b) / it is somebody's else (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "somebody else's." The apostrophe-s is added to "else."
+
+Q198. The raid team (a) / discovered bagsful of money (b) / from the corrupt officer's house (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- The correct plural form is "bagfuls."
+
+Q199. There are (a) / twenty fishes (b) / in this tank (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "fish" (plural is same as singular).
+
+Q200. They found him (a) / hiding at the backside (b) / of the house (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "back." "Backside" is considered informal or inappropriate in this context.
+
+Q201. Many sophisticated aircrafts have (a) / been purchased by the (b) / Indian Air Force recently (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- Use "aircraft" instead of "aircrafts." The word "aircraft" is used for both singular and plural contexts.
+
+Q202. He left (a) / Mumbai, with (b) / bag and baggage (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error. "Bag and baggage" is a standard idiom meaning with all one's belongings.
+
+Q203. He was wearing shabby, (a) / faded trouser which he explained, (b) / were called jeans and cost a fortune (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "trousers" instead of "trouser." Trousers is a pair noun and is always plural.
+
+Q204. The neutron bomb provides the capable of a (a) / limited nuclear ware (b) / in which buildings would be preserved (c) / but people would be destroyed (d) / no error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- Use the noun "capability" instead of the adjective "capable." Also, "war" (not "ware") is needed in part (b).
+
+Q205. She was (a) / standing in the centre (b) / of the road. (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error. (Note: "Middle" is for areas, "centre" is for a specific point, but "centre of the road" is acceptable).
+
+Q206. The teacher (a) / needed (b) / a chalk. (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- "Chalk" is uncountable. Use "a piece of chalk" or simply "chalk."
+
+Q207. I do not (a) / know (b) / my date of birth (c) / No error (d)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error.
+
+Q208. We have read (a) / two-third (b) / of this novel (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "two-thirds." When the numerator is greater than one, the denominator must be pluralized.
+
+Q209. The extra benefits in addition to its (a) / flexibility of operation (b) / and superior finish makes (c) / it the most desirable machine of its kind (d)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- The subject is "benefits" (plural). Use the plural verb "make."
+
+Q210. The monthly sales summary, (a) / besides the purchases register was (b) / to be submitted (b) / to the scrutiny committee (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error. When "besides" is used, the verb agrees with the first subject (summary), which is singular.
+
+Q211. The place was lovely and the (a) / weather was fine, but amidst the screams of brats and the chatter of women, I could not (b) / enjoy the outing (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error.
+
+Q212. You can get your car repaired (a) / at Salim and Karim's garage (b) / which is only a furlong away (c) / no error (d)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error. This correctly shows joint possession; the apostrophe is only on the second name.
+
+Q213. On receiving the mark-sheet from the University (1) / I realised (2) / that I had got only passing marks in English (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "pass marks." "Passing marks" is grammatically incorrect.
+
+Q214. Speakers after speakers (1) / came on the stage (2) / to perform. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- Use "Speaker after speaker." Nouns joined by a preposition in this structure must be singular.
+
+Q215. Hari lost (1) / a hundred rupees note (2) / yesterday. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "a hundred-rupee note." In compound adjectives, the unit remains singular.
+
+Q216. They are standing (1) / at the gate of the auditorium (2) / as there is no place inside. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "room" instead of "place." "Room" refers to unoccupied space for a person.
+
+Q217. Last week's sharp hike in the wholesale price of beef (1) / is a strong indication for (2) / higher meat costs to come. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error.
+
+Q218. There is (1) / no place of you (2) / in this compartment. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "room for you." Space in a vehicle or room is referred to as "room."
+
+Q219. Santosh lives (1) / by the principals (2) / he professes. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "principles" (rules/beliefs). "Principals" refers to school heads or primary sums.
+
+Q220. Most people (1) / are afraid of (2) / swine flu these days. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error.
+
+Q221. The Manager put forward (1) / a number of critereons (2) / for the post. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- The plural of "criterion" is "criteria."
+
+Q222. I like (1) / the poetries (2) / of Byron and Shelley. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- "Poetry" is uncountable. Use "poetry."
+
+Q248. The company has ordered (1) / some (2) / new equipments. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- "Equipment" is uncountable. Use "equipment."
+
+Q223. I (1) / have (2) / many works to do. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- "Work" is uncountable. Use "much work" or "pieces of work."
+
+Q224. The clerk was (1) / not intimidated by (2) / his boss's bullying (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error.
+
+Q225. A few tiles on skylab (1) / were the only equipments (2) / that failed to perform well in outer space. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "equipment" (uncountable).
+
+Q226. The table's legs (1) / have been (2) / elaborately carved. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: A
+Exp:- Use "The legs of the table." Non-living things generally do not take 's.
+
+Q227. The lawyer asked the complainant (1) / to put his sign (2) / on the paper. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use the noun "signature" instead of the verb/symbol "sign."
+
+Q228. When the football team walked onto the filed (1) / the crowd burst into applause, (2) / but some cheers were heard too. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: D
+Exp:- No error (assuming "filed" is a typo for "field").
+
+Q229. The young men from Japan (1) / found the assent of the mountain (2) / hard going. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "ascent" (climb). "Assent" means agreement.
+
+Q230. The long-distance train (1) / which met with an accident (2) / was carrying some army personal. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "personnel" (staff). "Personal" means private.
+
+Q231. The Prime Minister was asked (1) / to write a forward (2) / to the book. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: B
+Exp:- Use "foreword" (preface). "Forward" means ahead.
+
+Q232. My sister (1) / has read (2) / pages after of the Bible. (3) / No Error (4)
+A.
+B.
+C.
+D.
+Ans: C
+Exp:- Use "page after page." Nouns joined by prepositions in a sequence must be singular.
+
+Q233. Cannot you see (a) / that the cattle (b) / is grazing in the field? (c) / So, you cannot play ther (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- "Cattle" is plural. Use "are grazing."
+
+Q234. If those (a) / cattles are (b) / yours, whose (c) / are these ones (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- Use "cattle." "Cattle" is already plural and does not take an 's'.
+
+Q235. The gentry of Mumbai does not (a) / like Salman Khan at (b) / all, even though he has g (c) / number of good movies to his credit (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- "Gentry" is a plural noun. Use the plural verb "do not."
+
+Q236. The police (a) / has arrested him, (b) / so we are going (c) / to the police station (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- "Police" is a plural noun. Use "have arrested."
+
+Q237. Science has (a) / proved that (b) / even vermain (c) / carries diseases (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- Use "vermin." Vermin is a plural noun, so it should take a plural verb: "vermin carry diseases."
+
+Q238. She had already (a) / given you (b) / an information regarding that mishap, (c) / however, she did not care even an iota for it (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- "Information" is uncountable. Use "some information" or "a piece of information."
+
+Q239. Would you please (a) / tell me how many (b) / soaps do you (c) / use in a month (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- "Soap" is uncountable. Use "how many cakes of soap" or "how much soap."
+
+Q240. Don't you (a) / know her angers (b) / is as dangerous (c) / as the flaring fire (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- "Anger" is an abstract noun and uncountable. Use "anger."
+
+Q241. Can you give me at (a) / least five breads to eat, (b) / because I am so hungry (c) / that one or two won't do at all (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- "Bread" is uncountable. Use "five loaves of bread" or "five pieces of bread."
+
+Q242. A few days ago (a) / she received a letter (b) / of advices on how to (c) / give a makeover to life (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- "Advice" is uncountable. Use "advice."
+
+Q243. Commander-in-chiefs (a) / are among (b) / those who (c) / get handsome salary (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- The plural is "Commanders-in-chief."
+
+Q244. She was greeted (a) / by all the (b) / passer-bys near (c) / Laxmi nager metro station (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- The plural is "passers-by."
+
+Q245. The karkarduama court has issued (a) / five summons against him (b) / so far, but he (c) / has attended to none of them (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- "Summons" is singular. Use the plural "summonses."
+
+Q246. Mathematics are a very (a) / difficult subject for (b) / those students who (c) / don't work hard (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- "Mathematics" is a subject name and takes a singular verb. Use "Mathematics is."
+
+Q247. His mathematics is very (a) / good, so she will (b) / surely obtain more (c) / than 90% marks (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- When possessive adjectives (his, your) are used with Mathematics, it refers to calculation skills and takes a plural verb. Use "His mathematics are."
+
+Q248. The politics of India is (a) / very pathetic because (b) / politicians are corrupt (c) / and inefficient (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: A
+Exp:- "Politics" (political views/activities) takes a plural verb. Use "The politics of India are."
+
+Q249. She has only (a) / two issues while (b) / her sister has (c) / four offspring (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: B
+Exp:- When "issue" means "offspring/children," it is used in the singular form "issue."
+
+Q250. Most people in India (a) / now live in a house (b) / built of bricks, (c) / but earlier it was not like that (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: C
+Exp:- When used as building material, use the uncountable singular form "brick."
+
+Q251. What she told me (a) / to ask you that (b) / whenever you go to market, do (c) / get her some fruits (d) / No error (e)
+A.
+B.
+C.
+D.
+E.
+Ans: D
+Exp:- Use "fruit" (uncountable). "Fruits" refers to different varieties/species.
+
+Q1. No sane person or government can tolerate terrorist of any degree or kind.
+A. terrorism of any degree or kind
+B. terrorise of any degree or kind
+C. torture of any degree or kind
+D. No improvement
+Ans: A
+Exp:- The sentence requires a noun to act as the object of the verb "tolerate." "Terrorist" refers to a person, whereas "terrorism" refers to the act or concept.
+
+Q2. The Sutlej has changed its path.
+A. journey
+B. course
+C. line
+D. No improvement
+Ans: B
+Exp:- The standard geographical term for the route followed by a river is its "course."
+
+Q3. I stayed at Henry house for a week.
+A. Henry's home
+B. Henry's
+C. Henry home
+D. No improvement
+Ans: A
+Exp:- Possession must be shown using an apostrophe-s. "Henry's home" is the grammatically complete choice.
+
+Q4. The glass figurine that was being shown in the store window appealed to me.
+A. No improvement
+B. that was on display
+C. that was exhibited
+D. that was advertised
+Ans: B
+Exp:- Objects placed in a shop window for public viewing are idiomatically said to be "on display."
+
+Q5. Drinking tea is an English habit.
+A. No improvement
+B. tradition
+C. convention
+D. custom
+Ans: D
+Exp:- While "habit" refers to an individual, "custom" refers to a tradition or practice followed by a society or country.
+
+Q6. Water and soil pollutants find their entry into the body through ingestion of contaminated water or food.
+A. No improvement
+B. digestion of contaminated
+C. injection of contaminated
+D. passage of contaminated
+Ans: A
+Exp:- "Ingestion" means the process of taking food or drink into the body by swallowing it, which is scientifically accurate here.
+
+Q7. She is very eccentric woman.
+A. Impatient
+B. No improvement
+C. Unusual
+D. Generous
+Ans: B
+Exp:- "Eccentric" means unconventional or slightly strange; it is used correctly as a character trait.
+
+Q8. Torture and trauma has made her a mental patient.
+A. No improvement
+B. Lunatic
+C. Mania
+D. Mad
+Ans: A
+Exp:- While "lunatic" is an older term, "mental patient" is a grammatically sound and neutral phrase in modern English.
+
+Q9. The Chief Minister has promised to commit his department to a renewed effort to clean up the environment.
+A. administration
+B. departmental
+C. workers
+D. No improvement
+Ans: A
+Exp:- "Administration" is a more comprehensive term for the governance body led by a Chief Minister.
+
+Q10. When the thief saw the police approaching he showed a clean pair at heels.
+A. a clean pair of heels
+B. a clean pair on heels
+C. a clean pair down heels
+D. No improvement
+Ans: A
+Exp:- The correct idiom is "to show a clean pair of heels," meaning to run away very fast.
+
+Q11. Equipment and practice space will be provided for the players.
+A. Much facility
+B. Each facility
+C. No improvement
+D. Every facility
+Ans: D
+Exp:- "Every facility" is a standard expression meaning all necessary conveniences or services will be provided.
+
+Q12. The police found a human body in the forest.
+A. corpse
+B. No improvement
+C. carcass
+D. copse
+Ans: A
+Exp:- The specific word for a dead human body is "corpse."
+
+Q13. Placing a talisman or lucky charm on the door or near the threshold is not mere superstition.
+A. entrance
+B. opening
+C. No improvement
+D. doorway
+Ans: C
+Exp:- "Threshold" refers specifically to the base of a doorway, which is the precise term needed here.
+
+Q14. The prisoner was kept in Jail.
+A. kept in confined
+B. kept in confinement.
+C. No improvement
+D. kept in confirmation
+Ans: C
+Exp:- "Kept in Jail" is direct and accurate for a prisoner.
+
+Q15. The most important part in life is to be humble.
+A. appearance
+B. No improvement
+C. aspect
+D. entity
+Ans: C
+Exp:- "Aspect" refers to a particular feature or part of a concept (like life), making it more precise than "part."
+
+Q16. It is quite tough to declare which candidate will win the presidential election.
+A. predict
+B. augur
+C. portend
+D. No improvement
+Ans: A
+Exp:- To state what will happen in the future is to "predict." "Declare" usually implies an official statement of a known fact.
+
+Q17. The octopus uses its arms for hunting and locomotion.
+A. fins
+B. flippers
+C. tentacles
+D. No improvement
+Ans: C
+Exp:- Biologically, the limbs of an octopus are specifically called "tentacles."
+
+Q18. Hitler was an absolute Potentate.
+A. dictator
+B. militant
+C. ruler
+D. No improvement
+Ans: A
+Exp:- "Dictator" is the most accurate term for Hitler’s style of absolute, unchecked governance.
+
+Q19. Loose tea leaves are kept in a tea box.
+A. tin
+B. cosy
+C. caddy
+D. No improvement
+Ans: C
+Exp:- A "caddy" is the specific name for a small container used for storing tea.
+
+Q20. The autumn season of Parliament will begin on Monday.
+A. session
+B. cession
+C. mission
+D. No improvement
+Ans: A
+Exp:- Formal periods of parliamentary work are called "sessions."
+
+Q21. A group of fish is swimming in the pond.
+A. swarm
+B. collection
+C. school
+D. No improvement
+Ans: C
+Exp:- The collective noun for a group of fish is a "school."
+
+Q22. Rajesh's ability to use the local language surprised me.
+A. knowing of
+B. confidence with
+C. familiarity with
+D. No improvement
+Ans: C
+Exp:- "Familiarity with" implies ease and deep knowledge acquired through experience.
+
+Q23. The carpenter has been given a routine to finish his job.
+A. framework
+B. deadline
+C. limitation
+D. No improvement
+Ans: B
+Exp:- A "deadline" is the specific time limit set for the completion of a task.
+
+Q24. Last evening I went to the optician and bought spectacles.
+A. a spectacle
+B. two spectacle
+C. a pair of spectacles
+D. No improvement
+Ans: C
+Exp:- "Spectacles" is a pair noun. "A pair of spectacles" is the correct way to count a single item.
+
+Q25. After the written exam, you will also have an oral exam.
+A. Practical
+B. viva voce
+C. vocal
+D. No improvement
+Ans: B
+Exp:- "Viva voce" is the formal technical term for an oral examination in academic settings.
+
+Q26. Migrant workers can be seen working on many of the building places in New Delhi.
+A. sites
+B. premises
+C. locations
+D. No improvement
+Ans: A
+Exp:- Construction areas are referred to as "building sites."
+
+Q27. I could never repay the debt I owe to my place of study.
+A. Alma Mater
+B. Motherland
+C. Place of worship
+D. No improvement
+Ans: A
+Exp:- "Alma Mater" refers to the specific institution (school/college) where one studied.
+
+Q28. There is no escape in the container for the water to flow.
+A. outlet
+B. inlet
+C. drainage
+D. No improvement
+Ans: A
+Exp:- An "outlet" is an opening through which liquid flows out.
+
+Q29. There is no alternate offered to us.
+A. ay
+B. solution
+C. choice
+D. No improvement
+Ans: C
+Exp:- "Alternate" means every second one. "Choice" or "alternative" is needed for a different option.
+
+Q30. The difficulty level of this problem is extremely great.
+A. perplexity
+B. hindrance
+C. intricacy
+D. No improvement
+Ans: C
+Exp:- "Intricacy" refers to the quality of being complex or detailed, which fits a "difficult" problem better.
+
+Q31. Some people garner new experiences after retirement.
+A. episodes
+B. events
+C. happenings
+D. No improvement
+Ans: D
+Exp:- To "garner experiences" is a correct formal phrase meaning to collect or accumulate them.
+
+Q32. The editor gave me a time line to finish the article.
+A. guideline
+B. deadline
+C. deeline
+D. No improvement
+Ans: B
+Exp:- A time limit for completing an assignment is a "deadline."
+
+Q33. The war was a time of tribulations for all of us.
+A. intimacy
+B. placidity
+C. stupidity
+D. No improvement
+Ans: D
+Exp:- "Tribulation" refers to great trouble or suffering, accurately describing war-time conditions.
+
+Q34. A lot depends on your early brought up in the family.
+A. bringing
+B. bring up
+C. upbringing
+D. No improvement
+Ans: C
+Exp:- "Upbringing" is the noun referring to how a person is raised as a child.
+
+Q35. Try to understand the confidence of your opponents before you take any step against them.
+A. motivation
+B. inspiration
+C. motive
+D. No improvement
+Ans: C
+Exp:- A "motive" is the reason for someone's actions; it is more logical to analyze an opponent's motive than their confidence.
+
+Q36. This course does not have any requirements.
+A. reason
+B. technique
+C. prerequisite
+D. No improvement
+Ans: C
+Exp:- A "prerequisite" is a condition that must be met before starting something like a course.
+
+Q37. Work at the request of your conscience.
+A. behest
+B. desires
+C. orders
+D. No improvement
+Ans: A
+Exp:- "At the behest of" is the formal idiom meaning at the command or strong request of someone/something.
+
+Q38. The increasing sale of luxuries is an index of the country's prosperity.
+A. appendix
+B. pointer
+C. mark
+D. No improvement
+Ans: D
+Exp:- "Index" is used correctly as a sign or measure of a situation.
+
+Q39. The problems of traffic crowding will not disappear soon.
+A. congestion
+B. concentration
+C. intensification
+D. No improvement
+Ans: A
+Exp:- "Traffic congestion" is the standard term for overcrowded roads.
+
+Q40. Both the mother-in-laws welcomed the newly weds with garlands of flowers.
+A. mothers-in-laws
+B. mother-in-law
+C. mothers-in-law
+D. No improvement
+Ans: C
+Exp:- The plural of mother-in-law is "mothers-in-law" (pluralize the root word).
+
+Q41. He showed great kind to his friends.
+A. kindness
+B. kind heart
+C. kind hearted
+D. No improvement
+Ans: A
+Exp:- We need the noun form "kindness" to serve as the object of the verb "showed."
+
+Q42. In the hot afternoon after a long walk, I rested under the shadow of a tree.
+A. shelter
+B. shade
+C. cool
+D. No improvement
+Ans: B
+Exp:- You rest in the "shade" (cool area). "Shadow" refers to the specific silhouette of an object.
+
+Q43. Rahul gave me an old scissor.
+A. an old scissors
+B. a pair of old scissors
+C. a pair of old scissor
+D. No improvement
+Ans: B
+Exp:- "Scissors" is a plural-only noun. It must be paired with "a pair of."
+
+Q44. Officials were asked to examine the likelihood of providing banking facilities in the area.
+A. probability
+B. possibility
+C. profit
+D. No improvement
+Ans: B
+Exp:- "Possibility" is used to ask if an action can be implemented by an authority.
+
+Q45. The monkey was seated at the foot of a tree.
+A. bottom
+B. end
+C. root
+D. No improvement
+Ans: D
+Exp:- "At the foot of" is a correct idiom for being at the base of something vertical like a tree or hill.
+
+Q46. The strong breeze blew his hat away.
+A. The strong air
+B. The strong breath
+C. The strong wind
+D. No improvement
+Ans: C
+Exp:- A breeze is gentle. If it can blow away a hat, it is considered a "wind."
+
+Q47. Who will provide relief to the poor in this country?
+A. money
+B. succour
+C. shelter
+D. No improvement
+Ans: B
+Exp:- "Succour" is a formal word for help given to those in hardship.
+
+Q48. Owning to the close affinity of the architect and the builder, the project was completed ahead of schedule.
+A. termination
+B. cooperation
+C. collaboration
+D. No improvement
+Ans: C
+Exp:- "Collaboration" is the technical term for professionals working together to create something.
+
+Q49. There is no more room for you in this compartment.
+A. no seat
+B. no more space
+C. no more accommodation
+D. No improvement
+Ans: D
+Exp:- "Room" is used correctly to mean available space.
+
+Q50. The master was good at using pleasant names for unpleasant things in order to hoodwink the labourers.
+A. euphemisms
+B. euphoria
+C. pleasantries
+D. No improvement
+Ans: A
+Exp:- A "euphemism" is a mild word used in place of a harsh or blunt one.
+
+Q51. I bought four dozen mangoes.
+A. dozens of mango
+B. dozens of mangoes
+C. dozens mangoes
+D. No improvement
+Ans: D
+Exp:- When a specific number is given, "dozen" remains singular. "Four dozen mangoes" is correct.
+
+Q52. She is quite without affection and has no false pride.
+A. admiration
+B. affliction
+C. affectation
+D. No improvement
+Ans: C
+Exp:- "Affectation" means artificial behavior intended to impress. "Affection" means love.
+
+Q53. The struggle for independence is gaining movement every day.
+A. motion
+B. movement
+C. momentum
+D. No improvement
+Ans: C
+Exp:- The standard idiom for a cause gaining power and speed is "gaining momentum."
+
+Q54. It is a three-years degree course.
+A. an three-years degree course
+B. a three-year degree course
+C. a three years degree course
+D. No improvement
+Ans: B
+Exp:- In a compound adjective (three-year), the noun must be in the singular form.
+
+Q55. Most of the participating members at the fair, which was organised by the students, were Mathematics teacher's.
+A. Mathematic teachers.
+B. Mathematics teachers
+C. Teacher in mathematics
+D. No improvement
+Ans: B
+Exp:- "Mathematics teachers" is a simple plural; an apostrophe is only needed for possession.
+
+Q56. TV sets have become costlier, thanks to the sudden rise in the prices of imported compounds.
+A. tubes
+B. components
+C. things
+D. No improvement
+Ans: B
+Exp:- Mechanical or electronic parts are called "components."
+
+Q57. India will enter the league of major developed nations as a space giant within a short time.
+A. energy
+B. force
+C. power
+D. No improvement
+Ans: C
+Exp:- A country with significant influence in a specific sector is known as a "power" (e.g., space power).
+
 `;
 
 /* ── CARD 2 ── */
