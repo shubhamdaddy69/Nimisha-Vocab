@@ -14016,10 +14016,6 @@ Exp: Use "of which" — "Whose" relative pronoun has antecedent and verb "throw"
 
 `;
 
-/* ── CARD 3 ── */
-const EP_RAW_3 = `
-`;
-
 /* ── CARD 4 ── */
 const EP_RAW_4 = `Q1. I don't like (a)/ such nasty (b)/ things (c)/ nor he does. (d)/ No Error (e)
 A. (a)
@@ -19535,10 +19531,6 @@ Ans: C
 Exp:- 'The' is used before the comparative degree when two comparative degrees are shown to be directly or inversely proportional. Replace 'higher' with 'the higher'.
 `;
 
-/* ── CARD 7 ── */
-const EP_RAW_7 = `
-`;
-
 /* ── CARD 8 ── */
 const EP_RAW_8 = `Q1. I cannot allow you to (a)/ go out of class (b)/ unless the teacher comes (c)/ and gives me some instructions. (d)/ No Error (e)
 A.
@@ -21597,10 +21589,6 @@ C. you will forget
 D. you should forget
 Ans: D
 Exp:- The conjunction "lest" is always followed by the auxiliary verb "should."
-`;
-
-/* ── CARD 9 ── */
-const EP_RAW_9 = `
 `;
 
 /* ── CARD 10 ── */
@@ -24088,13 +24076,10 @@ Exp: Replace 'ringing and ringing' with 'ringing repeatedly'. Repetition of same
 const ERROR_PRO_CARDS = [
   parseEPCard(EP_RAW_1),
   parseEPCard(EP_RAW_2),
-  parseEPCard(EP_RAW_3),
   parseEPCard(EP_RAW_4),
   parseEPCard(EP_RAW_5),
   parseEPCard(EP_RAW_6),
-  parseEPCard(EP_RAW_7),
   parseEPCard(EP_RAW_8),
-  parseEPCard(EP_RAW_9),
   parseEPCard(EP_RAW_10),
 ];
 
@@ -24664,16 +24649,13 @@ function downloadResult() {
 /* ════════ ERROR PRO ════════ */
 /* ── EDIT CARD NAMES HERE ── change any name inside the quotes below */
 const EP_CARD_NAMES = [
-  'Noun',   /* ← Card 1  name */
-  'pronoun',   /* ← Card 2  name */
-  'verb',   /* ← Card 3  name */
-  'Adverb',   /* ← Card 4  name */
-  'Adjective',   /* ← Card 5  name */
-  'article',   /* ← Card 6  name */
-  'preposition',   /* ← Card 7  name */
-  'Conjunction',   /* ← Card 8  name */
-  'Interjection',   /* ← Card 9  name */
-  'Tense',  /* ← Card 10 name */
+  'Noun',        /* ← Card 1  name */
+  'Pronoun',     /* ← Card 2  name */
+  'Adverb',      /* ← Card 3  name */
+  'Adjective',   /* ← Card 4  name */
+  'Article',     /* ← Card 5  name */
+  'Conjunction', /* ← Card 6  name */
+  'Tense',       /* ← Card 7  name */
 ];
 
 let epCurrentCard = 0;
@@ -24695,17 +24677,14 @@ function openErrorPro() {
   grid.innerHTML = '';
   ERROR_PRO_CARDS.forEach((qs, i) => {
     const btn = document.createElement('button');
-    const EP_ICONS = ['📝','🔤','⚡','🌟','🎨','🔮','🗺️','🔗','💥','⏱️'];
+    const EP_ICONS = ['📝','🔤','🌟','🎨','🔮','🔗','⏱️'];
     const EP_GRADIENTS = [
       ['#6366f1','#8b5cf6','rgba(99,102,241,0.5)'],
       ['#0ea5e9','#06b6d4','rgba(14,165,233,0.5)'],
-      ['#10b981','#059669','rgba(16,185,129,0.5)'],
       ['#f59e0b','#ef4444','rgba(245,158,11,0.5)'],
       ['#ec4899','#a855f7','rgba(236,72,153,0.5)'],
       ['#14b8a6','#0891b2','rgba(20,184,166,0.5)'],
-      ['#f97316','#dc2626','rgba(249,115,22,0.5)'],
       ['#8b5cf6','#ec4899','rgba(139,92,246,0.5)'],
-      ['#22d3ee','#6366f1','rgba(34,211,238,0.5)'],
       ['#84cc16','#10b981','rgba(132,204,22,0.5)'],
     ];
     const [c1,c2,glow] = EP_GRADIENTS[i];
@@ -24750,13 +24729,10 @@ function openEpSubsets(cardIdx) {
   const EP_GRADIENTS2 = [
     ['#6366f1','#8b5cf6','rgba(99,102,241,0.5)'],
     ['#0ea5e9','#06b6d4','rgba(14,165,233,0.5)'],
-    ['#10b981','#059669','rgba(16,185,129,0.5)'],
     ['#f59e0b','#ef4444','rgba(245,158,11,0.5)'],
     ['#ec4899','#a855f7','rgba(236,72,153,0.5)'],
     ['#14b8a6','#0891b2','rgba(20,184,166,0.5)'],
-    ['#f97316','#dc2626','rgba(249,115,22,0.5)'],
     ['#8b5cf6','#ec4899','rgba(139,92,246,0.5)'],
-    ['#22d3ee','#6366f1','rgba(34,211,238,0.5)'],
     ['#84cc16','#10b981','rgba(132,204,22,0.5)'],
   ];
   const [c1,c2,glow] = EP_GRADIENTS2[cardIdx] || EP_GRADIENTS2[0];
