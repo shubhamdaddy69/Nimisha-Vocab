@@ -610,7 +610,7 @@
 
     <!-- ── TOP BAR: Mistakes (left) + Saved (right) ── -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:1.5rem;">
-      <button class="home-top-btn mistakes-top-btn" onclick="toggleSection('mistakesBody','mistakesChevron')">
+      <button class="home-top-btn mistakes-top-btn" onclick="openMistakesPage()">
         <span class="htb-icon">❌</span>
         <div class="htb-text">
           <span class="htb-label">Mistakes</span>
@@ -618,7 +618,7 @@
         </div>
         <span class="section-count count-mistakes" id="mistakesCount">0</span>
       </button>
-      <button class="home-top-btn saved-top-btn" onclick="toggleSection('savedBody','savedChevron')">
+      <button class="home-top-btn saved-top-btn" onclick="openSavedPage()">
         <span class="htb-icon">🔖</span>
         <div class="htb-text">
           <span class="htb-label">Saved</span>
@@ -626,20 +626,6 @@
         </div>
         <span class="section-count count-saved" id="savedCount">0</span>
       </button>
-    </div>
-
-    <!-- ── DROPDOWN PANELS ── -->
-    <div class="home-sections" style="margin-top:0;">
-      <div class="home-section" id="mistakesPanel" style="display:none;">
-        <div class="home-section-body open" id="mistakesBody">
-          <div id="mistakesContent"><div class="empty-state"><div class="es-icon">📋</div>No mistakes recorded yet. Complete a quiz to see wrong answers here.</div></div>
-        </div>
-      </div>
-      <div class="home-section" id="savedPanel" style="display:none;">
-        <div class="home-section-body open" id="savedBody">
-          <div id="savedContent"><div class="empty-state"><div class="es-icon">🔖</div>No saved questions yet. Bookmark questions during a quiz to save them here.</div></div>
-        </div>
-      </div>
     </div>
 
     <div class="home-grid">
@@ -820,8 +806,30 @@
       <button class="dl-btn" onclick="downloadResult()">Download Result (.html)</button>
       <button class="dl-btn outline" onclick="downloadResultTxt()">Download Result (.txt)</button>
       <button class="dl-btn outline" onclick="retakeSet()">Retake Set</button>
-      <button class="dl-btn outline" onclick="goHome()">Home</button>
+      <button class="dl-btn outline" onclick="goHomeFromResult()">Home</button>
     </div>
+  </div>
+
+  <!-- ── MISTAKES PAGE VIEW ── -->
+  <div style="display:none;" id="mistakesPageView">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;">
+      <button class="back-btn" onclick="goHome()">← Back</button>
+      <h2 style="font-size:19px;font-weight:800;color:var(--red);margin:0;">❌ Mistakes</h2>
+      <span class="section-count count-mistakes" id="mistakesPageCount" style="margin-left:auto;">0</span>
+    </div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:1.25rem;">Tap a set card to retake it as a mock test.</p>
+    <div id="mistakesPageContent"><div class="empty-state"><div class="es-icon">📋</div>No mistakes recorded yet. Complete a quiz to see wrong answers here.</div></div>
+  </div>
+
+  <!-- ── SAVED PAGE VIEW ── -->
+  <div style="display:none;" id="savedPageView">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;">
+      <button class="back-btn" onclick="goHome()">← Back</button>
+      <h2 style="font-size:19px;font-weight:800;color:var(--blue);margin:0;">🔖 Saved</h2>
+      <span class="section-count count-saved" id="savedPageCount" style="margin-left:auto;">0</span>
+    </div>
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:1.25rem;">Tap a set card to practice it as a mock test.</p>
+    <div id="savedPageContent"><div class="empty-state"><div class="es-icon">🔖</div>No saved questions yet. Bookmark questions during a quiz to save them here.</div></div>
   </div>
 
   <!-- ── REVIEW VIEW (Mistakes / Saved detail) ── -->
@@ -33127,24 +33135,6 @@ function updateBookmarkBtn() {
 }
 
 /* ════════ HOME SECTION RENDERING ════════ */
-function toggleSection(bodyId, chevId) {
-  const isMistakes = bodyId === 'mistakesBody';
-  const panelId  = isMistakes ? 'mistakesPanel' : 'savedPanel';
-  const btnClass = isMistakes ? 'mistakes-top-btn' : 'saved-top-btn';
-  const panel = document.getElementById(panelId);
-  const btn   = document.querySelector('.' + btnClass);
-  const isOpen = panel.style.display === 'block';
-  // close both panels first
-  document.getElementById('mistakesPanel').style.display = 'none';
-  document.getElementById('savedPanel').style.display    = 'none';
-  document.querySelectorAll('.home-top-btn').forEach(b => b.classList.remove('active'));
-  // toggle clicked one
-  if (!isOpen) {
-    panel.style.display = 'block';
-    btn.classList.add('active');
-  }
-}
-
 function labelFromKey(key) {
   const parts = key.split('-');
   const type = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
@@ -33152,72 +33142,120 @@ function labelFromKey(key) {
   return { type, setStr, full: `${type} · ${setStr}` };
 }
 
-function renderHomeSections() {
+function openMistakesPage() {
   const data = loadStorage();
-  renderMistakes(data.mistakes || {});
-  renderSaved(data.bookmarks || {});
-}
-
-function renderMistakes(mistakes) {
-  const container = document.getElementById('mistakesContent');
-  const countEl = document.getElementById('mistakesCount');
+  const mistakes = data.mistakes || {};
   const keys = Object.keys(mistakes).sort();
   let total = 0;
   keys.forEach(k => total += mistakes[k].length);
-  countEl.textContent = total;
+  document.getElementById('mistakesPageCount').textContent = total;
+  const container = document.getElementById('mistakesPageContent');
   if (total === 0) {
-    container.innerHTML = '<div class="empty-state"><div class="es-icon">📋</div>No mistakes yet. Complete a quiz to see wrong answers here.</div>';
-    return;
+    container.innerHTML = '<div class="empty-state"><div class="es-icon">📋</div>No mistakes recorded yet. Complete a quiz to see wrong answers here.</div>';
+  } else {
+    container.innerHTML = '';
+    const grid = document.createElement('div');
+    grid.className = 'set-cards-grid';
+    keys.forEach(key => {
+      const items = mistakes[key];
+      if (!items.length) return;
+      const lbl = labelFromKey(key);
+      const btn = document.createElement('div');
+      btn.className = 'set-card-btn mistakes-card';
+      btn.innerHTML = `
+        <div class="sc-type">${lbl.type}</div>
+        <div class="sc-name">${lbl.setStr}</div>
+        <span class="sc-count">${items.length} mistake${items.length !== 1 ? 's' : ''}</span>
+        <span class="sc-arrow">▶</span>`;
+      btn.onclick = () => playAsMock(items, lbl.full, 'mistakes');
+      grid.appendChild(btn);
+    });
+    container.appendChild(grid);
   }
-  container.innerHTML = '';
-  const grid = document.createElement('div');
-  grid.className = 'set-cards-grid';
-  keys.forEach(key => {
-    const items = mistakes[key];
-    if (!items.length) return;
-    const lbl = labelFromKey(key);
-    const btn = document.createElement('div');
-    btn.className = 'set-card-btn mistakes-card';
-    btn.innerHTML = `
-      <div class="sc-type">${lbl.type}</div>
-      <div class="sc-name">${lbl.setStr}</div>
-      <span class="sc-count">${items.length} mistake${items.length !== 1 ? 's' : ''}</span>
-      <span class="sc-arrow">›</span>`;
-    btn.onclick = () => openReview('mistakes', key, items, lbl.full);
-    grid.appendChild(btn);
-  });
-  container.appendChild(grid);
+  show('mistakesPageView');
 }
 
-function renderSaved(bookmarks) {
-  const container = document.getElementById('savedContent');
-  const countEl = document.getElementById('savedCount');
+function openSavedPage() {
+  const data = loadStorage();
+  const bookmarks = data.bookmarks || {};
   const keys = Object.keys(bookmarks).sort();
   let total = 0;
   keys.forEach(k => total += bookmarks[k].length);
-  countEl.textContent = total;
+  document.getElementById('savedPageCount').textContent = total;
+  const container = document.getElementById('savedPageContent');
   if (total === 0) {
-    container.innerHTML = '<div class="empty-state"><div class="es-icon">🔖</div>No saved questions yet. Tap Bookmark during a quiz to save questions here.</div>';
-    return;
+    container.innerHTML = '<div class="empty-state"><div class="es-icon">🔖</div>No saved questions yet. Bookmark questions during a quiz to save them here.</div>';
+  } else {
+    container.innerHTML = '';
+    const grid = document.createElement('div');
+    grid.className = 'set-cards-grid';
+    keys.forEach(key => {
+      const items = bookmarks[key];
+      if (!items.length) return;
+      const lbl = labelFromKey(key);
+      const btn = document.createElement('div');
+      btn.className = 'set-card-btn saved-card';
+      btn.innerHTML = `
+        <div class="sc-type">${lbl.type}</div>
+        <div class="sc-name">${lbl.setStr}</div>
+        <span class="sc-count">${items.length} saved</span>
+        <span class="sc-arrow">▶</span>`;
+      btn.onclick = () => playAsMock(items, lbl.full, 'saved');
+      grid.appendChild(btn);
+    });
+    container.appendChild(grid);
   }
-  container.innerHTML = '';
-  const grid = document.createElement('div');
-  grid.className = 'set-cards-grid';
-  keys.forEach(key => {
-    const items = bookmarks[key];
-    if (!items.length) return;
-    const lbl = labelFromKey(key);
-    const btn = document.createElement('div');
-    btn.className = 'set-card-btn saved-card';
-    btn.innerHTML = `
-      <div class="sc-type">${lbl.type}</div>
-      <div class="sc-name">${lbl.setStr}</div>
-      <span class="sc-count">${items.length} saved</span>
-      <span class="sc-arrow">›</span>`;
-    btn.onclick = () => openReview('saved', key, items, lbl.full);
-    grid.appendChild(btn);
-  });
-  container.appendChild(grid);
+  show('savedPageView');
+}
+
+/* Play a set of stored items (mistakes or saved) as a mock quiz */
+function playAsMock(items, title, mode) {
+  /* Convert stored items to the quiz question format */
+  questions = shuffle(items.map(item => ({
+    q: item.q,
+    options: item.options,
+    answer: item.answer,
+    _mockMode: mode
+  })));
+  answers = {};
+  currentQ = 0;
+  currentType = mode === 'mistakes' ? '_mock_mistakes' : '_mock_saved';
+  currentSet = 0;
+  window._mockReturnPage = mode; // remember where to go back after result
+  window._mockTitle = title;
+
+  /* Style: red for mistakes, blue for saved */
+  const isSaved = mode === 'saved';
+  const col1 = isSaved ? '#2563eb' : '#dc2626';
+  const col2 = isSaved ? '#60a5fa' : '#f87171';
+  const glow = isSaved ? 'rgba(96,165,250,0.4)' : 'rgba(220,38,38,0.4)';
+  document.getElementById('progressFill').className = 'progress-fill';
+  document.getElementById('progressFill').style.background = `linear-gradient(90deg,${col1},${col2})`;
+  document.getElementById('submitBtn').className = 'nav-btn primary';
+  document.getElementById('submitBtn').style.background = `linear-gradient(135deg,${col1},${col2})`;
+  document.getElementById('submitBtn').style.boxShadow = `0 4px 16px ${glow}`;
+  const qCard = document.querySelector('.question-card');
+  if (qCard) qCard.style.borderColor = isSaved ? 'rgba(96,165,250,0.35)' : 'rgba(220,38,38,0.35)';
+
+  renderQuestion();
+  show('quizView');
+  startQuizTimer();
+}
+
+function toggleSection(bodyId, chevId) { /* legacy no-op kept for safety */ }
+
+function renderHomeSections() {
+  const data = loadStorage();
+  /* Only update the badge counts on the home buttons */
+  const mistakes = data.mistakes || {};
+  const bookmarks = data.bookmarks || {};
+  let mTotal = 0, sTotal = 0;
+  Object.keys(mistakes).forEach(k => mTotal += mistakes[k].length);
+  Object.keys(bookmarks).forEach(k => sTotal += bookmarks[k].length);
+  const mc = document.getElementById('mistakesCount');
+  const sc = document.getElementById('savedCount');
+  if (mc) mc.textContent = mTotal;
+  if (sc) sc.textContent = sTotal;
 }
 
 function openReview(mode, key, items, title) {
@@ -33260,14 +33298,26 @@ function openReview(mode, key, items, title) {
 
 /* ════════ NAVIGATION ════════ */
 function show(id) {
-  ['homeView','setView','quizView','resultView','reviewView','errorproView','epQuizView','epSubsetView'].forEach(v => {
+  ['homeView','setView','quizView','resultView','reviewView','errorproView','epQuizView','epSubsetView','mistakesPageView','savedPageView'].forEach(v => {
     const el = document.getElementById(v);
     if (el) el.style.display = v === id ? 'block' : 'none';
   });
   if (id === 'homeView') renderHomeSections();
 }
 
-function goHome() { clearInterval(quizTimerInt); show('homeView'); }
+function goHome() {
+  clearInterval(quizTimerInt);
+  show('homeView');
+}
+
+function goHomeFromResult() {
+  clearInterval(quizTimerInt);
+  const mockReturn = window._mockReturnPage;
+  window._mockReturnPage = null;
+  if (mockReturn === 'mistakes') { openMistakesPage(); }
+  else if (mockReturn === 'saved') { openSavedPage(); }
+  else { show('homeView'); }
+}
 
 function selectType(type) {
   currentType = type;
@@ -33482,12 +33532,18 @@ function getResults() {
 function showResult() {
   const total = questions.length;
   const { results, correct, wrong, skipped } = getResults();
-  storeMistakes(currentType, currentSet, results);
+  const isMock = currentType === '_mock_mistakes' || currentType === '_mock_saved';
+  if (!isMock) storeMistakes(currentType, currentSet, results);
   const pct = Math.round((correct / total) * 100);
-  const type = currentType === 'synonyms' ? 'Synonyms' : currentType === 'antonyms' ? 'Antonyms' : `${EP_CARD_NAMES[epCurrentCard]} — Set ${epCurrentSubset + 1}`;
+  let type;
+  if (isMock) {
+    type = window._mockTitle || (currentType === '_mock_mistakes' ? 'Mistakes Mock' : 'Saved Mock');
+  } else {
+    type = currentType === 'synonyms' ? 'Synonyms' : currentType === 'antonyms' ? 'Antonyms' : `${EP_CARD_NAMES[epCurrentCard]} — Set ${epCurrentSubset + 1}`;
+  }
   const date = new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
 
-  document.getElementById('resultTitle').textContent = currentType === 'errorpro' ? `${type} Result` : `${type} — Set ${currentSet + 1} Result`;
+  document.getElementById('resultTitle').textContent = isMock ? `${type} — Mock Result` : (currentType === 'errorpro' ? `${type} Result` : `${type} — Set ${currentSet + 1} Result`);
   document.getElementById('resultSubtitle').textContent = `Submitted on ${date}`;
   document.getElementById('statTotal').textContent   = total;
   document.getElementById('statCorrect').textContent = correct;
@@ -33537,8 +33593,19 @@ function showResult() {
 }
 
 function retakeSet() {
-  if (currentType === 'errorpro') { openEpCard(epCurrentCard, epCurrentSubset); }
-  else { startSet(currentSet); }
+  if (currentType === '_mock_mistakes' || currentType === '_mock_saved') {
+    /* Re-shuffle and replay the same questions */
+    questions = shuffle(questions);
+    answers = {};
+    currentQ = 0;
+    renderQuestion();
+    show('quizView');
+    startQuizTimer();
+  } else if (currentType === 'errorpro') {
+    openEpCard(epCurrentCard, epCurrentSubset);
+  } else {
+    startSet(currentSet);
+  }
 }
 
 /* ════════ DOWNLOADS ════════ */
@@ -33754,7 +33821,7 @@ function openEpCard(cardIdx, subsetIdx) {
 function exitEpQuiz() { openErrorPro(); }
 
 function showEp(id) {
-  const allViews = ['homeView','setView','quizView','resultView','reviewView','errorproView','epQuizView','epSubsetView'];
+  const allViews = ['homeView','setView','quizView','resultView','reviewView','errorproView','epQuizView','epSubsetView','mistakesPageView','savedPageView'];
   allViews.forEach(v => {
     const el = document.getElementById(v);
     if (el) el.style.display = v === id ? 'block' : 'none';
